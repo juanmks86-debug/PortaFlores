@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "bento-portfolio",
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}

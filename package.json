@@ -1,0 +1,22 @@
+{
+  "name": "bento-portfolio",
+  "version": "2.6.0",
+  "description": "Portafolio Web Profesional Interactivo con diseño Bento Grid, Chatbot IA, Terminal CLI y GitHub Live Sync",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "bento-grid",
+    "javascript",
+    "css3",
+    "html5",
+    "threejs",
+    "dark-mode",
+    "ai-chatbot"
+  ],
+  "author": "Jon Daniel",
+  "license": "MIT"
+}

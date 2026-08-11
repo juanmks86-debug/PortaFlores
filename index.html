@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jon Daniel — Portafolio de Diseño & Desarrollo Web</title>
+    
+    <!-- SEO & OpenGraph Social Sharing Metadata -->
+    <meta name="description" content="Portafolio web profesional Bento Grid de Jon Daniel — Diseñador de Producto & Desarrollador Full-Stack galardonado internacionalmente.">
+    <meta name="keywords" content="Portafolio, UI UX, Bento Grid, React, Developer, Frontend, Full Stack, Design Systems">
+    <meta name="author" content="Jon Daniel">
+    
+    <!-- OpenGraph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Jon Daniel — Portafolio Bento Grid">
+    <meta property="og:description" content="Diseño de Producto & Desarrollo Full-Stack con experiencia internacional.">
+    <meta property="og:image" content="assets/profile.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jon Daniel — Portafolio Bento Grid">
+    <meta name="twitter:description" content="Explora mis proyectos 3D, desarrollo web app y asistente de IA.">
+    <meta name="twitter:image" content="assets/profile.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <main class="viewport-wrapper">
+        <div class="bento-frame">
+            
+            <!-- Left Vertical Sidebar Navigation -->
+            <aside class="sidebar-nav">
+                <div class="sidebar-logo">
+                    <span class="logo-symbol">❖</span>
+                </div>
+                <nav class="nav-links">
+                    <button class="nav-btn active" data-tab="about">
+                        <span class="nav-text">About Me</span>
+                    </button>
+                    <button class="nav-btn" data-tab="skills">
+                        <span class="nav-text">Skills</span>
+                    </button>
+                    <button class="nav-btn" data-tab="github">
+                        <span class="nav-text">GitHub</span>
+                    </button>
+                    <button class="nav-btn" data-tab="portfolio">
+                        <span class="nav-text">Portfolio</span>
+                    </button>
+                    <button class="nav-btn" data-tab="clients">
+                        <span class="nav-text">Clients</span>
+                    </button>
+                    <button class="nav-btn" data-tab="podcast">
+                        <span class="nav-text">Podcast</span>
+                    </button>
+                </nav>
+                <div class="sidebar-footer">
+                    <!-- Theme Switcher Toggle -->
+                    <button class="icon-btn" id="themeToggleBtn" title="Cambiar Modo Oscuro/Claro">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+
+                    <!-- Sound Toggle -->
+                    <button class="icon-btn" id="soundToggleBtn" title="Efectos de Sonido (Activado)">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+
+                    <!-- Terminal CLI Easter Egg -->
+                    <button class="icon-btn" id="terminalToggleBtn" title="Abrir Terminal CLI (~)">
+                        <i class="fa-solid fa-terminal"></i>
+                    </button>
+
+                    <!-- Edit Profile -->
+                    <button class="icon-btn" id="editProfileBtn" title="Editar Información">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="content-container">
+                
+                <!-- TAB 1: ABOUT ME (DEFAULT BENTO DASHBOARD VIEW) -->
+                <section class="tab-content active" id="tab-about">
+                    <div class="bento-grid">
+                        
+                        <!-- HERO PROFILE CARD (LEFT COLUMN) -->
+                        <div class="bento-card card-hero-profile">
+                            <div class="hero-header-tab">
+                                <span class="tab-icon">❖</span> About Me
+                            </div>
+                            
+                            <div class="profile-image-container">
+                                <div class="profile-ring"></div>
+                                <img src="assets/profile.jpg" alt="Foto de Perfil" id="userProfileImage" class="profile-img">
+                            </div>
+
+                            <div class="profile-info">
+                                <h1 class="profile-name">
+                                    <span class="greeting">Im,</span>
+                                    <span class="name-highlight" id="userName">Jon Daniel</span>
+                                </h1>
+                                <a href="mailto:inquiry@jondaniel.design" class="profile-email" id="userEmail">
+                                    <span id="userEmailText">inquiry@jondaniel.design</span>
+                                    <i class="fa-regular fa-envelope"></i>
+                                </a>
+                            </div>
+
+                            <!-- Spotify Live Player Status Bar -->
+                            <div class="spotify-status-bar" id="spotifyWidget">
+                                <i class="fa-brands fa-spotify spotify-icon"></i>
+                                <div class="spotify-text">
+                                    <span class="spotify-label">Escuchando ahora en Spotify</span>
+                                    <span class="spotify-track" id="spotifyTrack">Daft Punk — One More Time</span>
+                                </div>
+                                <div class="spotify-equalizer">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+
+                            <!-- Action CV Download Button -->
+                            <div class="hero-cv-action">
+                                <button class="cv-download-btn" id="openCvBtn">
+                                    Descargar CV <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+
+                            <!-- Spinning Stamp Badge -->
+                            <div class="stamp-badge">
+                                <svg viewBox="0 0 100 100" width="85" height="85">
+                                    <path id="circlePath" fill="none" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+                                    <text font-size="10" font-weight="700" fill="currentColor" letter-spacing="1.4">
+                                        <textPath href="#circlePath" startOffset="0%">
+                                            • MY DESIGN PORTFOLIO • 2026
+                                        </textPath>
+                                    </text>
+                                </svg>
+                                <div class="stamp-center">✦</div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN MAIN AREA -->
+                        <div class="bento-right-column">
+                            
+                            <!-- Header Title -->
+                            <header class="bento-header">
+                                <h2 class="main-title">
+                                    Portfolio <span class="arrow-accent">↗</span>
+                                </h2>
+                                <div class="header-actions">
+                                    <button class="cta-pill-btn" id="contactBtn">
+                                        Contacto <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </header>
+
+                            <!-- TOP ROW: Featured Artwork & Stats Stack -->
+                            <div class="bento-row top-row">
+                                
+                                <!-- Featured Video/Artwork Card -->
+                                <div class="bento-card card-media-feature" id="openVideoModal">
+                                    <img src="assets/project1.jpg" alt="Obra de Arte Destacada" class="media-bg">
+                                    <div class="media-overlay">
+                                        <button class="play-pulse-btn" aria-label="Reproducir Video">
+                                            <i class="fa-solid fa-play"></i>
+                                        </button>
+                                        <span class="card-arrow-top">↗</span>
+                                    </div>
+                                    <div class="media-caption">
+                                        <span class="tag-badge">Papercraft 3D</span>
+                                        <h3>Tropical Paradise Art</h3>
+                                    </div>
+                                </div>
+
+                                <!-- Stats Stack -->
+                                <div class="stats-stack">
+                                    <!-- Mint Projects Card -->
+                                    <div class="bento-card card-stat card-stat-mint" id="openProjectsModal">
+                                        <span class="card-arrow-top">↗</span>
+                                        <div class="stat-content">
+                                            <span class="stat-number" data-target="251">0</span>
+                                            <span class="stat-label">Projects</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Periwinkle Awards Card -->
+                                    <div class="bento-card card-stat card-stat-purple" id="openAwardsModal">
+                                        <span class="card-arrow-top">↗</span>
+                                        <div class="stat-content">
+                                            <span class="stat-number" data-target="156">0</span>
+                                            <span class="stat-label">Awards</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- BOTTOM ROW: Clients Card & Dual Split Card -->
+                            <div class="bento-row bottom-row">
+                                
+                                <!-- Clients Card -->
+                                <div class="bento-card card-clients-dark" id="openClientsModal">
+                                    <span class="card-arrow-top">↗</span>
+                                    <div class="clients-body">
+                                        <div class="client-logo-icon">
+                                            <i class="fa-brands fa-apple"></i>
+                                        </div>
+                                        <span class="clients-title">Clients</span>
+                                    </div>
+                                </div>
+
+                                <!-- Dual Split Card (3D Sphere + Global Awards) -->
+                                <div class="bento-card card-dual-split" id="openGlobalAwardsModal">
+                                    <span class="card-arrow-top">↗</span>
+                                    
+                                    <!-- Left Section: 3D Interactive Sphere -->
+                                    <div class="split-left-dark">
+                                        <div class="sphere-wrapper">
+                                            <canvas id="sphereCanvas"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Section: Yellow Global Awards -->
+                                    <div class="split-right-yellow">
+                                        <div class="award-content">
+                                            <span class="stat-number-large" data-target="172">0</span>
+                                            <p class="award-text">Global Design<br>Awards.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: SKILLS & TECH STACK -->
+                <section class="tab-content" id="tab-skills">
+                    <div class="subpage-wrapper">
+                        <header class="subpage-header">
+                            <h2>Habilidades & Stack Técnico <span class="arrow-accent">↗</span></h2>
+                            <p>Herramientas y tecnologías que domino para desarrollo web y diseño UI/UX.</p>
+                        </header>
+                        <div class="skills-grid">
+                            <div class="skill-card">
+                                <div class="skill-icon"><i class="fa-brands fa-react"></i></div>
+                                <div class="skill-info">
+                                    <div class="skill-header">
+                                        <span class="skill-name">Frontend Dev (React, Next.js, TS)</span>
+                                        <span class="skill-pct">95%</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-icon"><i class="fa-brands fa-figma"></i></div>
+                                <div class="skill-info">
+                                    <div class="skill-header">
+                                        <span class="skill-name">Diseño UI/UX (Figma, Design Systems)</span>
+                                        <span class="skill-pct">92%</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 92%;"></div></div>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-icon"><i class="fa-brands fa-node-js"></i></div>
+                                <div class="skill-info">
+                                    <div class="skill-header">
+                                        <span class="skill-name">Backend APIs (Node.js, Express, Python)</span>
+                                        <span class="skill-pct">88%</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                <div class="skill-info">
+                                    <div class="skill-header">
+                                        <span class="skill-name">3D & Animación (Three.js, Papercraft)</span>
+                                        <span class="skill-pct">90%</span>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 3: GITHUB LIVE REPOSITORIES & ACTIVITY -->
+                <section class="tab-content" id="tab-github">
+                    <div class="subpage-wrapper">
+                        <header class="subpage-header">
+                            <h2>GitHub Live & Código <span class="arrow-accent">↗</span></h2>
+                            <p>Repositorios en vivo, contribuciones y actividad reciente sincronizada.</p>
+                        </header>
+                        <div class="github-search-box">
+                            <input type="text" id="ghUsernameInput" value="octocat" placeholder="Ingresa un usuario de GitHub...">
+                            <button id="fetchGhBtn" class="cta-pill-btn"><i class="fa-brands fa-github"></i> Cargar Datos</button>
+                        </div>
+                        
+                        <div class="github-stats-summary" id="ghSummary">
+                            <div class="gh-stat-box"><span class="gh-num" id="ghPublicRepos">--</span> <span>Repositorios</span></div>
+                            <div class="gh-stat-box"><span class="gh-num" id="ghFollowers">--</span> <span>Seguidores</span></div>
+                            <div class="gh-stat-box"><span class="gh-num" id="ghFollowing">--</span> <span>Siguiendo</span></div>
+                        </div>
+
+                        <div class="github-repos-grid" id="ghReposGrid">
+                            <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Cargando repositorios de GitHub...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: PORTFOLIO GALLERY -->
+                <section class="tab-content" id="tab-portfolio">
+                    <div class="subpage-wrapper">
+                        <header class="subpage-header">
+                            <h2>Proyectos Seleccionados <span class="arrow-accent">↗</span></h2>
+                            <p>Una muestra de trabajos destacados en UI/UX, 3D y desarrollo web.</p>
+                        </header>
+                        <div class="portfolio-filter-bar">
+                            <button class="filter-btn active" data-filter="all">Todos</button>
+                            <button class="filter-btn" data-filter="ui">UI/UX</button>
+                            <button class="filter-btn" data-filter="3d">3D & Art</button>
+                            <button class="filter-btn" data-filter="dev">Web App</button>
+                        </div>
+                        <div class="gallery-grid">
+                            <div class="gallery-item" data-category="3d">
+                                <img src="assets/project1.jpg" alt="Tropical Papercraft">
+                                <div class="gallery-info">
+                                    <h4>Tropical Paradise 3D</h4>
+                                    <span>Escultura Digital Papercraft</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-category="ui">
+                                <div class="placeholder-art art-purple">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                                <div class="gallery-info">
+                                    <h4>Neptune Dashboard</h4>
+                                    <span>Sistema Financiero Glassmorphic</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-category="dev">
+                                <div class="placeholder-art art-mint">
+                                    <i class="fa-solid fa-code"></i>
+                                </div>
+                                <div class="gallery-info">
+                                    <h4>Aura AI Engine</h4>
+                                    <span>Plataforma SaaS con React & Node</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 5: CLIENTS GALLERY -->
+                <section class="tab-content" id="tab-clients">
+                    <div class="subpage-wrapper">
+                        <header class="subpage-header">
+                            <h2>Nuestros Clientes <span class="arrow-accent">↗</span></h2>
+                            <p>Hemos colaborado con las marcas más innovadoras del mundo.</p>
+                        </header>
+                        <div class="clients-grid">
+                            <div class="client-box"><i class="fa-brands fa-apple"></i> <span>Apple</span></div>
+                            <div class="client-box"><i class="fa-brands fa-google"></i> <span>Google</span></div>
+                            <div class="client-box"><i class="fa-brands fa-spotify"></i> <span>Spotify</span></div>
+                            <div class="client-box"><i class="fa-brands fa-figma"></i> <span>Figma</span></div>
+                            <div class="client-box"><i class="fa-brands fa-airbnb"></i> <span>Airbnb</span></div>
+                            <div class="client-box"><i class="fa-brands fa-stripe"></i> <span>Stripe</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 6: PODCAST WITH AUDIO PLAYER -->
+                <section class="tab-content" id="tab-podcast">
+                    <div class="subpage-wrapper">
+                        <header class="subpage-header">
+                            <h2>Design & Tech Podcast <span class="arrow-accent">↗</span></h2>
+                            <p>Conversaciones semanales sobre diseño de producto y código de vanguardia.</p>
+                        </header>
+                        
+                        <div class="audio-player-widget">
+                            <div class="player-info">
+                                <div class="equalizer-anim" id="equalizer">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                                <div class="now-playing">
+                                    <span class="ep-tag">EPISODIO ACTUAL</span>
+                                    <h4 id="nowPlayingTitle">EP. 42 — Estética Neo-Brutalista y Minimalismo</h4>
+                                </div>
+                            </div>
+                            <div class="player-controls">
+                                <button class="audio-action-btn" id="prevTrackBtn"><i class="fa-solid fa-backward-step"></i></button>
+                                <button class="audio-action-btn play-main" id="mainAudioPlayBtn"><i class="fa-solid fa-play"></i></button>
+                                <button class="audio-action-btn" id="nextTrackBtn"><i class="fa-solid fa-forward-step"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="podcast-episodes">
+                            <div class="episode-card" data-title="EP. 42 — Estética Neo-Brutalista y Minimalismo">
+                                <div class="ep-icon"><i class="fa-solid fa-microphone"></i></div>
+                                <div class="ep-details">
+                                    <span class="ep-number">EP. 42 • 45 min</span>
+                                    <h4>Estética Neo-Brutalista y el retorno al minimalismo dinámico</h4>
+                                </div>
+                                <button class="play-ep-btn"><i class="fa-solid fa-play"></i> Reproducir</button>
+                            </div>
+                            <div class="episode-card" data-title="EP. 41 — Cómo construir un portafolio de impacto internacional">
+                                <div class="ep-icon"><i class="fa-solid fa-microphone"></i></div>
+                                <div class="ep-details">
+                                    <span class="ep-number">EP. 41 • 38 min</span>
+                                    <h4>Cómo construir un portafolio de impacto internacional</h4>
+                                </div>
+                                <button class="play-ep-btn"><i class="fa-solid fa-play"></i> Reproducir</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FLOATING AI CHATBOT WIDGET -->
+    <div class="ai-chatbot-wrapper">
+        <button class="ai-chat-trigger-btn" id="toggleAiChatBtn" title="Hablar con mi Asistente de IA">
+            <i class="fa-solid fa-robot"></i>
+            <span class="chat-pulse-badge"></span>
+        </button>
+
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-chat-header">
+                <div class="ai-bot-avatar">🤖</div>
+                <div class="ai-bot-info">
+                    <h4>Jon Daniel AI Assistant</h4>
+                    <span>Disponible • Pregúntame lo que quieras</span>
+                </div>
+                <button class="ai-chat-close" id="closeAiChatBtn">&times;</button>
+            </div>
+            <div class="ai-chat-messages" id="aiChatMessages">
+                <div class="ai-msg bot">
+                    👋 ¡Hola! Soy el asistente virtual de Jon Daniel. Puedo darte información sobre sus proyectos, habilidades, tarifas o concertar una reunión. ¿En qué te ayudo hoy?
+                </div>
+            </div>
+            <div class="ai-chat-input-area">
+                <input type="text" id="aiChatInput" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
+                <button id="sendAiChatBtn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS & POPUPS -->
+
+    <!-- Contact Modal -->
+    <div class="modal-backdrop" id="contactModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeContactModal">&times;</button>
+            <h3>¡Hablemos de tu próximo proyecto!</h3>
+            <p>Envía un mensaje y nos pondremos en contacto rápidamente.</p>
+            <form id="contactForm" class="modal-form" action="https://formspree.io/f/sample" method="POST">
+                <div class="form-group">
+                    <label for="cName">Tu Nombre</label>
+                    <input type="text" id="cName" name="name" placeholder="Ej: María García" required>
+                </div>
+                <div class="form-group">
+                    <label for="cEmail">Tu Email</label>
+                    <input type="email" id="cEmail" name="email" placeholder="maria@empresa.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="cMsg">Mensaje</label>
+                    <textarea id="cMsg" name="message" rows="4" placeholder="Cuéntame sobre las metas de tu proyecto..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Mensaje <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal-backdrop" id="editModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeEditModal">&times;</button>
+            <h3>Personalizar Portafolio</h3>
+            <p>Modifica los datos de tu perfil en tiempo real.</p>
+            <form id="editProfileForm" class="modal-form">
+                <div class="form-group">
+                    <label for="eName">Nombre Completo</label>
+                    <input type="text" id="eName" value="Jon Daniel" required>
+                </div>
+                <div class="form-group">
+                    <label for="eEmail">Correo Electrónico</label>
+                    <input type="email" id="eEmail" value="inquiry@jondaniel.design" required>
+                </div>
+                <button type="submit" class="submit-btn">Guardar Cambios <i class="fa-solid fa-check"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CV Resume Modal -->
+    <div class="modal-backdrop" id="cvModal">
+        <div class="modal-card modal-cv-card">
+            <button class="modal-close" id="closeCvModal">&times;</button>
+            <div class="cv-header">
+                <h3>Curriculum Vitae — Jon Daniel</h3>
+                <span>Senior Designer & Full-Stack Developer</span>
+            </div>
+            <div class="cv-body">
+                <p><strong>Experiencia:</strong> 8+ años creando productos digitales, sistemas de diseño y arquitectura de software.</p>
+                <p><strong>Especialidades:</strong> UI/UX Design, React, TypeScript, Three.js, Node.js, Design Systems.</p>
+                <p><strong>Educación:</strong> Grado en Diseño Multimedia & Ingeniería Informática.</p>
+            </div>
+            <div class="cv-actions">
+                <button class="submit-btn" id="downloadPdfActionBtn">
+                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF Oficial
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terminal CLI Modal -->
+    <div class="modal-backdrop" id="terminalModal">
+        <div class="modal-card modal-terminal-card">
+            <button class="modal-close" id="closeTerminalModal">&times;</button>
+            <div class="terminal-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="terminal-title">bash — jon@daniel-portfolio ~ (CLI)</span>
+            </div>
+            <canvas id="matrixCanvas"></canvas>
+            <div class="terminal-body" id="terminalBody">
+                <p class="term-welcome">Jon Daniel CLI v2.6.0. Escribe <span class="cmd">help</span> para ver comandos disponibles.</p>
+            </div>
+            <div class="terminal-input-line">
+                <span class="prompt">jon@portfolio:~$</span>
+                <input type="text" id="termInput" placeholder="Escribe un comando..." autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Preview Modal -->
+    <div class="modal-backdrop" id="videoModal">
+        <div class="modal-card modal-media-view">
+            <button class="modal-close" id="closeVideoModal">&times;</button>
+            <h3>Tropical Paradise 3D Papercraft</h3>
+            <div class="video-placeholder">
+                <img src="assets/project1.jpg" alt="Project Showcase" class="video-preview-img">
+                <div class="video-controls-overlay">
+                    <i class="fa-solid fa-circle-play video-play-big"></i>
+                    <span>Demo interactivo en alta resolución</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
