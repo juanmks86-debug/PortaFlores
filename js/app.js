@@ -291,6 +291,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 12000);
 
+    // --- 7b. Ambient Background Music (loop generado con Web Audio API) ---
+    let ambientCtx = null;
+    let ambientNodes = [];
+    let ambientPlaying = false;
+
+    const startAmbient = () => {
+        if (!ambientCtx) {
+            ambientCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (ambientCtx.state === 'suspended') ambientCtx.resume();
+
+        const masterGain = ambientCtx.createGain();
+        masterGain.gain.value = 0.05;
+        masterGain.connect(ambientCtx.destination);
+
+        const freqs = [130.81, 164.81, 196.00, 261.63]; // acorde suave C3-E3-G3-C4
+        freqs.forEach((freq, i) => {
+            const osc = ambientCtx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+
+            const lfo = ambientCtx.createOscillator();
+            lfo.frequency.value = 0.05 + i * 0.02;
+            const lfoGain = ambientCtx.createGain();
+            lfoGain.gain.value = 0.015;
+            lfo.connect(lfoGain);
+            lfoGain.connect(masterGain.gain);
+            lfo.start();
+
+            osc.connect(masterGain);
+            osc.start();
+            ambientNodes.push(osc, lfo);
+        });
+
+        ambientNodes.push(masterGain);
+        ambientPlaying = true;
+    };
+
+    const stopAmbient = () => {
+        ambientNodes.forEach(node => {
+            try { node.stop && node.stop(); } catch (e) {}
+            try { node.disconnect(); } catch (e) {}
+        });
+        ambientNodes = [];
+        ambientPlaying = false;
+    };
+
+    const spotifyWidget = document.getElementById('spotifyWidget');
+    const spotifyLabel = document.querySelector('.spotify-label');
+    if (spotifyWidget) {
+        spotifyWidget.style.cursor = 'pointer';
+        spotifyWidget.title = 'Click para reproducir/pausar música de fondo';
+        spotifyWidget.addEventListener('click', () => {
+            playUiSound('click');
+            if (ambientPlaying) {
+                stopAmbient();
+                if (spotifyLabel) spotifyLabel.textContent = 'Música en pausa';
+            } else {
+                startAmbient();
+                if (spotifyLabel) spotifyLabel.textContent = 'Escuchando ahora en Spotify';
+            }
+        });
+    }
+
+    // Respeta el toggle global de sonido (mismo botón que los efectos de UI)
+    document.getElementById('soundToggleBtn')?.addEventListener('click', () => {
+        if (!soundEnabled && ambientPlaying) stopAmbient();
+    });
+
     // --- 8. AI Chatbot Widget Logic ---
     const toggleAiChatBtn = document.getElementById('toggleAiChatBtn');
     const aiChatWindow = document.getElementById('aiChatWindow');
@@ -358,44 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') handleAiSendMessage();
     });
 
-    // --- 9. Podcast Audio Player Logic ---
-    let isPlayingAudio = false;
-    const mainAudioPlayBtn = document.getElementById('mainAudioPlayBtn');
-    const equalizer = document.getElementById('equalizer');
-    const nowPlayingTitle = document.getElementById('nowPlayingTitle');
-    const episodePlayBtns = document.querySelectorAll('.play-ep-btn');
-
-    const toggleAudioPlay = (title = null) => {
-        playUiSound('click');
-        if (title) {
-            nowPlayingTitle.textContent = title;
-            isPlayingAudio = true;
-        } else {
-            isPlayingAudio = !isPlayingAudio;
-        }
-
-        if (isPlayingAudio) {
-            mainAudioPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            equalizer?.classList.add('playing');
-            showToast(`▶ Reproduciendo: ${nowPlayingTitle.textContent}`);
-        } else {
-            mainAudioPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-            equalizer?.classList.remove('playing');
-            showToast('⏸️ Reproducción pausada');
-        }
-    };
-
-    if (mainAudioPlayBtn) {
-        mainAudioPlayBtn.addEventListener('click', () => toggleAudioPlay());
-    }
-
-    episodePlayBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const card = e.target.closest('.episode-card');
-            const title = card ? card.getAttribute('data-title') : 'Episodio de Podcast';
-            toggleAudioPlay(title);
-        });
-    });
+    // --- 9. Podcast episodes now link out to real external shows (no in-app fake player needed) ---
 
     // --- 10. Modals & Popups ---
     const setupModal = (triggerId, modalId, closeId) => {
