@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jon Daniel — Portafolio de Diseño & Desarrollo Web</title>
+    <title>Juan Israel Flores — Portafolio de Desarrollo Web & Data/IA</title>
     
     <!-- SEO & OpenGraph Social Sharing Metadata -->
-    <meta name="description" content="Portafolio web profesional Bento Grid de Jon Daniel — Diseñador de Producto & Desarrollador Full-Stack galardonado internacionalmente.">
-    <meta name="keywords" content="Portafolio, UI UX, Bento Grid, React, Developer, Frontend, Full Stack, Design Systems">
-    <meta name="author" content="Jon Daniel">
+    <meta name="description" content="Portafolio de Juan Israel Flores — Analista Programador Universitario (UNJu) y estudiante de Ciencias de Datos e IA (IES N°6).">
+    <meta name="keywords" content="Portafolio, Desarrollo Web, React, PWA, Data Science, Inteligencia Artificial, UNJu">
+    <meta name="author" content="Juan Israel Flores">
     
     <!-- OpenGraph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Jon Daniel — Portafolio Bento Grid">
-    <meta property="og:description" content="Diseño de Producto & Desarrollo Full-Stack con experiencia internacional.">
+    <meta property="og:title" content="Juan Israel Flores — Portafolio">
+    <meta property="og:description" content="Analista Programador Universitario y estudiante de Ciencias de Datos e IA.">
     <meta property="og:image" content="assets/profile.jpg">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Jon Daniel — Portafolio Bento Grid">
-    <meta name="twitter:description" content="Explora mis proyectos 3D, desarrollo web app y asistente de IA.">
+    <meta name="twitter:title" content="Juan Israel Flores — Portafolio">
+    <meta name="twitter:description" content="Explora mis proyectos, apps propias y asistente de IA.">
     <meta name="twitter:image" content="assets/profile.jpg">
     
     <!-- Favicon -->
@@ -107,11 +107,11 @@
 
                             <div class="profile-info">
                                 <h1 class="profile-name">
-                                    <span class="greeting">Im,</span>
-                                    <span class="name-highlight" id="userName">Jon Daniel</span>
+                                    <span class="greeting">Soy,</span>
+                                    <span class="name-highlight" id="userName">Juan Israel Flores</span>
                                 </h1>
-                                <a href="mailto:inquiry@jondaniel.design" class="profile-email" id="userEmail">
-                                    <span id="userEmailText">inquiry@jondaniel.design</span>
+                                <a href="mailto:juanmks86@gmail.com" class="profile-email" id="userEmail">
+                                    <span id="userEmailText">juanmks86@gmail.com</span>
                                     <i class="fa-regular fa-envelope"></i>
                                 </a>
                             </div>
@@ -164,62 +164,59 @@
                                 </div>
                             </header>
 
-                            <!-- TOP ROW: Featured Artwork & Stats Stack -->
+                            <!-- TOP ROW: Featured Project & Stats Stack -->
                             <div class="bento-row top-row">
                                 
-                                <!-- Featured Video/Artwork Card -->
-                                <div class="bento-card card-media-feature" id="openVideoModal">
-                                    <img src="assets/project1.jpg" alt="Obra de Arte Destacada" class="media-bg">
-                                    <div class="media-overlay">
-                                        <button class="play-pulse-btn" aria-label="Reproducir Video">
-                                            <i class="fa-solid fa-play"></i>
-                                        </button>
+                                <!-- Featured Project Card -->
+                                <a class="bento-card card-media-feature" id="openVideoModal" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background: var(--color-mint);">
+                                    <div class="media-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%);">
+                                        <i class="fa-solid fa-utensils" style="font-size: 48px; color: #FFF;"></i>
                                         <span class="card-arrow-top">↗</span>
                                     </div>
                                     <div class="media-caption">
-                                        <span class="tag-badge">Papercraft 3D</span>
-                                        <h3>Tropical Paradise Art</h3>
+                                        <span class="tag-badge">Web App / PWA</span>
+                                        <h3>DeliMarket</h3>
                                     </div>
-                                </div>
+                                </a>
 
                                 <!-- Stats Stack -->
                                 <div class="stats-stack">
-                                    <!-- Mint Projects Card -->
+                                    <!-- Mint Projects Card (GitHub repos en vivo) -->
                                     <div class="bento-card card-stat card-stat-mint" id="openProjectsModal">
                                         <span class="card-arrow-top">↗</span>
                                         <div class="stat-content">
-                                            <span class="stat-number" data-target="251">0</span>
-                                            <span class="stat-label">Projects</span>
+                                            <span class="stat-number" id="heroReposCount" data-target="0">0</span>
+                                            <span class="stat-label">Repos en GitHub</span>
                                         </div>
                                     </div>
 
-                                    <!-- Periwinkle Awards Card -->
+                                    <!-- Purple Followers Card (GitHub followers en vivo) -->
                                     <div class="bento-card card-stat card-stat-purple" id="openAwardsModal">
                                         <span class="card-arrow-top">↗</span>
                                         <div class="stat-content">
-                                            <span class="stat-number" data-target="156">0</span>
-                                            <span class="stat-label">Awards</span>
+                                            <span class="stat-number" id="heroFollowersCount" data-target="0">0</span>
+                                            <span class="stat-label">Seguidores en GitHub</span>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <!-- BOTTOM ROW: Clients Card & Dual Split Card -->
+                            <!-- BOTTOM ROW: Formación Card & Dual Split Card -->
                             <div class="bento-row bottom-row">
                                 
-                                <!-- Clients Card -->
+                                <!-- Formación Card -->
                                 <div class="bento-card card-clients-dark" id="openClientsModal">
                                     <span class="card-arrow-top">↗</span>
                                     <div class="clients-body">
                                         <div class="client-logo-icon">
-                                            <i class="fa-brands fa-apple"></i>
+                                            <i class="fa-solid fa-graduation-cap"></i>
                                         </div>
-                                        <span class="clients-title">Clients</span>
+                                        <span class="clients-title">Formación: UNJu &amp; IES N°6</span>
                                     </div>
                                 </div>
 
-                                <!-- Dual Split Card (3D Sphere + Global Awards) -->
+                                <!-- Dual Split Card (3D Sphere + Tagline real) -->
                                 <div class="bento-card card-dual-split" id="openGlobalAwardsModal">
                                     <span class="card-arrow-top">↗</span>
                                     
@@ -230,17 +227,17 @@
                                         </div>
                                     </div>
 
-                                    <!-- Right Section: Yellow Global Awards -->
+                                    <!-- Right Section: Yellow Tagline -->
                                     <div class="split-right-yellow">
                                         <div class="award-content">
-                                            <span class="stat-number-large" data-target="172">0</span>
-                                            <p class="award-text">Global Design<br>Awards.</p>
+                                            <p class="award-text">Full-Stack Dev<br>&amp; Data Science / IA.</p>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
 
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -473,14 +470,14 @@
             <div class="ai-chat-header">
                 <div class="ai-bot-avatar">🤖</div>
                 <div class="ai-bot-info">
-                    <h4>Jon Daniel AI Assistant</h4>
+                    <h4>Asistente de Juan Israel Flores</h4>
                     <span>Disponible • Pregúntame lo que quieras</span>
                 </div>
                 <button class="ai-chat-close" id="closeAiChatBtn">&times;</button>
             </div>
             <div class="ai-chat-messages" id="aiChatMessages">
                 <div class="ai-msg bot">
-                    👋 ¡Hola! Soy el asistente virtual de Jon Daniel. Puedo darte información sobre sus proyectos, habilidades, tarifas o concertar una reunión. ¿En qué te ayudo hoy?
+                    👋 ¡Hola! Soy el asistente virtual de Juan. Puedo darte información sobre sus proyectos, habilidades o cómo contactarlo. ¿En qué te ayudo hoy?
                 </div>
             </div>
             <div class="ai-chat-input-area">
@@ -525,11 +522,11 @@
             <form id="editProfileForm" class="modal-form">
                 <div class="form-group">
                     <label for="eName">Nombre Completo</label>
-                    <input type="text" id="eName" value="Jon Daniel" required>
+                    <input type="text" id="eName" value="Juan Israel Flores" required>
                 </div>
                 <div class="form-group">
                     <label for="eEmail">Correo Electrónico</label>
-                    <input type="email" id="eEmail" value="inquiry@jondaniel.design" required>
+                    <input type="email" id="eEmail" value="juanmks86@gmail.com" required>
                 </div>
                 <button type="submit" class="submit-btn">Guardar Cambios <i class="fa-solid fa-check"></i></button>
             </form>
@@ -541,13 +538,13 @@
         <div class="modal-card modal-cv-card">
             <button class="modal-close" id="closeCvModal">&times;</button>
             <div class="cv-header">
-                <h3>Curriculum Vitae — Jon Daniel</h3>
-                <span>Senior Designer & Full-Stack Developer</span>
+                <h3>Curriculum Vitae — Juan Israel Flores</h3>
+                <span>Desarrollador Full-Stack & Data Science / IA</span>
             </div>
             <div class="cv-body">
-                <p><strong>Experiencia:</strong> 8+ años creando productos digitales, sistemas de diseño y arquitectura de software.</p>
-                <p><strong>Especialidades:</strong> UI/UX Design, React, TypeScript, Three.js, Node.js, Design Systems.</p>
-                <p><strong>Educación:</strong> Grado en Diseño Multimedia & Ingeniería Informática.</p>
+                <p><strong>Formación:</strong> Analista Programador Universitario (cursando, Facultad de Ingeniería — UNJu) y Tecnicatura Superior en Ciencias de Datos e Inteligencia Artificial (cursando, IES N°6).</p>
+                <p><strong>Especialidades:</strong> React, Vite, JavaScript, PWA, IndexedDB/localStorage, Python (Ciencia de Datos).</p>
+                <p><strong>Proyectos propios:</strong> Contax, DeliMarket y Cuentas Claras — apps desplegadas en Vercel.</p>
             </div>
             <div class="cv-actions">
                 <button class="submit-btn" id="downloadPdfActionBtn">
@@ -563,14 +560,14 @@
             <button class="modal-close" id="closeTerminalModal">&times;</button>
             <div class="terminal-bar">
                 <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">bash — jon@daniel-portfolio ~ (CLI)</span>
+                <span class="terminal-title">bash — juan@flores-portfolio ~ (CLI)</span>
             </div>
             <canvas id="matrixCanvas"></canvas>
             <div class="terminal-body" id="terminalBody">
-                <p class="term-welcome">Jon Daniel CLI v2.6.0. Escribe <span class="cmd">help</span> para ver comandos disponibles.</p>
+                <p class="term-welcome">Juan Flores CLI v2.6.0. Escribe <span class="cmd">help</span> para ver comandos disponibles.</p>
             </div>
             <div class="terminal-input-line">
-                <span class="prompt">jon@portfolio:~$</span>
+                <span class="prompt">juan@portfolio:~$</span>
                 <input type="text" id="termInput" placeholder="Escribe un comando..." autocomplete="off">
             </div>
         </div>

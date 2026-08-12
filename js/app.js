@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (targetTab === 'github') {
-                fetchGitHubData('octocat');
+                fetchGitHubData('juanmks86-debug');
             }
         });
     });
@@ -133,6 +133,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     setTimeout(animateCounters, 300);
+
+    // --- 4b. Hero Stats: GitHub repos/followers en vivo ---
+    const fetchHeroGitHubStats = async () => {
+        const reposEl = document.getElementById('heroReposCount');
+        const followersEl = document.getElementById('heroFollowersCount');
+        if (!reposEl || !followersEl) return;
+        try {
+            const res = await fetch('https://api.github.com/users/juanmks86-debug');
+            if (!res.ok) return;
+            const data = await res.json();
+            reposEl.setAttribute('data-target', data.public_repos || 0);
+            followersEl.setAttribute('data-target', data.followers || 0);
+            animateCounters();
+        } catch (err) {
+            // Si falla (ej. rate limit), se quedan en 0 sin romper la página
+        }
+    };
+
+    fetchHeroGitHubStats();
 
     // --- 5. 3D Canvas Sphere Animation ---
     const initSphereCanvas = () => {
@@ -240,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('fetchGhBtn')?.addEventListener('click', () => {
         playUiSound('click');
-        const user = document.getElementById('ghUsernameInput').value.trim() || 'octocat';
+        const user = document.getElementById('ghUsernameInput').value.trim() || 'juanmks86-debug';
         fetchGitHubData(user);
     });
 
@@ -304,15 +323,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const lower = text.toLowerCase();
             if (lower.includes('hola') || lower.includes('buenas')) {
-                botMsg.textContent = "¡Hola! ¿Cómo estás? Soy el asistente de Jon. ¿Te gustaría saber más sobre sus proyectos o contratar sus servicios?";
+                botMsg.textContent = "¡Hola! ¿Cómo estás? Soy el asistente de Juan. ¿Te gustaría saber más sobre sus proyectos, su formación o cómo contactarlo?";
             } else if (lower.includes('precio') || lower.includes('tarifa') || lower.includes('costo')) {
-                botMsg.textContent = "Jon ofrece tarifas competitivas para proyectos de desarrollo Web App, Diseño UI/UX y esculturas 3D. Puedes escribirle a inquiry@jondaniel.design para un presupuesto exacto.";
+                botMsg.textContent = "Para consultas sobre proyectos o presupuestos, escribile directamente a juanmks86@gmail.com y coordinamos los detalles.";
             } else if (lower.includes('proyecto') || lower.includes('portafolio')) {
-                botMsg.textContent = "Jon ha creado más de 251 proyectos internacionales, incluyendo Neptune Dashboard y Tropical Paradise 3D Papercraft. ¡Revisa la sección Portfolio!";
+                botMsg.textContent = "Juan desarrolló Contax, DeliMarket y Cuentas Claras, apps propias desplegadas en Vercel. ¡Revisa la sección Portfolio para ver más!";
             } else if (lower.includes('contacto') || lower.includes('email') || lower.includes('correo')) {
-                botMsg.textContent = "Puedes enviarle un mensaje directo haciendo clic en el botón 'Contacto' arriba o escribiendo a inquiry@jondaniel.design.";
+                botMsg.textContent = "Puedes enviarle un mensaje directo haciendo clic en el botón 'Contacto' arriba o escribiendo a juanmks86@gmail.com.";
+            } else if (lower.includes('estudi') || lower.includes('formacion') || lower.includes('formación') || lower.includes('universidad')) {
+                botMsg.textContent = "Juan cursa Analista Programador Universitario en la Facultad de Ingeniería (UNJu) y la Tecnicatura Superior en Ciencias de Datos e IA en el IES N°6.";
             } else {
-                botMsg.textContent = "¡Excelente pregunta! Jon tiene amplia experiencia en desarrollo React, Next.js, Node.js y diseño de sistemas UI/UX. Si quieres coordinar una llamada, déjanos tu mensaje en el formulario de contacto.";
+                botMsg.textContent = "¡Buena pregunta! Juan trabaja con React, Vite, JavaScript y PWAs, y está formándose en Ciencia de Datos e IA. Si querés coordinar algo, dejá tu mensaje en el formulario de contacto.";
             }
 
             aiChatMessages.appendChild(botMsg);
@@ -466,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const cmdLine = document.createElement('div');
                 cmdLine.className = 'term-line';
-                cmdLine.innerHTML = `<span class="prompt">jon@portfolio:~$</span> ${cmd}`;
+                cmdLine.innerHTML = `<span class="prompt">juan@portfolio:~$</span> ${cmd}`;
                 terminalBody.appendChild(cmdLine);
 
                 const output = document.createElement('div');
@@ -477,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         output.textContent = 
 `Comandos disponibles:
   help       - Muestra esta lista de comandos
-  about      - Resumen sobre Jon Daniel
+  about      - Resumen sobre Juan Israel Flores
   skills     - Muestra las principales habilidades técnicas
   projects   - Lista los proyectos destacados
   contact    - Abre el formulario de contacto
@@ -485,13 +506,13 @@ document.addEventListener('DOMContentLoaded', () => {
   clear      - Limpia la pantalla de la terminal`;
                         break;
                     case 'about':
-                        output.textContent = "Jon Daniel — Diseñador de Producto & Desarrollador Full-Stack con +8 años de experiencia creando sistemas digitales premiados internacionalmente.";
+                        output.textContent = "Juan Israel Flores — Analista Programador Universitario (UNJu) y estudiante de Ciencias de Datos e IA (IES N°6). Desarrolla apps propias como Contax, DeliMarket y Cuentas Claras.";
                         break;
                     case 'skills':
-                        output.textContent = "✦ Frontend: React, Next.js, TypeScript, Canvas 3D\n✦ Backend: Node.js, Express, Python\n✦ UI/UX: Figma, Design Systems, Glassmorphism & Bento Grid Layouts";
+                        output.textContent = "✦ Frontend: React, Vite, JavaScript, HTML/CSS\n✦ Datos/IA: Python, análisis de datos (en formación)\n✦ Apps: PWA, IndexedDB/localStorage, deploy en Vercel";
                         break;
                     case 'projects':
-                        output.textContent = "1. Tropical Paradise 3D Papercraft\n2. Neptune Glassmorphic Dashboard\n3. Aura AI SaaS Platform";
+                        output.textContent = "1. Contax — Gestor de inventario y ventas\n2. DeliMarket — Marketplace de delivery\n3. Cuentas Claras — Gestión de préstamos";
                         break;
                     case 'contact':
                         output.textContent = "Abriendo el formulario de contacto...";
@@ -520,19 +541,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 12. Stat Cards Navigation Click Handlers ---
     document.getElementById('openProjectsModal')?.addEventListener('click', () => {
-        document.querySelector('.nav-btn[data-tab="portfolio"]')?.click();
+        document.querySelector('.nav-btn[data-tab="github"]')?.click();
     });
 
     document.getElementById('openClientsModal')?.addEventListener('click', () => {
-        document.querySelector('.nav-btn[data-tab="clients"]')?.click();
+        showToast('🎓 Analista Programador (UNJu) + Ciencias de Datos e IA (IES N°6)');
     });
 
     document.getElementById('openAwardsModal')?.addEventListener('click', () => {
-        showToast('🏆 156 Premios de excelencia UI/UX ganados.');
+        document.querySelector('.nav-btn[data-tab="github"]')?.click();
     });
 
     document.getElementById('openGlobalAwardsModal')?.addEventListener('click', () => {
-        showToast('✨ Galardonado como Mejor Portafolio Bento 2026.');
+        document.querySelector('.nav-btn[data-tab="portfolio"]')?.click();
     });
 
     // --- 13. Form Submissions ---
