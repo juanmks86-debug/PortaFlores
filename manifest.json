@@ -1,0 +1,39 @@
+{
+  "name": "Juan Israel Flores — Portfolio",
+  "short_name": "JIF Portfolio",
+  "description": "Portafolio profesional de Juan Israel Flores — Analista Programador y estudiante de Ciencias de Datos e IA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#E7EAEE",
+  "theme_color": "#7E7BE6",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "developer", "design"],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/profile.jpg",
+      "sizes": "640x480",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    }
+  ]
+}

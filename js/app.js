@@ -159,10 +159,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
-        let width = canvas.width = canvas.parentElement.clientWidth || 90;
-        let height = canvas.height = canvas.parentElement.clientHeight || 90;
+        let width, height, angle = 0;
+        let animFrame = null;
 
-        let angle = 0;
+        const resize = () => {
+            const parent = canvas.parentElement;
+            if (!parent) return;
+            width = canvas.width = parent.clientWidth || 90;
+            height = canvas.height = parent.clientHeight || 90;
+        };
 
         const drawSphere = () => {
             ctx.clearRect(0, 0, width, height);
@@ -196,10 +201,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.restore();
 
             angle += 0.015;
-            requestAnimationFrame(drawSphere);
+            animFrame = requestAnimationFrame(drawSphere);
         };
 
+        resize();
         drawSphere();
+
+        // Recalcular al redimensionar la ventana
+        window.addEventListener('resize', () => {
+            resize();
+        });
     };
 
     initSphereCanvas();
@@ -559,8 +570,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 13. Form Submissions ---
     document.getElementById('contactForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
+        const name    = document.getElementById('cName')?.value || '';
+        const email   = document.getElementById('cEmail')?.value || '';
+        const message = document.getElementById('cMsg')?.value || '';
+        const subject = encodeURIComponent(`Contacto desde Portfolio — ${name}`);
+        const body    = encodeURIComponent(`Hola Juan,\n\nSoy ${name} (${email}).\n\n${message}`);
+        window.location.href = `mailto:juanmks86@gmail.com?subject=${subject}&body=${body}`;
         document.getElementById('contactModal')?.classList.remove('active');
-        showToast('🚀 Mensaje enviado con éxito. ¡Gracias!');
+        showToast('📧 Abriendo tu cliente de correo...');
     });
 
     document.getElementById('editProfileForm')?.addEventListener('submit', (e) => {

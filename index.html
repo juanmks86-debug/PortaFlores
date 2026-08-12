@@ -46,21 +46,27 @@
                 </div>
                 <nav class="nav-links">
                     <button class="nav-btn active" data-tab="about">
-                        <span class="nav-text">About Me</span>
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span class="nav-text">Sobre Mí</span>
                     </button>
                     <button class="nav-btn" data-tab="skills">
-                        <span class="nav-text">Skills</span>
+                        <i class="fa-solid fa-code"></i>
+                        <span class="nav-text">Habilidades</span>
                     </button>
                     <button class="nav-btn" data-tab="github">
-                        <span class="nav-text">GitHub</span>
+                        <i class="fa-brands fa-github"></i>
+                        <span class="nav-text">GitHub Live</span>
                     </button>
                     <button class="nav-btn" data-tab="portfolio">
-                        <span class="nav-text">Portfolio</span>
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span class="nav-text">Proyectos</span>
                     </button>
                     <button class="nav-btn" data-tab="clients">
-                        <span class="nav-text">Clients</span>
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span class="nav-text">Formación</span>
                     </button>
                     <button class="nav-btn" data-tab="podcast">
+                        <i class="fa-solid fa-podcast"></i>
                         <span class="nav-text">Podcast</span>
                     </button>
                 </nav>
@@ -391,21 +397,95 @@
                     </div>
                 </section>
 
-                <!-- TAB 5: CLIENTS GALLERY -->
+                <!-- TAB 5: FORMACIÓN ACADÉMICA -->
                 <section class="tab-content" id="tab-clients">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>Nuestros Clientes <span class="arrow-accent">↗</span></h2>
-                            <p>Hemos colaborado con las marcas más innovadoras del mundo.</p>
+                            <h2>Formación Académica <span class="arrow-accent">↗</span></h2>
+                            <p>Mi trayectoria universitaria y técnica en desarrollo de software, datos e inteligencia artificial.</p>
                         </header>
-                        <div class="clients-grid">
-                            <div class="client-box"><i class="fa-brands fa-apple"></i> <span>Apple</span></div>
-                            <div class="client-box"><i class="fa-brands fa-google"></i> <span>Google</span></div>
-                            <div class="client-box"><i class="fa-brands fa-spotify"></i> <span>Spotify</span></div>
-                            <div class="client-box"><i class="fa-brands fa-figma"></i> <span>Figma</span></div>
-                            <div class="client-box"><i class="fa-brands fa-airbnb"></i> <span>Airbnb</span></div>
-                            <div class="client-box"><i class="fa-brands fa-stripe"></i> <span>Stripe</span></div>
+
+                        <div class="edu-cards-grid">
+
+                            <!-- UNJu -->
+                            <div class="edu-card edu-card--purple">
+                                <div class="edu-card__header">
+                                    <div class="edu-icon-wrap"><i class="fa-solid fa-university"></i></div>
+                                    <div class="edu-badge">En cursado</div>
+                                </div>
+                                <h3 class="edu-title">Analista Programador Universitario</h3>
+                                <p class="edu-institution">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    Facultad de Ingeniería — Universidad Nacional de Jujuy (UNJu)
+                                </p>
+                                <p class="edu-desc">Carrera universitaria orientada al análisis, diseño e implementación de sistemas de software. Enfoque en algoritmos, estructuras de datos, bases de datos relacionales, sistemas operativos y programación orientada a objetos.</p>
+                                <div class="edu-tags">
+                                    <span class="edu-tag">Java</span>
+                                    <span class="edu-tag">C / C++</span>
+                                    <span class="edu-tag">SQL</span>
+                                    <span class="edu-tag">Sistemas Operativos</span>
+                                    <span class="edu-tag">Redes</span>
+                                </div>
+                            </div>
+
+                            <!-- IES N°6 -->
+                            <div class="edu-card edu-card--mint">
+                                <div class="edu-card__header">
+                                    <div class="edu-icon-wrap"><i class="fa-solid fa-brain"></i></div>
+                                    <div class="edu-badge">En cursado</div>
+                                </div>
+                                <h3 class="edu-title">Tecnicatura Superior en Ciencias de Datos e Inteligencia Artificial</h3>
+                                <p class="edu-institution">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    Instituto de Educación Superior N°6 — Jujuy
+                                </p>
+                                <p class="edu-desc">Tecnicatura con foco en análisis estadístico, aprendizaje automático, redes neuronales y visualización de datos. Incluye Python, Machine Learning y herramientas modernas del ecosistema de datos.</p>
+                                <div class="edu-tags">
+                                    <span class="edu-tag">Python</span>
+                                    <span class="edu-tag">Machine Learning</span>
+                                    <span class="edu-tag">Estadística</span>
+                                    <span class="edu-tag">Pandas / NumPy</span>
+                                    <span class="edu-tag">IA</span>
+                                </div>
+                            </div>
+
                         </div>
+
+                        <!-- Timeline autodidacta -->
+                        <div class="edu-self-section">
+                            <h3 class="edu-self-title"><i class="fa-solid fa-rocket"></i> Aprendizaje Autodidacta</h3>
+                            <div class="edu-timeline">
+                                <div class="edu-tl-item">
+                                    <div class="edu-tl-dot"></div>
+                                    <div class="edu-tl-content">
+                                        <strong>React + Vite + TypeScript</strong>
+                                        <span>SPAs y PWAs modernas. Apps propias: DeliMarket, Contax, Cuentas Claras desplegadas en Vercel.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-tl-item">
+                                    <div class="edu-tl-dot"></div>
+                                    <div class="edu-tl-content">
+                                        <strong>Diseño UI/UX</strong>
+                                        <span>Figma, Design Systems, Bento Grid, Glassmorphism y estética de productos digitales modernos.</span>
+                                    </div>
+                                </div>
+                                <div class="edu-tl-item">
+                                    <div class="edu-tl-dot"></div>
+                                    <div class="edu-tl-content">
+                                        <strong>DevOps & Deploy</strong>
+                                        <span>Vercel, Netlify, Git/GitHub, CI/CD. Virtualización con Proxmox/KVM (TP Lab SO II — UNJu).</span>
+                                    </div>
+                                </div>
+                                <div class="edu-tl-item">
+                                    <div class="edu-tl-dot"></div>
+                                    <div class="edu-tl-content">
+                                        <strong>3D & Animación Web</strong>
+                                        <span>Canvas API, animaciones CSS avanzadas, Three.js y efectos de partículas interactivos.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
 
@@ -495,7 +575,7 @@
             <button class="modal-close" id="closeContactModal">&times;</button>
             <h3>¡Hablemos de tu próximo proyecto!</h3>
             <p>Envía un mensaje y nos pondremos en contacto rápidamente.</p>
-            <form id="contactForm" class="modal-form" action="https://formspree.io/f/sample" method="POST">
+            <form id="contactForm" class="modal-form">
                 <div class="form-group">
                     <label for="cName">Tu Nombre</label>
                     <input type="text" id="cName" name="name" placeholder="Ej: María García" required>
@@ -508,8 +588,9 @@
                     <label for="cMsg">Mensaje</label>
                     <textarea id="cMsg" name="message" rows="4" placeholder="Cuéntame sobre las metas de tu proyecto..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Enviar Mensaje <i class="fa-solid fa-paper-plane"></i></button>
+                <button type="submit" class="submit-btn">Enviar por Email <i class="fa-solid fa-paper-plane"></i></button>
             </form>
+            <p class="contact-alt">O escribime directo a <a href="mailto:juanmks86@gmail.com">juanmks86@gmail.com</a></p>
         </div>
     </div>
 
@@ -547,9 +628,10 @@
                 <p><strong>Proyectos propios:</strong> Contax, DeliMarket y Cuentas Claras — apps desplegadas en Vercel.</p>
             </div>
             <div class="cv-actions">
-                <button class="submit-btn" id="downloadPdfActionBtn">
-                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF Oficial
-                </button>
+                <a class="submit-btn" id="downloadPdfActionBtn" href="assets/cv-juan-israel-flores.pdf" download="CV-Juan-Israel-Flores.pdf" style="text-decoration:none; justify-content:center;">
+                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF
+                </a>
+                <p class="contact-alt" style="margin-top:12px;">¿No disponible aún? Escribime a <a href="mailto:juanmks86@gmail.com">juanmks86@gmail.com</a></p>
             </div>
         </div>
     </div>
