@@ -619,13 +619,15 @@ body {
 .filter-btn.active, .filter-btn:hover { background: var(--color-text-main); color: var(--bg-frame); }
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
-.gallery-item { border-radius: 16px; overflow: hidden; background: var(--card-bg-subtle); transition: transform 0.3s ease; }
+.gallery-item { border-radius: 16px; overflow: hidden; background: var(--card-bg-subtle); transition: transform 0.3s ease; display: block; text-decoration: none; color: inherit; }
 .gallery-item:hover { transform: translateY(-4px); }
 .gallery-item img { width: 100%; height: 140px; object-fit: cover; }
 
 .placeholder-art { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #FFF; }
 .art-purple { background: var(--color-hero-purple); }
 .art-mint { background: var(--color-mint); color: #111; }
+.art-yellow { background: var(--color-yellow); color: #111; }
+.art-dark { background: var(--color-dark-card); }
 .gallery-info { padding: 14px 16px; }
 .gallery-info h4 { font-family: var(--font-heading); font-size: 16px; }
 .gallery-info span { font-size: 12px; color: var(--color-text-muted); }
