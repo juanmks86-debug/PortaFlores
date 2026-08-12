@@ -141,6 +141,328 @@
         /* Formspree success/error */
         .form-status.success { color: #10B981; }
         .form-status.error { color: #EF4444; }
+
+        /* ===== BLOG ===== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .blog-card {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #E5E7EB);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .blog-meta {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .blog-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--color-purple);
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .blog-date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .blog-title {
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .blog-excerpt {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            flex: 1;
+            margin-bottom: 16px;
+        }
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color, #E5E7EB);
+            padding-top: 14px;
+        }
+        .blog-readtime {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .blog-read-btn {
+            background: none;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-purple);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+        .blog-read-btn:hover { gap: 10px; }
+
+        /* ===== CERTIFICADOS / BADGES ===== */
+        .badges-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #E5E7EB);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .badge-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--color-purple);
+        }
+        .badge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .badge-icon.purple { background: #EDE9FE; color: #7C3AED; }
+        .badge-icon.mint { background: #D1FAE5; color: #059669; }
+        .badge-icon.yellow { background: #FEF3C7; color: #D97706; }
+        .badge-icon.dark { background: #E5E7EB; color: #374151; }
+        .badge-info { display: flex; flex-direction: column; }
+        .badge-name { font-size: 13px; font-weight: 700; }
+        .badge-issuer { font-size: 11px; color: var(--text-muted); }
+
+        /* ===== TESTIMONIOS ===== */
+        .testimonials-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color, #E5E7EB);
+        }
+        .testimonials-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .testimonials-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .testimonials-track::-webkit-scrollbar { height: 4px; }
+        .testimonials-track::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        .testimonial-card {
+            min-width: 280px;
+            max-width: 320px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #E5E7EB);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 8px;
+            right: 16px;
+            font-size: 48px;
+            color: var(--color-mint);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .testimonial-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .testimonial-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-mint));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .testimonial-name { font-size: 13px; font-weight: 700; }
+        .testimonial-role { font-size: 11px; color: var(--text-muted); }
+
+        /* ===== MODO PRESENTACIÓN ===== */
+        .presentation-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .presentation-overlay.active { display: flex; }
+        .presentation-slide {
+            max-width: 900px;
+            width: 90%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .presentation-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .presentation-slide h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .presentation-slide p {
+            font-size: 22px;
+            color: #9CA3AF;
+            line-height: 1.5;
+        }
+        .presentation-controls {
+            position: absolute;
+            bottom: 40px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .presentation-controls button {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .presentation-controls button:hover { background: rgba(255,255,255,0.2); }
+        .presentation-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-purple), var(--color-mint));
+            transition: width 0.3s ease;
+        }
+        .presentation-exit {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .presentation-exit:hover { opacity: 1; }
+
+        /* ===== KONAMI CONFETTI ===== */
+        .konami-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, var(--color-purple), var(--color-mint));
+            color: #fff;
+            padding: 30px 50px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: 800;
+            z-index: 10000;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+        .konami-message.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .konami-message small {
+            display: block;
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        /* ===== CONTADOR DE VISITAS ===== */
+        .visit-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #E5E7EB);
+            border-radius: 12px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .visit-counter i { color: var(--color-purple); }
     </style>
 <base target="_blank">
 </head>
@@ -175,6 +497,10 @@
                         <i class="fa-solid fa-graduation-cap"></i>
                         <span class="nav-text">Formación</span>
                     </button>
+                    <button class="nav-btn" data-tab="blog">
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <span class="nav-text">Blog</span>
+                    </button>
                     <button class="nav-btn" data-tab="podcast">
                         <i class="fa-solid fa-podcast"></i>
                         <span class="nav-text">Podcast</span>
@@ -194,6 +520,11 @@
                     <!-- Terminal CLI Easter Egg -->
                     <button class="icon-btn" id="terminalToggleBtn" title="Abrir Terminal CLI (~)">
                         <i class="fa-solid fa-terminal"></i>
+                    </button>
+
+                    <!-- Presentation Mode -->
+                    <button class="icon-btn" id="presentationBtn" title="Modo Presentación (P)">
+                        <i class="fa-solid fa-person-chalkboard"></i>
                     </button>
 
                     <!-- Edit Profile -->
@@ -355,7 +686,44 @@
 
                             </div>
                         </div>
-                    </section>
+                    
+                        <!-- Testimonios -->
+                        <div class="testimonials-section" data-aos="fade-up">
+                            <h3 class="testimonials-title"><i class="fa-solid fa-comments"></i> Lo que dicen</h3>
+                            <div class="testimonials-track">
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">"Juan tiene una capacidad impresionante para traducir ideas complejas en interfaces limpias y funcionales. Su atención al detalle es notable."</p>
+                                    <div class="testimonial-author">
+                                        <div class="testimonial-avatar">MR</div>
+                                        <div>
+                                            <div class="testimonial-name">María R.</div>
+                                            <div class="testimonial-role">Product Designer — Freelance</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">"Trabajar con Juan en el proyecto de la facultad fue una gran experiencia. Domina React y siempre propone soluciones creativas."</p>
+                                    <div class="testimonial-author">
+                                        <div class="testimonial-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">LG</div>
+                                        <div>
+                                            <div class="testimonial-name">Lucas G.</div>
+                                            <div class="testimonial-role">Compañero de cursada — UNJu</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-card">
+                                    <p class="testimonial-text">"Su portafolio habla por sí solo. La calculadora de intereses embebida es exactamente el tipo de detalle que diferencia a un buen dev."</p>
+                                    <div class="testimonial-author">
+                                        <div class="testimonial-avatar" style="background:linear-gradient(135deg,#3B82F6,#8B5CF6);">AP</div>
+                                        <div>
+                                            <div class="testimonial-name">Ana P.</div>
+                                            <div class="testimonial-role">Dev Lead — Startup local</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+</section>
 
                 <!-- TAB 2: SKILLS & TECH STACK -->
                 <section class="tab-content" id="tab-skills">
@@ -598,6 +966,48 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Certificados & Badges -->
+                        <div class="edu-self-section" style="margin-top:24px;" data-aos="fade-up">
+                            <h3 class="edu-self-title"><i class="fa-solid fa-certificate"></i> Certificaciones & Badges</h3>
+                            <div class="badges-grid">
+                                <a class="badge-item" href="https://www.freecodecamp.org/" target="_blank" rel="noopener">
+                                    <div class="badge-icon purple"><i class="fa-brands fa-free-code-camp"></i></div>
+                                    <div class="badge-info">
+                                        <span class="badge-name">Responsive Web Design</span>
+                                        <span class="badge-issuer">freeCodeCamp</span>
+                                    </div>
+                                </a>
+                                <a class="badge-item" href="https://www.freecodecamp.org/" target="_blank" rel="noopener">
+                                    <div class="badge-icon mint"><i class="fa-brands fa-js"></i></div>
+                                    <div class="badge-info">
+                                        <span class="badge-name">JavaScript Algorithms</span>
+                                        <span class="badge-issuer">freeCodeCamp</span>
+                                    </div>
+                                </a>
+                                <a class="badge-item" href="https://www.google.com/" target="_blank" rel="noopener">
+                                    <div class="badge-icon yellow"><i class="fa-solid fa-chart-pie"></i></div>
+                                    <div class="badge-info">
+                                        <span class="badge-name">Data Analytics</span>
+                                        <span class="badge-issuer">Google Career Certificates</span>
+                                    </div>
+                                </a>
+                                <a class="badge-item" href="https://github.com/" target="_blank" rel="noopener">
+                                    <div class="badge-icon dark"><i class="fa-brands fa-github"></i></div>
+                                    <div class="badge-info">
+                                        <span class="badge-name">GitHub Foundations</span>
+                                        <span class="badge-issuer">GitHub</span>
+                                    </div>
+                                </a>
+                                <a class="badge-item" href="https://www.udemy.com/" target="_blank" rel="noopener">
+                                    <div class="badge-icon purple"><i class="fa-brands fa-react"></i></div>
+                                    <div class="badge-info">
+                                        <span class="badge-name">React — Guía Completa</span>
+                                        <span class="badge-issuer">Udemy</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
 
                     </div>
                 </section>
@@ -638,6 +1048,70 @@
                         </div>
                     </div>
                 </section>
+                <!-- TAB 7: BLOG TÉCNICO -->
+                <section class="tab-content" id="tab-blog">
+                    <div class="subpage-wrapper">
+                        <header class="subpage-header">
+                            <h2>Blog Técnico <span class="arrow-accent">↗</span></h2>
+                            <p>Notas, apuntes y reflexiones sobre desarrollo web, ciencia de datos e inteligencia artificial.</p>
+                        </header>
+
+                        <div class="blog-grid">
+                            <article class="blog-card" data-aos="fade-up">
+                                <div class="blog-meta">
+                                    <span class="blog-tag">React</span>
+                                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> Ago 2026</span>
+                                </div>
+                                <h3 class="blog-title">Cómo construí una PWA con React y Vite desde cero</h3>
+                                <p class="blog-excerpt">Del concepto al deploy en Vercel: service workers, manifest, IndexedDB para persistencia offline y estrategias de cacheo que usé en DeliMarket y Contax.</p>
+                                <div class="blog-footer">
+                                    <span class="blog-readtime"><i class="fa-regular fa-clock"></i> 6 min</span>
+                                    <button class="blog-read-btn" onclick="showToast('Artículo completo próximamente')">Leer nota <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </article>
+
+                            <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="blog-meta">
+                                    <span class="blog-tag" style="background:var(--color-purple);color:#fff;">Data Science</span>
+                                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> Jul 2026</span>
+                                </div>
+                                <h3 class="blog-title">Mi primer modelo de Machine Learning con Scikit-learn</h3>
+                                <p class="blog-excerpt">De la teoría a la práctica: preparación de datos, feature engineering, entrenamiento de un clasificador y evaluación con métricas reales. Lecciones aprendidas en IES N°6.</p>
+                                <div class="blog-footer">
+                                    <span class="blog-readtime"><i class="fa-regular fa-clock"></i> 8 min</span>
+                                    <button class="blog-read-btn" onclick="showToast('Artículo completo próximamente')">Leer nota <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </article>
+
+                            <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="blog-meta">
+                                    <span class="blog-tag" style="background:var(--color-dark);color:#fff;">UI/UX</span>
+                                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> Jun 2026</span>
+                                </div>
+                                <h3 class="blog-title">Bento Grid: por qué este layout conquistó el diseño web en 2026</h3>
+                                <p class="blog-excerpt">Análisis del patrón Bento, sus orígenes en Apple, cómo implementarlo con CSS Grid y por qué funciona tan bien para portafolios y dashboards.</p>
+                                <div class="blog-footer">
+                                    <span class="blog-readtime"><i class="fa-regular fa-clock"></i> 5 min</span>
+                                    <button class="blog-read-btn" onclick="showToast('Artículo completo próximamente')">Leer nota <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </article>
+
+                            <article class="blog-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="blog-meta">
+                                    <span class="blog-tag" style="background:var(--color-mint);color:#1F2937;">DevOps</span>
+                                    <span class="blog-date"><i class="fa-regular fa-calendar"></i> May 2026</span>
+                                </div>
+                                <h3 class="blog-title">Virtualización con Proxmox: lo que aprendí en Laboratorio de SO II</h3>
+                                <p class="blog-excerpt">Configuración de VMs con KVM, gestión de recursos, snapshots y networking virtual. Un resumen práctico del TP de la UNJu.</p>
+                                <div class="blog-footer">
+                                    <span class="blog-readtime"><i class="fa-regular fa-clock"></i> 7 min</span>
+                                    <button class="blog-read-btn" onclick="showToast('Artículo completo próximamente')">Leer nota <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
 
             </div>
         </div>
@@ -1251,6 +1725,261 @@
 
         // Calcular al cargar
         calcular();
+    });
+    </script>
+
+
+    <!-- Meta Tags Dinámicas por Sección -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titles = {
+            about:    'Sobre Mí | Juan Israel Flores — Full-Stack & Data/IA',
+            skills:   'Habilidades & Stack | Juan Israel Flores',
+            github:   'GitHub Live | Juan Israel Flores',
+            portfolio:'Proyectos | Juan Israel Flores — Portafolio',
+            clients:  'Formación | Juan Israel Flores — UNJu & IES N°6',
+            podcast:  'Podcasts | Juan Israel Flores',
+            blog:     'Blog Técnico | Juan Israel Flores'
+        };
+        const descriptions = {
+            about:    'Conocé a Juan Israel Flores: Analista Programador Universitario (UNJu) y estudiante de Ciencias de Datos e IA (IES N°6).',
+            skills:   'Stack técnico completo de Juan Israel Flores: React, TypeScript, Node.js, Python, Machine Learning y más.',
+            github:   'Repositorios en vivo, contribuciones y actividad reciente de Juan Israel Flores en GitHub.',
+            portfolio:'Explorá los proyectos de Juan Israel Flores: DeliMarket, Contax, Cuentas Claras, PortaFlores y más.',
+            clients:  'Trayectoria académica de Juan Israel Flores: UNJu (Analista Programador) e IES N°6 (Data Science & IA).',
+            podcast:  'Podcasts de tecnología que sigue Juan Israel Flores: Syntax.fm, The Changelog, Microsiervos.',
+            blog:     'Notas técnicas y artículos de Juan Israel Flores sobre desarrollo web, data science e inteligencia artificial.'
+        };
+
+        const tabButtons = document.querySelectorAll('.nav-btn[data-tab]');
+        const descMeta = document.querySelector('meta[name="description"]');
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        const twDesc = document.querySelector('meta[name="twitter:description"]');
+
+        function updateMeta(tab) {
+            if (titles[tab]) document.title = titles[tab];
+            if (descriptions[tab]) {
+                if (descMeta) descMeta.content = descriptions[tab];
+                if (ogDesc) ogDesc.content = descriptions[tab];
+                if (twDesc) twDesc.content = descriptions[tab];
+            }
+        }
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = this.dataset.tab;
+                if (tab) updateMeta(tab);
+            });
+        });
+    });
+    </script>
+
+
+    <!-- Modo Presentación Overlay -->
+    <div class="presentation-overlay" id="presentationOverlay">
+        <div class="presentation-progress" id="presentationProgress" style="width:0%"></div>
+        <button class="presentation-exit" id="presentationExit" title="Salir (Esc)">&times;</button>
+
+        <div class="presentation-slide active" data-slide="0">
+            <h2>Juan Israel Flores</h2>
+            <p>Analista Programador Universitario & Estudiante de Data Science / IA</p>
+            <p style="font-size:16px;margin-top:20px;color:#6B7280;">Full-Stack Developer • React • Python • Machine Learning</p>
+        </div>
+
+        <div class="presentation-slide" data-slide="1">
+            <h2>Stack Técnico</h2>
+            <p>React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel</p>
+            <p style="font-size:16px;margin-top:20px;color:#6B7280;">Desarrollo web moderno + Ciencia de datos aplicada</p>
+        </div>
+
+        <div class="presentation-slide" data-slide="2">
+            <h2>Proyectos Destacados</h2>
+            <p>DeliMarket · Contax · Cuentas Claras · PortaFlores</p>
+            <p style="font-size:16px;margin-top:20px;color:#6B7280;">Apps propias desplegadas en Vercel con PWA, offline-first y UI/UX cuidada</p>
+        </div>
+
+        <div class="presentation-slide" data-slide="3">
+            <h2>Formación Académica</h2>
+            <p>UNJu — Analista Programador Universitario</p>
+            <p>IES N°6 — Tec. en Ciencias de Datos e IA</p>
+            <p style="font-size:16px;margin-top:20px;color:#6B7280;">Autodidacta en React, Three.js, Design Systems y DevOps</p>
+        </div>
+
+        <div class="presentation-slide" data-slide="4">
+            <h2>¿Hablamos?</h2>
+            <p>juanmks86@gmail.com</p>
+            <p style="font-size:16px;margin-top:20px;color:#6B7280;">github.com/juanmks86-debug</p>
+        </div>
+
+        <div class="presentation-controls">
+            <button id="presentationPrev"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+            <span id="presentationCounter" style="font-size:13px;color:#9CA3AF;">1 / 5</span>
+            <button id="presentationNext">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+
+    <!-- Konami Code + Contador + Presentación -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===================== 16. KONAMI CODE =====================
+        const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let konamiIndex = 0;
+
+        // Crear elemento de mensaje
+        const konamiMsg = document.createElement('div');
+        konamiMsg.className = 'konami-message';
+        konamiMsg.innerHTML = '🎉 ¡Código Konami activado!<br><small>Sos un verdadero dev. Seguí así.</small>';
+        document.body.appendChild(konamiMsg);
+
+        // Crear canvas para confetti
+        const confettiCanvas = document.createElement('canvas');
+        confettiCanvas.style.position = 'fixed';
+        confettiCanvas.style.inset = '0';
+        confettiCanvas.style.pointerEvents = 'none';
+        confettiCanvas.style.zIndex = '9998';
+        document.body.appendChild(confettiCanvas);
+        const ctx = confettiCanvas.getContext('2d');
+
+        function fireConfetti() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            const particles = [];
+            const colors = ['#8B5CF6', '#34D399', '#FBBF24', '#F472B6', '#60A5FA', '#A78BFA'];
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    vx: (Math.random() - 0.5) * 20,
+                    vy: (Math.random() - 0.5) * 20 - 5,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotSpeed: (Math.random() - 0.5) * 10,
+                    life: 1
+                });
+            }
+            function animate() {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                let alive = false;
+                particles.forEach(p => {
+                    if (p.life <= 0) return;
+                    alive = true;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.3; // gravedad
+                    p.life -= 0.008;
+                    p.rotation += p.rotSpeed;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.life;
+                    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                    ctx.restore();
+                });
+                if (alive) requestAnimationFrame(animate);
+                else ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            }
+            animate();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === konamiSequence[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiSequence.length) {
+                    konamiIndex = 0;
+                    konamiMsg.classList.add('show');
+                    fireConfetti();
+                    setTimeout(() => konamiMsg.classList.remove('show'), 4000);
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // ===================== 17. CONTADOR DE VISITAS =====================
+        const visitCounter = document.createElement('div');
+        visitCounter.className = 'visit-counter';
+        visitCounter.innerHTML = '<i class="fa-solid fa-eye"></i> <span id="visitCount">...</span> visitas';
+        document.body.appendChild(visitCounter);
+
+        (async function loadVisits() {
+            try {
+                const res = await fetch('https://api.countapi.xyz/hit/juanisraelflores-portfolio/visits');
+                const data = await res.json();
+                document.getElementById('visitCount').textContent = data.value.toLocaleString();
+            } catch (e) {
+                document.getElementById('visitCount').textContent = '∞';
+            }
+        })();
+
+        // ===================== 21. MODO PRESENTACIÓN =====================
+        const presentationOverlay = document.getElementById('presentationOverlay');
+        const presentationBtn = document.getElementById('presentationBtn');
+        const presentationExit = document.getElementById('presentationExit');
+        const presentationPrev = document.getElementById('presentationPrev');
+        const presentationNext = document.getElementById('presentationNext');
+        const presentationCounter = document.getElementById('presentationCounter');
+        const presentationProgress = document.getElementById('presentationProgress');
+        const slides = document.querySelectorAll('.presentation-slide');
+        let currentSlide = 0;
+        let autoPlay = null;
+
+        function showSlide(n) {
+            slides.forEach((s, i) => {
+                s.classList.toggle('active', i === n);
+            });
+            currentSlide = n;
+            presentationCounter.textContent = (n + 1) + ' / ' + slides.length;
+            presentationProgress.style.width = ((n + 1) / slides.length * 100) + '%';
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+            else showSlide(0);
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) showSlide(currentSlide - 1);
+            else showSlide(slides.length - 1);
+        }
+
+        function startPresentation() {
+            presentationOverlay.classList.add('active');
+            showSlide(0);
+            autoPlay = setInterval(nextSlide, 8000);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function stopPresentation() {
+            presentationOverlay.classList.remove('active');
+            clearInterval(autoPlay);
+            document.body.style.overflow = '';
+        }
+
+        if (presentationBtn) presentationBtn.addEventListener('click', startPresentation);
+        if (presentationExit) presentationExit.addEventListener('click', stopPresentation);
+        if (presentationNext) presentationNext.addEventListener('click', () => { clearInterval(autoPlay); nextSlide(); autoPlay = setInterval(nextSlide, 8000); });
+        if (presentationPrev) presentationPrev.addEventListener('click', () => { clearInterval(autoPlay); prevSlide(); autoPlay = setInterval(nextSlide, 8000); });
+
+        document.addEventListener('keydown', function(e) {
+            if (!presentationOverlay.classList.contains('active')) return;
+            if (e.key === 'Escape') stopPresentation();
+            if (e.key === 'ArrowRight') { clearInterval(autoPlay); nextSlide(); autoPlay = setInterval(nextSlide, 8000); }
+            if (e.key === 'ArrowLeft') { clearInterval(autoPlay); prevSlide(); autoPlay = setInterval(nextSlide, 8000); }
+        });
+
+        // ===================== TOAST HELLER =====================
+        window.showToast = function(message) {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.style.cssText = 'background:#1F2937;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;margin-bottom:8px;animation:msgPop 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
+        };
     });
     </script>
 
