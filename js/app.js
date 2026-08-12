@@ -1287,3 +1287,58 @@ document.addEventListener('DOMContentLoaded', function() {
         AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
     }
 });
+
+
+// --- M. Carrusel de Logos en Hero ---
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('logoCarousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.logo-slide');
+    const dots = carousel.querySelectorAll('.logo-dot');
+    let currentIndex = 0;
+    let autoPlay = null;
+
+    function showSlide(index) {
+        slides.forEach((s, i) => s.classList.toggle('active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        currentIndex = index;
+    }
+
+    function nextSlide() {
+        showSlide((currentIndex + 1) % slides.length);
+    }
+
+    function startAutoPlay() {
+        autoPlay = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlay);
+    }
+
+    // Click en dots
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            stopAutoPlay();
+            showSlide(i);
+            startAutoPlay();
+        });
+    });
+
+    // Pausar al hover
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    // Click en la card → ir al tab de formación
+    const card = document.getElementById('openClientsModal');
+    if (card) {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.logo-dot')) return;
+            document.querySelector('.nav-btn[data-tab="clients"]')?.click();
+        });
+    }
+
+    startAutoPlay();
+});

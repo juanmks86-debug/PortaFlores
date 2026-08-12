@@ -233,13 +233,31 @@
                             <div class="bento-row bottom-row">
                                 
                                 <!-- Formación Card -->
-                                <div class="bento-card card-clients-dark" id="openClientsModal">
-                                    <span class="card-arrow-top">↗</span>
-                                    <div class="clients-body">
-                                        <div class="client-logo-icon">
-                                            <i class="fa-solid fa-graduation-cap"></i>
+                                <div class="bento-card card-clients-dark" id="openClientsModal" style="padding:0;overflow:hidden;cursor:pointer;">
+                                    <span class="card-arrow-top" style="z-index:10;color:rgba(255,255,255,0.6);">↗</span>
+                                    <div class="logo-carousel" id="logoCarousel">
+                                        <div class="logo-slide active" data-index="0">
+                                            <img src="assets/logos/unju.png" alt="UNJu" class="logo-slide-img">
+                                            <span class="logo-slide-label">Universidad Nacional de Jujuy</span>
                                         </div>
-                                        <span class="clients-title" data-i18n="hero.formation">Formación: UNJu &amp; IES N°6</span>
+                                        <div class="logo-slide" data-index="1">
+                                            <img src="assets/logos/fce-unju.png" alt="FCE UNJu" class="logo-slide-img">
+                                            <span class="logo-slide-label">Facultad de Ciencias Económicas</span>
+                                        </div>
+                                        <div class="logo-slide" data-index="2">
+                                            <img src="assets/logos/fi-unju.png" alt="FI UNJu" class="logo-slide-img">
+                                            <span class="logo-slide-label">Facultad de Ingeniería</span>
+                                        </div>
+                                        <div class="logo-slide" data-index="3">
+                                            <img src="assets/logos/ies6.png" alt="IES N°6" class="logo-slide-img">
+                                            <span class="logo-slide-label">IES N°6 — Ciencias de Datos e IA</span>
+                                        </div>
+                                        <div class="logo-carousel-dots">
+                                            <span class="logo-dot active" data-index="0"></span>
+                                            <span class="logo-dot" data-index="1"></span>
+                                            <span class="logo-dot" data-index="2"></span>
+                                            <span class="logo-dot" data-index="3"></span>
+                                        </div>
                                     </div>
                                 </div>
 

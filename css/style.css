@@ -1359,3 +1359,101 @@ body {
     border: 0;
     background: #f5f5f5;
 }
+
+
+/* ===== CARRUSEL DE LOGOS EN HERO ===== */
+.logo-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-dark-card);
+}
+
+.logo-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    padding: 20px;
+}
+
+.logo-slide.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+.logo-slide-img {
+    max-width: 80%;
+    max-height: 70px;
+    object-fit: contain;
+    filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    transition: transform 0.4s ease;
+}
+
+.logo-slide.active .logo-slide-img {
+    animation: logoBounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes logoBounceIn {
+    0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+    60% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.logo-slide-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+}
+
+.logo-slide.active .logo-slide-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logo-carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+
+.logo-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logo-dot.active {
+    background: #fff;
+    width: 18px;
+    border-radius: 3px;
+}
+
+.logo-dot:hover {
+    background: rgba(255,255,255,0.7);
+}
