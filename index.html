@@ -32,7 +32,115 @@
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Mejoras visuales inline -->
+    <style>
+        /* Placeholders de proyectos mejorados */
+        .placeholder-art {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .placeholder-art::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .placeholder-art {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .gallery-item:hover .placeholder-art::before {
+            opacity: 1;
+        }
+        .gallery-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+        /* Gradiente animado para art-purple */
+        .art-purple {
+            background: linear-gradient(-45deg, #8B5CF6, #A78BFA, #7C3AED, #6D28D9);
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+        }
+        .art-mint {
+            background: linear-gradient(-45deg, #34D399, #6EE7B7, #10B981, #059669);
+            background-size: 400% 400%;
+            animation: gradientShift 7s ease infinite;
+        }
+        .art-yellow {
+            background: linear-gradient(-45deg, #FBBF24, #FCD34D, #F59E0B, #D97706);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+        .art-dark {
+            background: linear-gradient(-45deg, #374151, #4B5563, #1F2937, #111827);
+            background-size: 400% 400%;
+            animation: gradientShift 9s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Chatbot mejoras */
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .ai-msg {
+            animation: msgPop 0.3s ease;
+        }
+        @keyframes msgPop {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #9CA3AF;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        .msg-time {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+        /* Formspree success/error */
+        .form-status.success { color: #10B981; }
+        .form-status.error { color: #EF4444; }
+    </style>
 <base target="_blank">
 </head>
 <body>
@@ -256,7 +364,7 @@
                             <p>Herramientas y tecnologías que domino para desarrollo web y diseño UI/UX.</p>
                         </header>
                         <div class="skills-grid">
-                            <div class="skill-card">
+                            <div class="skill-card" data-aos="fade-right">
                                 <div class="skill-icon"><i class="fa-brands fa-react"></i></div>
                                 <div class="skill-info">
                                     <div class="skill-header">
@@ -266,7 +374,7 @@
                                     <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
                                 </div>
                             </div>
-                            <div class="skill-card">
+                            <div class="skill-card" data-aos="fade-right">
                                 <div class="skill-icon"><i class="fa-brands fa-figma"></i></div>
                                 <div class="skill-info">
                                     <div class="skill-header">
@@ -276,7 +384,7 @@
                                     <div class="progress-bar"><div class="progress-fill" style="width: 92%;"></div></div>
                                 </div>
                             </div>
-                            <div class="skill-card">
+                            <div class="skill-card" data-aos="fade-right">
                                 <div class="skill-icon"><i class="fa-brands fa-node-js"></i></div>
                                 <div class="skill-info">
                                     <div class="skill-header">
@@ -286,7 +394,7 @@
                                     <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
                                 </div>
                             </div>
-                            <div class="skill-card">
+                            <div class="skill-card" data-aos="fade-right">
                                 <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                                 <div class="skill-info">
                                     <div class="skill-header">
@@ -308,7 +416,7 @@
                             <p>Repositorios en vivo, contribuciones y actividad reciente sincronizada.</p>
                         </header>
                         <div class="github-search-box">
-                            <input type="text" id="ghUsernameInput" value="octocat" placeholder="Ingresa un usuario de GitHub...">
+                            <input type="text" id="ghUsernameInput" value="juanmks86-debug" placeholder="Ingresa un usuario de GitHub...">
                             <button id="fetchGhBtn" class="cta-pill-btn"><i class="fa-brands fa-github"></i> Cargar Datos</button>
                         </div>
                         
@@ -339,7 +447,7 @@
                             <button class="filter-btn" data-filter="sistemas">Sistemas / Infraestructura</button>
                         </div>
                         <div class="gallery-grid">
-                            <a class="gallery-item" data-category="webapp" href="https://github.com/juanmks86-debug/Contax" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Contax" target="_blank" rel="noopener">
                                 <div class="placeholder-art art-purple">
                                     <i class="fa-solid fa-boxes-stacked"></i>
                                 </div>
@@ -348,7 +456,7 @@
                                     <span>Gestor de inventario y ventas — PWA offline</span>
                                 </div>
                             </a>
-                            <a class="gallery-item" data-category="webapp" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener">
                                 <div class="placeholder-art art-mint">
                                     <i class="fa-solid fa-utensils"></i>
                                 </div>
@@ -357,7 +465,7 @@
                                     <span>Marketplace de delivery con carrito y filtros</span>
                                 </div>
                             </a>
-                            <a class="gallery-item" data-category="webapp" href="https://github.com/juanmks86-debug/Adeuas" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Adeuas" target="_blank" rel="noopener">
                                 <div class="placeholder-art art-yellow">
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </div>
@@ -366,7 +474,7 @@
                                     <span>Gestión de préstamos e intereses — PWA</span>
                                 </div>
                             </a>
-                            <a class="gallery-item" data-category="frontend" href="https://github.com/juanmks86-debug/PortaFlores" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-aos-delay="300" data-category="frontend" href="https://github.com/juanmks86-debug/PortaFlores" target="_blank" rel="noopener">
                                 <div class="placeholder-art art-dark">
                                     <i class="fa-solid fa-diamond"></i>
                                 </div>
@@ -375,7 +483,7 @@
                                     <span>Este portafolio — Bento Grid + interacciones</span>
                                 </div>
                             </a>
-                            <div class="gallery-item" data-category="sistemas">
+                            <div class="gallery-item" data-aos="fade-up" data-aos-delay="400" data-category="sistemas">
                                 <div class="placeholder-art art-dark">
                                     <i class="fa-solid fa-server"></i>
                                 </div>
@@ -384,7 +492,7 @@
                                     <span>TP de Laboratorio de Sistemas Operativos II (UNJu) — KVM</span>
                                 </div>
                             </div>
-                            <div class="gallery-item" data-category="data" id="openMapaModal" style="cursor:pointer;">
+                            <div class="gallery-item" data-aos="fade-up" data-aos-delay="500" data-category="data" id="openMapaModal" style="cursor:pointer;">
                                 <div class="placeholder-art art-purple">
                                     <i class="fa-solid fa-brain"></i>
                                 </div>
@@ -412,7 +520,7 @@
                         <div class="edu-cards-grid">
 
                             <!-- UNJu -->
-                            <div class="edu-card edu-card--purple">
+                            <div class="edu-card edu-card--purple" data-aos="fade-up">
                                 <div class="edu-card__header">
                                     <div class="edu-icon-wrap"><i class="fa-solid fa-university"></i></div>
                                     <div class="edu-badge">En cursado</div>
@@ -433,7 +541,7 @@
                             </div>
 
                             <!-- IES N°6 -->
-                            <div class="edu-card edu-card--mint">
+                            <div class="edu-card edu-card--mint" data-aos="fade-up" data-aos-delay="150">
                                 <div class="edu-card__header">
                                     <div class="edu-icon-wrap"><i class="fa-solid fa-brain"></i></div>
                                     <div class="edu-badge">En cursado</div>
@@ -459,28 +567,28 @@
                         <div class="edu-self-section">
                             <h3 class="edu-self-title"><i class="fa-solid fa-rocket"></i> Aprendizaje Autodidacta</h3>
                             <div class="edu-timeline">
-                                <div class="edu-tl-item">
+                                <div class="edu-tl-item" data-aos="fade-left" data-aos-delay="100">
                                     <div class="edu-tl-dot"></div>
                                     <div class="edu-tl-content">
                                         <strong>React + Vite + TypeScript</strong>
                                         <span>SPAs y PWAs modernas. Apps propias: DeliMarket, Contax, Cuentas Claras desplegadas en Vercel.</span>
                                     </div>
                                 </div>
-                                <div class="edu-tl-item">
+                                <div class="edu-tl-item" data-aos="fade-left" data-aos-delay="200">
                                     <div class="edu-tl-dot"></div>
                                     <div class="edu-tl-content">
                                         <strong>Diseño UI/UX</strong>
                                         <span>Figma, Design Systems, Bento Grid, Glassmorphism y estética de productos digitales modernos.</span>
                                     </div>
                                 </div>
-                                <div class="edu-tl-item">
+                                <div class="edu-tl-item" data-aos="fade-left" data-aos-delay="300">
                                     <div class="edu-tl-dot"></div>
                                     <div class="edu-tl-content">
                                         <strong>DevOps & Deploy</strong>
                                         <span>Vercel, Netlify, Git/GitHub, CI/CD. Virtualización con Proxmox/KVM (TP Lab SO II — UNJu).</span>
                                     </div>
                                 </div>
-                                <div class="edu-tl-item">
+                                <div class="edu-tl-item" data-aos="fade-left" data-aos-delay="400">
                                     <div class="edu-tl-dot"></div>
                                     <div class="edu-tl-content">
                                         <strong>3D & Animación Web</strong>
@@ -502,7 +610,7 @@
                         </header>
 
                         <div class="podcast-episodes">
-                            <a class="episode-card" href="https://syntax.fm/" target="_blank" rel="noopener">
+                            <a class="episode-card" data-aos="fade-up" data-aos-delay="100" href="https://syntax.fm/" target="_blank" rel="noopener">
                                 <div class="ep-icon"><i class="fa-solid fa-microphone"></i></div>
                                 <div class="ep-details">
                                     <span class="ep-number">Syntax.fm</span>
@@ -510,7 +618,7 @@
                                 </div>
                                 <button class="play-ep-btn" type="button"><i class="fa-solid fa-arrow-up-right-from-square"></i> Escuchar</button>
                             </a>
-                            <a class="episode-card" href="https://changelog.com/podcast" target="_blank" rel="noopener">
+                            <a class="episode-card" data-aos="fade-up" data-aos-delay="200" href="https://changelog.com/podcast" target="_blank" rel="noopener">
                                 <div class="ep-icon"><i class="fa-solid fa-microphone"></i></div>
                                 <div class="ep-details">
                                     <span class="ep-number">The Changelog</span>
@@ -518,7 +626,7 @@
                                 </div>
                                 <button class="play-ep-btn" type="button"><i class="fa-solid fa-arrow-up-right-from-square"></i> Escuchar</button>
                             </a>
-                            <a class="episode-card" href="https://www.microsiervos.com/podcast/" target="_blank" rel="noopener">
+                            <a class="episode-card" data-aos="fade-up" data-aos-delay="300" href="https://www.microsiervos.com/podcast/" target="_blank" rel="noopener">
                                 <div class="ep-icon"><i class="fa-solid fa-microphone"></i></div>
                                 <div class="ep-details">
                                     <span class="ep-number">Podcast de Microsiervos</span>
@@ -546,13 +654,14 @@
                 <div class="ai-bot-avatar">🤖</div>
                 <div class="ai-bot-info">
                     <h4>Asistente de Juan Israel Flores</h4>
-                    <span>Disponible • Pregúntame lo que quieras</span>
+                    <span id="aiBotStatus"><span class="status-dot"></span> En línea</span>
                 </div>
                 <button class="ai-chat-close" id="closeAiChatBtn">&times;</button>
             </div>
             <div class="ai-chat-messages" id="aiChatMessages">
                 <div class="ai-msg bot">
-                    👋 ¡Hola! Soy el asistente virtual de Juan. Puedo darte información sobre sus proyectos, habilidades o cómo contactarlo. ¿En qué te ayudo hoy?
+                    <div class="msg-content">👋 ¡Hola! Soy el asistente virtual de Juan. Puedo contarte sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>. ¿Qué te interesa?</div>
+                    <div class="msg-time" id="msgTime0"></div>
                 </div>
             </div>
             <div class="ai-chat-input-area">
@@ -570,20 +679,22 @@
             <button class="modal-close" id="closeContactModal">&times;</button>
             <h3>¡Hablemos de tu próximo proyecto!</h3>
             <p>Envía un mensaje y nos pondremos en contacto rápidamente.</p>
-            <form id="contactForm" class="modal-form">
+            <form id="contactForm" class="modal-form" action="https://formspree.io/f/xnqevjdr" method="POST">
                 <div class="form-group">
                     <label for="cName">Tu Nombre</label>
                     <input type="text" id="cName" name="name" placeholder="Ej: María García" required>
                 </div>
                 <div class="form-group">
                     <label for="cEmail">Tu Email</label>
-                    <input type="email" id="cEmail" name="email" placeholder="maria@empresa.com" required>
+                    <input type="email" id="cEmail" name="_replyto" placeholder="maria@empresa.com" required>
                 </div>
                 <div class="form-group">
                     <label for="cMsg">Mensaje</label>
                     <textarea id="cMsg" name="message" rows="4" placeholder="Cuéntame sobre las metas de tu proyecto..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Enviar por Email <i class="fa-solid fa-paper-plane"></i></button>
+                <input type="hidden" name="_subject" value="Nuevo mensaje desde tu Portafolio">
+                <button type="submit" class="submit-btn" id="contactSubmitBtn">Enviar Mensaje <i class="fa-solid fa-paper-plane"></i></button>
+                <p id="contactStatus" style="margin-top:10px;font-size:13px;text-align:center;display:none;"></p>
             </form>
             <p class="contact-alt">O escribime directo a <a href="mailto:juanmks86@gmail.com">juanmks86@gmail.com</a></p>
         </div>
@@ -713,6 +824,55 @@
         });
     </script>
 
+
+    <!-- HERO STATS EN VIVO desde GitHub API -->
+    <script>
+        (async function loadHeroStats() {
+            const username = 'juanmks86-debug';
+            try {
+                const res = await fetch('https://api.github.com/users/' + username);
+                if (!res.ok) throw new Error('GitHub API error');
+                const data = await res.json();
+
+                // Animar contador de repos
+                const reposEl = document.getElementById('heroReposCount');
+                const followersEl = document.getElementById('heroFollowersCount');
+
+                function animateCounter(el, target) {
+                    if (!el) return;
+                    let current = 0;
+                    const duration = 1500;
+                    const step = Math.ceil(target / (duration / 16));
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        el.textContent = current.toLocaleString();
+                    }, 16);
+                }
+
+                animateCounter(reposEl, data.public_repos);
+                animateCounter(followersEl, data.followers);
+            } catch (e) {
+                console.log('No se pudieron cargar stats de GitHub:', e);
+            }
+        })();
+    </script>
+
+
+    <!-- AOS Animations -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 700,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60
+        });
+    </script>
+
     <!-- Mapa Mental Modal Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -781,5 +941,178 @@
             }
         });
     </script>
+
+    <!-- Chatbot IA Inteligente + Formspree Handler -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===================== FORMSPREE =====================
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contactStatus');
+        const submitBtn = document.getElementById('contactSubmitBtn');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        contactStatus.textContent = '✅ ¡Mensaje enviado! Te responderé pronto.';
+                        contactStatus.className = 'form-status success';
+                        contactStatus.style.display = 'block';
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Error en el servidor');
+                    }
+                } catch (err) {
+                    contactStatus.textContent = '❌ Hubo un error. Escribime directo a juanmks86@gmail.com';
+                    contactStatus.className = 'form-status error';
+                    contactStatus.style.display = 'block';
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    setTimeout(() => { contactStatus.style.display = 'none'; }, 6000);
+                }
+            });
+        }
+
+        // ===================== CHATBOT IA =====================
+        const chatWindow = document.getElementById('aiChatWindow');
+        const chatMessages = document.getElementById('aiChatMessages');
+        const chatInput = document.getElementById('aiChatInput');
+        const sendBtn = document.getElementById('sendAiChatBtn');
+        const toggleBtn = document.getElementById('toggleAiChatBtn');
+        const closeBtn = document.getElementById('closeAiChatBtn');
+        const botStatus = document.getElementById('aiBotStatus');
+
+        // Base de conocimiento del asistente
+        const knowledgeBase = [
+            {
+                keywords: ['hola', 'buenas', 'hey', 'hi', 'hello'],
+                response: '¡Hola! 👋 Soy el asistente de Juan. ¿Te interesa saber sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>?'
+            },
+            {
+                keywords: ['proyecto', 'proyectos', 'app', 'apps', 'aplicación', 'contax', 'delimarket', 'cuentas claras'],
+                response: 'Juan tiene varios proyectos propios:<br>• <strong>DeliMarket</strong> — Marketplace de delivery (React + PWA)<br>• <strong>Contax</strong> — Gestor de inventario y ventas offline<br>• <strong>Cuentas Claras</strong> — Gestión de préstamos e intereses<br>• <strong>PortaFlores</strong> — Este portafolio interactivo<br>¿Querés ver alguno en particular?'
+            },
+            {
+                keywords: ['habilidad', 'habilidades', 'skill', 'skills', 'stack', 'tecnología', 'tecnologías', 'lenguaje', 'lenguajes'],
+                response: 'Juan domina:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/IA:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Diseño:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM'
+            },
+            {
+                keywords: ['formación', 'estudio', 'estudios', 'carrera', 'universidad', 'unju', 'ies', 'facultad'],
+                response: 'Juan está cursando dos carreras:<br>• <strong>Analista Programador Universitario</strong> — UNJu (Facultad de Ingeniería)<br>• <strong>Tec. en Ciencias de Datos e IA</strong> — IES N°6<br>También aprende de forma autodidacta React, Three.js y diseño UI/UX.'
+            },
+            {
+                keywords: ['contacto', 'contactar', 'email', 'mail', 'correo', 'whatsapp', 'teléfono', 'linkedin', 'github'],
+                response: 'Podés contactar a Juan por:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• También podés usar el formulario de contacto del portafolio (botón "Contacto" arriba a la derecha). ¿Te gustaría que te redirija?'
+            },
+            {
+                keywords: ['cv', 'curriculum', 'trabajo', 'empleo', 'freelance', 'contratar', 'disponible'],
+                response: 'Juan está abierto a oportunidades de <strong>desarrollo web</strong>, <strong>proyectos freelance</strong> y <strong>prácticas profesionales</strong>. Podés descargar su CV desde el botón "Descargar CV" en la sección principal, o escribirle directo por email.'
+            },
+            {
+                keywords: ['data', 'datos', 'ia', 'inteligencia artificial', 'machine learning', 'ml', 'python'],
+                response: 'Juan está formándose en <strong>Ciencias de Datos e IA</strong> (IES N°6). Maneja:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Machine Learning supervisado y no supervisado<br>• Procesamiento de Lenguaje Natural (PLN)<br>• Visualización de datos<br>¡Mirá su <strong>Mapa Mental de PLN</strong> en la sección Proyectos!'
+            },
+            {
+                keywords: ['gracias', 'thank', 'ok', 'perfecto', 'genial', 'buena', 'adiós', 'chau', 'bye'],
+                response: '¡De nada! 😊 Si tenés más preguntas, aquí estoy. ¡Suerte!'
+            }
+        ];
+
+        function getCurrentTime() {
+            const now = new Date();
+            return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        }
+
+        function addMessage(text, isBot) {
+            const div = document.createElement('div');
+            div.className = 'ai-msg ' + (isBot ? 'bot' : 'user');
+            div.innerHTML = '<div class="msg-content">' + text + '</div><div class="msg-time">' + getCurrentTime() + '</div>';
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'ai-msg bot';
+            div.id = 'typingMsg';
+            div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const t = document.getElementById('typingMsg');
+            if (t) t.remove();
+        }
+
+        function findResponse(input) {
+            const lower = input.toLowerCase();
+            for (const item of knowledgeBase) {
+                if (item.keywords.some(k => lower.includes(k))) {
+                    return item.response;
+                }
+            }
+            return 'Mmm, no estoy seguro de entender eso 🤔<br>Podés preguntarme sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>.';
+        }
+
+        async function handleSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, false);
+            chatInput.value = '';
+
+            // Mostrar "escribiendo..."
+            showTyping();
+            if (botStatus) botStatus.innerHTML = '<span class="status-dot"></span> Escribiendo...';
+
+            // Simular delay de respuesta
+            const delay = 800 + Math.random() * 800;
+
+            setTimeout(() => {
+                removeTyping();
+                const response = findResponse(text);
+                addMessage(response, true);
+                if (botStatus) botStatus.innerHTML = '<span class="status-dot"></span> En línea';
+            }, delay);
+        }
+
+        // Event listeners
+        if (sendBtn) sendBtn.addEventListener('click', handleSend);
+        if (chatInput) {
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleSend();
+            });
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                chatWindow.classList.toggle('active');
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                chatWindow.classList.remove('active');
+            });
+        }
+
+        // Poner hora al mensaje inicial
+        const initialTime = document.getElementById('msgTime0');
+        if (initialTime) initialTime.textContent = getCurrentTime();
+    });
+    </script>
+
 </body>
 </html>
