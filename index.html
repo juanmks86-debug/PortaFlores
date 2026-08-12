@@ -37,6 +37,189 @@
 
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- CSS Variables para Light/Dark Mode -->
+    <style>
+        :root {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            --border-color: #E5E7EB;
+            --sidebar-bg: #FFFFFF;
+            --input-bg: #F9FAFB;
+            --input-border: #E5E7EB;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --toast-bg: #1F2937;
+            --toast-text: #FFFFFF;
+            --modal-overlay: rgba(0,0,0,0.5);
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --bg-card: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #CBD5E1;
+            --text-muted: #64748B;
+            --border-color: #334155;
+            --sidebar-bg: #1E293B;
+            --input-bg: #0F172A;
+            --input-border: #334155;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --toast-bg: #0F172A;
+            --toast-text: #F1F5F9;
+            --modal-overlay: rgba(0,0,0,0.7);
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .bento-frame, .content-container, .subpage-wrapper {
+            background: var(--bg-primary);
+            transition: background 0.3s ease;
+        }
+        .sidebar-nav {
+            background: var(--sidebar-bg);
+            border-color: var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .bento-card, .skill-card, .edu-card, .blog-card, .badge-item, .testimonial-card, .gallery-item, .episode-card {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .bento-card *, .skill-card *, .edu-card *, .blog-card * {
+            color: inherit;
+        }
+        .main-title, .subpage-header h2, .profile-name, h1, h2, h3, h4 {
+            color: var(--text-primary);
+        }
+        .subpage-header p, .blog-excerpt, .testimonial-text, .edu-desc {
+            color: var(--text-secondary);
+        }
+        .nav-btn {
+            color: var(--text-muted);
+        }
+        .nav-btn.active, .nav-btn:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+        input, textarea, select {
+            background: var(--input-bg);
+            border-color: var(--input-border);
+            color: var(--text-primary);
+        }
+        .modal-backdrop {
+            background: var(--modal-overlay);
+        }
+        .modal-card {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        .ai-chat-window {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+        }
+        .ai-chat-header, .ai-chat-input-area {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+        .ai-chat-messages {
+            background: var(--bg-primary);
+        }
+        .ai-msg.bot {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        .ai-msg.user {
+            background: var(--color-purple);
+            color: #fff;
+        }
+        .visit-counter {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-muted);
+        }
+        .presentation-slide h2 {
+            color: #fff;
+        }
+        .card-clients-dark {
+            background: #1F2937 !important;
+        }
+        [data-theme="dark"] .card-clients-dark {
+            background: #0B1220 !important;
+        }
+        [data-theme="dark"] .split-left-dark {
+            background: #0B1220;
+        }
+        [data-theme="dark"] .split-right-yellow {
+            background: linear-gradient(135deg, #92400E, #B45309);
+        }
+        [data-theme="dark"] .art-dark {
+            background: linear-gradient(-45deg, #0F172A, #1E293B, #0B1220, #020617) !important;
+        }
+        [data-theme="dark"] .spotify-status-bar {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .spotify-track {
+            color: var(--text-secondary);
+        }
+        [data-theme="dark"] .spotify-label {
+            color: var(--text-muted);
+        }
+        [data-theme="dark"] .stamp-badge {
+            color: var(--text-primary);
+        }
+        [data-theme="dark"] .terminal-bar {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .terminal-body {
+            background: #0B1220;
+        }
+        [data-theme="dark"] .terminal-input-line input {
+            background: transparent;
+            color: var(--text-primary);
+        }
+        [data-theme="dark"] .cv-header {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .cv-body {
+            color: var(--text-secondary);
+        }
+        [data-theme="dark"] .filter-btn {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .filter-btn.active {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+        [data-theme="dark"] .progress-bar {
+            background: var(--bg-secondary);
+        }
+        [data-theme="dark"] .gh-stat-box {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+        [data-theme="dark"] .github-search-box input {
+            background: var(--input-bg);
+            border-color: var(--input-border);
+            color: var(--text-primary);
+        }
+    </style>
+
     <!-- Mejoras visuales inline -->
     <style>
         /* Placeholders de proyectos mejorados */
@@ -479,31 +662,31 @@
                 <nav class="nav-links">
                     <button class="nav-btn active" data-tab="about">
                         <i class="fa-solid fa-user-gear"></i>
-                        <span class="nav-text">Sobre Mí</span>
+                        <span class="nav-text" data-i18n="nav.about">Sobre Mí</span>
                     </button>
                     <button class="nav-btn" data-tab="skills">
                         <i class="fa-solid fa-code"></i>
-                        <span class="nav-text">Habilidades</span>
+                        <span class="nav-text" data-i18n="nav.skills">Habilidades</span>
                     </button>
                     <button class="nav-btn" data-tab="github">
                         <i class="fa-brands fa-github"></i>
-                        <span class="nav-text">GitHub Live</span>
+                        <span class="nav-text" data-i18n="nav.github">GitHub Live</span>
                     </button>
                     <button class="nav-btn" data-tab="portfolio">
                         <i class="fa-solid fa-briefcase"></i>
-                        <span class="nav-text">Proyectos</span>
+                        <span class="nav-text" data-i18n="nav.portfolio">Proyectos</span>
                     </button>
                     <button class="nav-btn" data-tab="clients">
                         <i class="fa-solid fa-graduation-cap"></i>
-                        <span class="nav-text">Formación</span>
+                        <span class="nav-text" data-i18n="nav.clients">Formación</span>
                     </button>
                     <button class="nav-btn" data-tab="blog">
                         <i class="fa-solid fa-pen-nib"></i>
-                        <span class="nav-text">Blog</span>
+                        <span class="nav-text" data-i18n="nav.blog">Blog</span>
                     </button>
                     <button class="nav-btn" data-tab="podcast">
                         <i class="fa-solid fa-podcast"></i>
-                        <span class="nav-text">Podcast</span>
+                        <span class="nav-text" data-i18n="nav.podcast">Podcast</span>
                     </button>
                 </nav>
                 <div class="sidebar-footer">
@@ -520,6 +703,11 @@
                     <!-- Terminal CLI Easter Egg -->
                     <button class="icon-btn" id="terminalToggleBtn" title="Abrir Terminal CLI (~)">
                         <i class="fa-solid fa-terminal"></i>
+                    </button>
+
+                    <!-- Language Toggle -->
+                    <button class="icon-btn" id="langToggleBtn" title="Cambiar idioma (ES/EN)">
+                        <span id="langIcon" style="font-size:13px;font-weight:800;">ES</span>
                     </button>
 
                     <!-- Presentation Mode -->
@@ -554,7 +742,7 @@
 
                             <div class="profile-info">
                                 <h1 class="profile-name">
-                                    <span class="greeting">Soy,</span>
+                                    <span class="greeting" data-i18n="hero.greeting">Soy,</span>
                                     <span class="name-highlight" id="userName">Juan Israel Flores</span>
                                 </h1>
                                 <a href="mailto:juanmks86@gmail.com" class="profile-email" id="userEmail">
@@ -567,7 +755,7 @@
                             <div class="spotify-status-bar" id="spotifyWidget">
                                 <i class="fa-brands fa-spotify spotify-icon"></i>
                                 <div class="spotify-text">
-                                    <span class="spotify-label">Escuchando ahora en Spotify</span>
+                                    <span class="spotify-label" data-i18n="spotify.listening">Escuchando ahora en Spotify</span>
                                     <span class="spotify-track" id="spotifyTrack">Daft Punk — One More Time</span>
                                 </div>
                                 <div class="spotify-equalizer">
@@ -578,7 +766,7 @@
                             <!-- Action CV Download Button -->
                             <div class="hero-cv-action">
                                 <a class="cv-download-btn" id="heroCvDownloadBtn" href="assets/cv-juan-israel-flores.pdf" download="CV-Juan-Israel-Flores.pdf" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
-                                    Descargar CV <i class="fa-solid fa-download"></i>
+                                    <span data-i18n="hero.cv">Descargar CV</span> <i class="fa-solid fa-download"></i>
                                 </a>
                             </div>
 
@@ -602,11 +790,11 @@
                             <!-- Header Title -->
                             <header class="bento-header">
                                 <h2 class="main-title">
-                                    Portfolio <span class="arrow-accent">↗</span>
+                                    <span data-i18n="hero.portfolio">Portfolio</span> <span class="arrow-accent">↗</span>
                                 </h2>
                                 <div class="header-actions">
                                     <button class="cta-pill-btn" id="contactBtn">
-                                        Contacto <i class="fa-solid fa-paper-plane"></i>
+                                        <span data-i18n="hero.contact">Contacto</span> <i class="fa-solid fa-paper-plane"></i>
                                     </button>
                                 </div>
                             </header>
@@ -615,14 +803,19 @@
                             <div class="bento-row top-row">
                                 
                                 <!-- Featured Project Card -->
-                                <div class="bento-card card-media-feature" id="openVideoModal" style="display:flex; align-items:center; justify-content:center; background: var(--color-mint); cursor:pointer;">
-                                    <div class="media-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%);">
-                                        <i class="fa-solid fa-utensils" style="font-size: 48px; color: #FFF;"></i>
-                                        <a href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener" class="card-arrow-top" onclick="event.stopPropagation()" title="Abrir DeliMarket en vivo">↗</a>
-                                    </div>
-                                    <div class="media-caption">
-                                        <span class="tag-badge">Web App / PWA</span>
-                                        <h3>DeliMarket</h3>
+                                <div class="bento-card card-media-feature" id="pergoliniCard" style="position:relative;overflow:hidden;border-radius:20px;cursor:pointer;">
+                                    <!-- ⚠️ IMPORTANTE: REEMPLAZAR ESTE ID DE YOUTUBE (dQw4w9WgXcQ) POR EL VIDEO REAL DE MARIO PERGOLINI -->
+                                    <iframe 
+                                        id="pergoliniVideo"
+                                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" 
+                                        title="Mario Pergolini"
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                    </iframe>
+                                    <div class="media-caption" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,0.8) 0%,transparent 100%);padding:20px;z-index:2;">
+                                        <span class="tag-badge" style="background:#FF0000;color:#fff;"><i class="fa-brands fa-youtube"></i> YouTube</span>
+                                        <h3 style="color:#fff;margin-top:6px;">Mario Pergolini</h3>
                                     </div>
                                 </div>
 
@@ -633,7 +826,7 @@
                                         <span class="card-arrow-top">↗</span>
                                         <div class="stat-content">
                                             <span class="stat-number" id="heroReposCount" data-target="0">0</span>
-                                            <span class="stat-label">Repos en GitHub</span>
+                                            <span class="stat-label" data-i18n="hero.repos">Repos en GitHub</span>
                                         </div>
                                     </div>
 
@@ -642,7 +835,7 @@
                                         <span class="card-arrow-top">↗</span>
                                         <div class="stat-content">
                                             <span class="stat-number" id="heroFollowersCount" data-target="0">0</span>
-                                            <span class="stat-label">Seguidores en GitHub</span>
+                                            <span class="stat-label" data-i18n="hero.followers">Seguidores en GitHub</span>
                                         </div>
                                     </div>
                                 </div>
@@ -659,7 +852,7 @@
                                         <div class="client-logo-icon">
                                             <i class="fa-solid fa-graduation-cap"></i>
                                         </div>
-                                        <span class="clients-title">Formación: UNJu &amp; IES N°6</span>
+                                        <span class="clients-title" data-i18n="hero.formation">Formación: UNJu &amp; IES N°6</span>
                                     </div>
                                 </div>
 
@@ -677,7 +870,7 @@
                                     <!-- Right Section: Yellow Tagline -->
                                     <div class="split-right-yellow">
                                         <div class="award-content">
-                                            <p class="award-text">Full-Stack Dev<br>&amp; Data Science / IA.</p>
+                                            <p class="award-text"><span data-i18n="hero.tagline">Full-Stack Dev<br>&amp; Data Science / IA.</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -729,8 +922,8 @@
                 <section class="tab-content" id="tab-skills">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>Habilidades & Stack Técnico <span class="arrow-accent">↗</span></h2>
-                            <p>Herramientas y tecnologías que domino para desarrollo web y diseño UI/UX.</p>
+                            <h2 data-i18n="skills.title">Habilidades & Stack Técnico <span class="arrow-accent">↗</span></h2>
+                            <p data-i18n="skills.desc">Herramientas y tecnologías que domino para desarrollo web y diseño UI/UX.</p>
                         </header>
                         <div class="skills-grid">
                             <div class="skill-card" data-aos="fade-right">
@@ -781,12 +974,12 @@
                 <section class="tab-content" id="tab-github">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>GitHub Live & Código <span class="arrow-accent">↗</span></h2>
-                            <p>Repositorios en vivo, contribuciones y actividad reciente sincronizada.</p>
+                            <h2 data-i18n="github.title">GitHub Live & Código <span class="arrow-accent">↗</span></h2>
+                            <p data-i18n="github.desc">Repositorios en vivo, contribuciones y actividad reciente sincronizada.</p>
                         </header>
                         <div class="github-search-box">
-                            <input type="text" id="ghUsernameInput" value="juanmks86-debug" placeholder="Ingresa un usuario de GitHub...">
-                            <button id="fetchGhBtn" class="cta-pill-btn"><i class="fa-brands fa-github"></i> Cargar Datos</button>
+                            <input type="text" id="ghUsernameInput" value="juanmks86-debug" placeholder="Ingresa un usuario de GitHub..." data-i18n-placeholder="github.placeholder">
+                            <button id="fetchGhBtn" class="cta-pill-btn"><i class="fa-brands fa-github"></i> <span data-i18n="github.load">Cargar Datos</span></button>
                         </div>
                         
                         <div class="github-stats-summary" id="ghSummary">
@@ -805,15 +998,15 @@
                 <section class="tab-content" id="tab-portfolio">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>Proyectos Seleccionados <span class="arrow-accent">↗</span></h2>
-                            <p>Apps propias, este portafolio y trabajos de la facultad — desarrollo web, sistemas y data & IA.</p>
+                            <h2 data-i18n="portfolio.title">Proyectos Seleccionados <span class="arrow-accent">↗</span></h2>
+                            <p data-i18n="portfolio.desc">Apps propias, este portafolio y trabajos de la facultad — desarrollo web, sistemas y data & IA.</p>
                         </header>
                         <div class="portfolio-filter-bar">
-                            <button class="filter-btn active" data-filter="all">Todos</button>
-                            <button class="filter-btn" data-filter="webapp">Web Apps / PWA</button>
-                            <button class="filter-btn" data-filter="data">Data & IA</button>
-                            <button class="filter-btn" data-filter="frontend">Frontend / UI</button>
-                            <button class="filter-btn" data-filter="sistemas">Sistemas / Infraestructura</button>
+                            <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Todos</button>
+                            <button class="filter-btn" data-filter="webapp" data-i18n="filter.webapp">Web Apps / PWA</button>
+                            <button class="filter-btn" data-filter="data" data-i18n="filter.data">Data & IA</button>
+                            <button class="filter-btn" data-filter="frontend" data-i18n="filter.frontend">Frontend / UI</button>
+                            <button class="filter-btn" data-filter="sistemas" data-i18n="filter.sistemas">Sistemas / Infraestructura</button>
                         </div>
                         <div class="gallery-grid">
                             <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Contax" target="_blank" rel="noopener">
@@ -882,8 +1075,8 @@
                 <section class="tab-content" id="tab-clients">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>Formación Académica <span class="arrow-accent">↗</span></h2>
-                            <p>Mi trayectoria universitaria y técnica en desarrollo de software, datos e inteligencia artificial.</p>
+                            <h2 data-i18n="clients.title">Formación Académica <span class="arrow-accent">↗</span></h2>
+                            <p data-i18n="clients.desc">Mi trayectoria universitaria y técnica en desarrollo de software, datos e inteligencia artificial.</p>
                         </header>
 
                         <div class="edu-cards-grid">
@@ -1016,8 +1209,8 @@
                 <section class="tab-content" id="tab-podcast">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>Podcasts que sigo <span class="arrow-accent">↗</span></h2>
-                            <p>Programas de tecnología que escucho habitualmente — abren en una pestaña nueva.</p>
+                            <h2 data-i18n="podcast.title">Podcasts que sigo <span class="arrow-accent">↗</span></h2>
+                            <p data-i18n="podcast.desc">Programas de tecnología que escucho habitualmente — abren en una pestaña nueva.</p>
                         </header>
 
                         <div class="podcast-episodes">
@@ -1052,8 +1245,8 @@
                 <section class="tab-content" id="tab-blog">
                     <div class="subpage-wrapper">
                         <header class="subpage-header">
-                            <h2>Blog Técnico <span class="arrow-accent">↗</span></h2>
-                            <p>Notas, apuntes y reflexiones sobre desarrollo web, ciencia de datos e inteligencia artificial.</p>
+                            <h2 data-i18n="blog.title">Blog Técnico <span class="arrow-accent">↗</span></h2>
+                            <p data-i18n="blog.desc">Notas, apuntes y reflexiones sobre desarrollo web, ciencia de datos e inteligencia artificial.</p>
                         </header>
 
                         <div class="blog-grid">
@@ -1128,8 +1321,8 @@
             <div class="ai-chat-header">
                 <div class="ai-bot-avatar">🤖</div>
                 <div class="ai-bot-info">
-                    <h4>Asistente de Juan Israel Flores</h4>
-                    <span id="aiBotStatus"><span class="status-dot"></span> En línea</span>
+                    <h4 data-i18n="chatbot.title">Asistente de Juan Israel Flores</h4>
+                    <span id="aiBotStatus"><span class="status-dot"></span> <span data-i18n="chatbot.online">En línea</span></span>
                 </div>
                 <button class="ai-chat-close" id="closeAiChatBtn">&times;</button>
             </div>
@@ -1152,23 +1345,23 @@
     <div class="modal-backdrop" id="contactModal">
         <div class="modal-card">
             <button class="modal-close" id="closeContactModal">&times;</button>
-            <h3>¡Hablemos de tu próximo proyecto!</h3>
-            <p>Envía un mensaje y nos pondremos en contacto rápidamente.</p>
+            <h3 data-i18n="contact.title">¡Hablemos de tu próximo proyecto!</h3>
+            <p data-i18n="contact.desc">Envía un mensaje y nos pondremos en contacto rápidamente.</p>
             <form id="contactForm" class="modal-form" action="https://formspree.io/f/xnqevjdr" method="POST">
                 <div class="form-group">
-                    <label for="cName">Tu Nombre</label>
-                    <input type="text" id="cName" name="name" placeholder="Ej: María García" required>
+                    <label for="cName" data-i18n="contact.name">Tu Nombre</label>
+                    <input type="text" id="cName" name="name" placeholder="Ej: María García" data-i18n-placeholder="contact.namePlaceholder" required>
                 </div>
                 <div class="form-group">
-                    <label for="cEmail">Tu Email</label>
-                    <input type="email" id="cEmail" name="_replyto" placeholder="maria@empresa.com" required>
+                    <label for="cEmail" data-i18n="contact.email">Tu Email</label>
+                    <input type="email" id="cEmail" name="_replyto" placeholder="maria@empresa.com" data-i18n-placeholder="contact.emailPlaceholder" required>
                 </div>
                 <div class="form-group">
-                    <label for="cMsg">Mensaje</label>
-                    <textarea id="cMsg" name="message" rows="4" placeholder="Cuéntame sobre las metas de tu proyecto..." required></textarea>
+                    <label for="cMsg" data-i18n="contact.message">Mensaje</label>
+                    <textarea id="cMsg" name="message" rows="4" placeholder="Cuéntame sobre las metas de tu proyecto..." data-i18n-placeholder="contact.msgPlaceholder" required></textarea>
                 </div>
                 <input type="hidden" name="_subject" value="Nuevo mensaje desde tu Portafolio">
-                <button type="submit" class="submit-btn" id="contactSubmitBtn">Enviar Mensaje <i class="fa-solid fa-paper-plane"></i></button>
+                <button type="submit" class="submit-btn" id="contactSubmitBtn"><span data-i18n="contact.send">Enviar Mensaje</span> <i class="fa-solid fa-paper-plane"></i></button>
                 <p id="contactStatus" style="margin-top:10px;font-size:13px;text-align:center;display:none;"></p>
             </form>
             <p class="contact-alt">O escribime directo a <a href="mailto:juanmks86@gmail.com">juanmks86@gmail.com</a></p>
@@ -1179,18 +1372,18 @@
     <div class="modal-backdrop" id="editModal">
         <div class="modal-card">
             <button class="modal-close" id="closeEditModal">&times;</button>
-            <h3>Personalizar Portafolio</h3>
-            <p>Modifica los datos de tu perfil en tiempo real.</p>
+            <h3 data-i18n="edit.title">Personalizar Portafolio</h3>
+            <p data-i18n="edit.desc">Modifica los datos de tu perfil en tiempo real.</p>
             <form id="editProfileForm" class="modal-form">
                 <div class="form-group">
-                    <label for="eName">Nombre Completo</label>
+                    <label for="eName" data-i18n="edit.name">Nombre Completo</label>
                     <input type="text" id="eName" value="Juan Israel Flores" required>
                 </div>
                 <div class="form-group">
-                    <label for="eEmail">Correo Electrónico</label>
+                    <label for="eEmail" data-i18n="edit.email">Correo Electrónico</label>
                     <input type="email" id="eEmail" value="juanmks86@gmail.com" required>
                 </div>
-                <button type="submit" class="submit-btn">Guardar Cambios <i class="fa-solid fa-check"></i></button>
+                <button type="submit" class="submit-btn"><span data-i18n="edit.save">Guardar Cambios</span> <i class="fa-solid fa-check"></i></button>
             </form>
         </div>
     </div>
@@ -1200,8 +1393,8 @@
         <div class="modal-card modal-cv-card">
             <button class="modal-close" id="closeCvModal">&times;</button>
             <div class="cv-header">
-                <h3>Curriculum Vitae — Juan Israel Flores</h3>
-                <span>Desarrollador Full-Stack & Data Science / IA</span>
+                <h3 data-i18n="cv.title">Curriculum Vitae — Juan Israel Flores</h3>
+                <span data-i18n="cv.subtitle">Desarrollador Full-Stack & Data Science / IA</span>
             </div>
             <div class="cv-body">
                 <p><strong>Formación:</strong> Analista Programador Universitario (cursando, Facultad de Ingeniería — UNJu) y Tecnicatura Superior en Ciencias de Datos e Inteligencia Artificial (cursando, IES N°6).</p>
@@ -1210,7 +1403,7 @@
             </div>
             <div class="cv-actions">
                 <a class="submit-btn" id="downloadPdfActionBtn" href="assets/cv-juan-israel-flores.pdf" download="CV-Juan-Israel-Flores.pdf" style="text-decoration:none; justify-content:center;">
-                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF
+                    <i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="cv.download">Descargar PDF</span>
                 </a>
                 <p class="contact-alt" style="margin-top:12px;">¿No disponible aún? Escribime a <a href="mailto:juanmks86@gmail.com">juanmks86@gmail.com</a></p>
             </div>
@@ -1223,7 +1416,7 @@
             <button class="modal-close" id="closeTerminalModal">&times;</button>
             <div class="terminal-bar">
                 <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">bash — juan@flores-portfolio ~ (CLI)</span>
+                <span class="terminal-title" data-i18n="terminal.title">bash — juan@flores-portfolio ~ (CLI)</span>
             </div>
             <canvas id="matrixCanvas"></canvas>
             <div class="terminal-body" id="terminalBody">
@@ -1348,6 +1541,51 @@
         });
     </script>
 
+
+    <!-- Dark Mode + i18n System -->
+    <script>
+    (function() {
+        // ===================== DARK MODE =====================
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const htmlEl = document.documentElement;
+        const themeIcon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
+
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('portfolio-theme', theme);
+            if (themeIcon) {
+                themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            }
+            if (themeToggleBtn) {
+                themeToggleBtn.title = theme === 'dark' ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro';
+            }
+        }
+
+        // Inicializar tema
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', function() {
+                const current = htmlEl.getAttribute('data-theme') || 'light';
+                setTheme(current === 'dark' ? 'light' : 'dark');
+            });
+        }
+
+        // Escuchar cambios del sistema
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('portfolio-theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    })();
+    </script>
+
     <!-- Mapa Mental Modal Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1469,38 +1707,71 @@
         const botStatus = document.getElementById('aiBotStatus');
 
         // Base de conocimiento del asistente
+        function getChatbotResponse(key) {
+            const lang = window.currentLang || localStorage.getItem('portfolio-lang') || 'es';
+            if (window.i18n && window.i18n[lang] && window.i18n[lang][key]) {
+                return window.i18n[lang][key];
+            }
+            // Fallbacks
+            const fallbacks = {
+                es: {
+                    'chatbot.hello': '¡Hola! 👋 Soy el asistente de Juan. ¿Te interesa saber sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>?',
+                    'chatbot.projects': 'Juan tiene varios proyectos propios:<br>• <strong>DeliMarket</strong> — Marketplace de delivery (React + PWA)<br>• <strong>Contax</strong> — Gestor de inventario y ventas offline<br>• <strong>Cuentas Claras</strong> — Gestión de préstamos e intereses<br>• <strong>PortaFlores</strong> — Este portafolio interactivo<br>¿Querés ver alguno en particular?',
+                    'chatbot.skills': 'Juan domina:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/IA:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Diseño:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM',
+                    'chatbot.education': 'Juan está cursando dos carreras:<br>• <strong>Analista Programador Universitario</strong> — UNJu (Facultad de Ingeniería)<br>• <strong>Tec. en Ciencias de Datos e IA</strong> — IES N°6<br>También aprende de forma autodidacta React, Three.js y diseño UI/UX.',
+                    'chatbot.contact': 'Podés contactar a Juan por:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• También podés usar el formulario de contacto del portafolio (botón "Contacto" arriba a la derecha). ¿Te gustaría que te redirija?',
+                    'chatbot.cv': 'Juan está abierto a oportunidades de <strong>desarrollo web</strong>, <strong>proyectos freelance</strong> y <strong>prácticas profesionales</strong>. Podés descargar su CV desde el botón "Descargar CV" en la sección principal, o escribirle directo por email.',
+                    'chatbot.data': 'Juan está formándose en <strong>Ciencias de Datos e IA</strong> (IES N°6). Maneja:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Machine Learning supervisado y no supervisado<br>• Procesamiento de Lenguaje Natural (PLN)<br>• Visualización de datos<br>¡Mirá su <strong>Mapa Mental de PLN</strong> en la sección Proyectos!',
+                    'chatbot.thanks': '¡De nada! 😊 Si tenés más preguntas, aquí estoy. ¡Suerte!',
+                    'chatbot.fallback': 'Mmm, no estoy seguro de entender eso 🤔<br>Podés preguntarme sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>.'
+                },
+                en: {
+                    'chatbot.hello': "Hi! 👋 I'm Juan's assistant. Are you interested in his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>?",
+                    'chatbot.projects': 'Juan has several own projects:<br>• <strong>DeliMarket</strong> — Delivery marketplace (React + PWA)<br>• <strong>Contax</strong> — Offline inventory and sales manager<br>• <strong>Cuentas Claras</strong> — Loan and interest management<br>• <strong>PortaFlores</strong> — This interactive portfolio<br>Want to see any in particular?',
+                    'chatbot.skills': 'Juan masters:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/AI:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Design:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM',
+                    'chatbot.education': 'Juan is studying two degrees:<br>• <strong>University Programming Analyst</strong> — UNJu (Engineering Faculty)<br>• <strong>Data Science & AI Technician</strong> — IES N°6<br>He also self-teaches React, Three.js and UI/UX design.',
+                    'chatbot.contact': 'You can contact Juan via:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• You can also use the contact form in the portfolio ("Contact" button top right). Would you like me to redirect you?',
+                    'chatbot.cv': 'Juan is open to <strong>web development</strong>, <strong>freelance projects</strong> and <strong>internships</strong>. You can download his CV from the "Download CV" button in the main section, or write him directly by email.',
+                    'chatbot.data': 'Juan is training in <strong>Data Science & AI</strong> (IES N°6). He handles:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Supervised and unsupervised Machine Learning<br>• Natural Language Processing (NLP)<br>• Data visualization<br>Check out his <strong>NLP Mind Map</strong> in the Projects section!',
+                    'chatbot.thanks': "You're welcome! 😊 If you have more questions, I'm here. Good luck!",
+                    'chatbot.fallback': "Hmm, I'm not sure I understand 🤔<br>You can ask me about his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>."
+                }
+            };
+            return (fallbacks[lang] && fallbacks[lang][key]) ? fallbacks[lang][key] : key;
+        }
+
         const knowledgeBase = [
             {
                 keywords: ['hola', 'buenas', 'hey', 'hi', 'hello'],
-                response: '¡Hola! 👋 Soy el asistente de Juan. ¿Te interesa saber sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>?'
+                responseKey: 'chatbot.hello'
             },
             {
-                keywords: ['proyecto', 'proyectos', 'app', 'apps', 'aplicación', 'contax', 'delimarket', 'cuentas claras'],
-                response: 'Juan tiene varios proyectos propios:<br>• <strong>DeliMarket</strong> — Marketplace de delivery (React + PWA)<br>• <strong>Contax</strong> — Gestor de inventario y ventas offline<br>• <strong>Cuentas Claras</strong> — Gestión de préstamos e intereses<br>• <strong>PortaFlores</strong> — Este portafolio interactivo<br>¿Querés ver alguno en particular?'
+                keywords: ['proyecto', 'proyectos', 'app', 'apps', 'aplicación', 'contax', 'delimarket', 'cuentas claras', 'project', 'projects'],
+                responseKey: 'chatbot.projects'
             },
             {
-                keywords: ['habilidad', 'habilidades', 'skill', 'skills', 'stack', 'tecnología', 'tecnologías', 'lenguaje', 'lenguajes'],
-                response: 'Juan domina:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/IA:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Diseño:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM'
+                keywords: ['habilidad', 'habilidades', 'skill', 'skills', 'stack', 'tecnología', 'tecnologías', 'lenguaje', 'lenguajes', 'technology'],
+                responseKey: 'chatbot.skills'
             },
             {
-                keywords: ['formación', 'estudio', 'estudios', 'carrera', 'universidad', 'unju', 'ies', 'facultad'],
-                response: 'Juan está cursando dos carreras:<br>• <strong>Analista Programador Universitario</strong> — UNJu (Facultad de Ingeniería)<br>• <strong>Tec. en Ciencias de Datos e IA</strong> — IES N°6<br>También aprende de forma autodidacta React, Three.js y diseño UI/UX.'
+                keywords: ['formación', 'estudio', 'estudios', 'carrera', 'universidad', 'unju', 'ies', 'facultad', 'education', 'study', 'university'],
+                responseKey: 'chatbot.education'
             },
             {
-                keywords: ['contacto', 'contactar', 'email', 'mail', 'correo', 'whatsapp', 'teléfono', 'linkedin', 'github'],
-                response: 'Podés contactar a Juan por:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• También podés usar el formulario de contacto del portafolio (botón "Contacto" arriba a la derecha). ¿Te gustaría que te redirija?'
+                keywords: ['contacto', 'contactar', 'email', 'mail', 'correo', 'whatsapp', 'teléfono', 'linkedin', 'github', 'contact'],
+                responseKey: 'chatbot.contact'
             },
             {
-                keywords: ['cv', 'curriculum', 'trabajo', 'empleo', 'freelance', 'contratar', 'disponible'],
-                response: 'Juan está abierto a oportunidades de <strong>desarrollo web</strong>, <strong>proyectos freelance</strong> y <strong>prácticas profesionales</strong>. Podés descargar su CV desde el botón "Descargar CV" en la sección principal, o escribirle directo por email.'
+                keywords: ['cv', 'curriculum', 'trabajo', 'empleo', 'freelance', 'contratar', 'disponible', 'job', 'work', 'hire'],
+                responseKey: 'chatbot.cv'
             },
             {
-                keywords: ['data', 'datos', 'ia', 'inteligencia artificial', 'machine learning', 'ml', 'python'],
-                response: 'Juan está formándose en <strong>Ciencias de Datos e IA</strong> (IES N°6). Maneja:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Machine Learning supervisado y no supervisado<br>• Procesamiento de Lenguaje Natural (PLN)<br>• Visualización de datos<br>¡Mirá su <strong>Mapa Mental de PLN</strong> en la sección Proyectos!'
+                keywords: ['data', 'datos', 'ia', 'inteligencia artificial', 'machine learning', 'ml', 'python', 'ai', 'artificial intelligence'],
+                responseKey: 'chatbot.data'
             },
             {
-                keywords: ['gracias', 'thank', 'ok', 'perfecto', 'genial', 'buena', 'adiós', 'chau', 'bye'],
-                response: '¡De nada! 😊 Si tenés más preguntas, aquí estoy. ¡Suerte!'
+                keywords: ['gracias', 'thank', 'ok', 'perfecto', 'genial', 'buena', 'adiós', 'chau', 'bye', 'thanks'],
+                responseKey: 'chatbot.thanks'
             }
         ];
 
@@ -1535,10 +1806,10 @@
             const lower = input.toLowerCase();
             for (const item of knowledgeBase) {
                 if (item.keywords.some(k => lower.includes(k))) {
-                    return item.response;
+                    return getChatbotResponse(item.responseKey);
                 }
             }
-            return 'Mmm, no estoy seguro de entender eso 🤔<br>Podés preguntarme sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>.';
+            return getChatbotResponse('chatbot.fallback');
         }
 
         async function handleSend() {
@@ -1732,7 +2003,7 @@
     <!-- Meta Tags Dinámicas por Sección -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const titles = {
+        window.dynamicTitles = {
             about:    'Sobre Mí | Juan Israel Flores — Full-Stack & Data/IA',
             skills:   'Habilidades & Stack | Juan Israel Flores',
             github:   'GitHub Live | Juan Israel Flores',
@@ -1741,6 +2012,7 @@
             podcast:  'Podcasts | Juan Israel Flores',
             blog:     'Blog Técnico | Juan Israel Flores'
         };
+        const titles = window.dynamicTitles;
         const descriptions = {
             about:    'Conocé a Juan Israel Flores: Analista Programador Universitario (UNJu) y estudiante de Ciencias de Datos e IA (IES N°6).',
             skills:   'Stack técnico completo de Juan Israel Flores: React, TypeScript, Node.js, Python, Machine Learning y más.',
@@ -1782,32 +2054,32 @@
 
         <div class="presentation-slide active" data-slide="0">
             <h2>Juan Israel Flores</h2>
-            <p>Analista Programador Universitario & Estudiante de Data Science / IA</p>
+            <p data-i18n="presentation.slide1">Analista Programador Universitario & Estudiante de Data Science / IA</p>
             <p style="font-size:16px;margin-top:20px;color:#6B7280;">Full-Stack Developer • React • Python • Machine Learning</p>
         </div>
 
         <div class="presentation-slide" data-slide="1">
             <h2>Stack Técnico</h2>
-            <p>React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel</p>
+            <p data-i18n="presentation.slide2">React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel</p>
             <p style="font-size:16px;margin-top:20px;color:#6B7280;">Desarrollo web moderno + Ciencia de datos aplicada</p>
         </div>
 
         <div class="presentation-slide" data-slide="2">
             <h2>Proyectos Destacados</h2>
-            <p>DeliMarket · Contax · Cuentas Claras · PortaFlores</p>
+            <p data-i18n="presentation.slide3">DeliMarket · Contax · Cuentas Claras · PortaFlores</p>
             <p style="font-size:16px;margin-top:20px;color:#6B7280;">Apps propias desplegadas en Vercel con PWA, offline-first y UI/UX cuidada</p>
         </div>
 
         <div class="presentation-slide" data-slide="3">
             <h2>Formación Académica</h2>
-            <p>UNJu — Analista Programador Universitario</p>
-            <p>IES N°6 — Tec. en Ciencias de Datos e IA</p>
+            <p data-i18n="presentation.slide4a">UNJu — Analista Programador Universitario</p>
+            <p data-i18n="presentation.slide4b">IES N°6 — Tec. en Ciencias de Datos e IA</p>
             <p style="font-size:16px;margin-top:20px;color:#6B7280;">Autodidacta en React, Three.js, Design Systems y DevOps</p>
         </div>
 
         <div class="presentation-slide" data-slide="4">
             <h2>¿Hablamos?</h2>
-            <p>juanmks86@gmail.com</p>
+            <p data-i18n="presentation.slide5">juanmks86@gmail.com</p>
             <p style="font-size:16px;margin-top:20px;color:#6B7280;">github.com/juanmks86-debug</p>
         </div>
 
@@ -1981,6 +2253,349 @@
             setTimeout(() => { toast.remove(); }, 3000);
         };
     });
+    </script>
+
+
+    <!-- i18n Multi-idioma ES/EN -->
+    <script>
+    (function() {
+        const i18n = {
+            es: {
+                'nav.about': 'Sobre Mí',
+                'nav.skills': 'Habilidades',
+                'nav.github': 'GitHub Live',
+                'nav.portfolio': 'Proyectos',
+                'nav.clients': 'Formación',
+                'nav.podcast': 'Podcast',
+                'nav.blog': 'Blog',
+                'hero.greeting': 'Soy,',
+                'hero.cv': 'Descargar CV',
+                'hero.contact': 'Contacto',
+                'hero.portfolio': 'Portfolio',
+                'hero.repos': 'Repos en GitHub',
+                'hero.followers': 'Seguidores en GitHub',
+                'hero.formation': 'Formación: UNJu & IES N°6',
+                'hero.tagline': 'Full-Stack Dev<br>& Data Science / IA.',
+                'spotify.listening': 'Escuchando ahora en Spotify',
+                'skills.title': 'Habilidades & Stack Técnico ↗',
+                'skills.desc': 'Herramientas y tecnologías que domino para desarrollo web y diseño UI/UX.',
+                'github.title': 'GitHub Live & Código ↗',
+                'github.desc': 'Repositorios en vivo, contribuciones y actividad reciente sincronizada.',
+                'github.placeholder': 'Ingresa un usuario de GitHub...',
+                'github.load': 'Cargar Datos',
+                'portfolio.title': 'Proyectos Seleccionados ↗',
+                'portfolio.desc': 'Apps propias, este portafolio y trabajos de la facultad — desarrollo web, sistemas y data & IA.',
+                'filter.all': 'Todos',
+                'filter.webapp': 'Web Apps / PWA',
+                'filter.data': 'Data & IA',
+                'filter.frontend': 'Frontend / UI',
+                'filter.sistemas': 'Sistemas / Infraestructura',
+                'clients.title': 'Formación Académica ↗',
+                'clients.desc': 'Mi trayectoria universitaria y técnica en desarrollo de software, datos e inteligencia artificial.',
+                'podcast.title': 'Podcasts que sigo ↗',
+                'podcast.desc': 'Programas de tecnología que escucho habitualmente — abren en una pestaña nueva.',
+                'blog.title': 'Blog Técnico ↗',
+                'blog.desc': 'Notas, apuntes y reflexiones sobre desarrollo web, ciencia de datos e inteligencia artificial.',
+                'contact.title': '¡Hablemos de tu próximo proyecto!',
+                'contact.desc': 'Envía un mensaje y nos pondremos en contacto rápidamente.',
+                'contact.name': 'Tu Nombre',
+                'contact.email': 'Tu Email',
+                'contact.message': 'Mensaje',
+                'contact.namePlaceholder': 'Ej: María García',
+                'contact.emailPlaceholder': 'maria@empresa.com',
+                'contact.msgPlaceholder': 'Cuéntame sobre las metas de tu proyecto...',
+                'contact.send': 'Enviar Mensaje',
+                'contact.alt': 'O escribime directo a',
+                'cv.title': 'Curriculum Vitae — Juan Israel Flores',
+                'cv.subtitle': 'Desarrollador Full-Stack & Data Science / IA',
+                'cv.download': 'Descargar PDF',
+                'cv.notYet': '¿No disponible aún? Escribime a',
+                'edit.title': 'Personalizar Portafolio',
+                'edit.desc': 'Modifica los datos de tu perfil en tiempo real.',
+                'edit.name': 'Nombre Completo',
+                'edit.email': 'Correo Electrónico',
+                'edit.save': 'Guardar Cambios',
+                'terminal.title': 'bash — juan@flores-portfolio ~ (CLI)',
+                'chatbot.title': 'Asistente de Juan Israel Flores',
+                'chatbot.online': 'En línea',
+                'chatbot.typing': 'Escribiendo...',
+                'chatbot.greeting': '👋 ¡Hola! Soy el asistente de Juan. Puedo contarte sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>. ¿Qué te interesa?',
+                'chatbot.fallback': 'Mmm, no estoy seguro de entender eso 🤔<br>Podés preguntarme sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>.',
+                'chatbot.projects': 'Juan tiene varios proyectos propios:<br>• <strong>DeliMarket</strong> — Marketplace de delivery (React + PWA)<br>• <strong>Contax</strong> — Gestor de inventario y ventas offline<br>• <strong>Cuentas Claras</strong> — Gestión de préstamos e intereses<br>• <strong>PortaFlores</strong> — Este portafolio interactivo<br>¿Querés ver alguno en particular?',
+                'chatbot.skills': 'Juan domina:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/IA:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Diseño:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM',
+                'chatbot.education': 'Juan está cursando dos carreras:<br>• <strong>Analista Programador Universitario</strong> — UNJu (Facultad de Ingeniería)<br>• <strong>Tec. en Ciencias de Datos e IA</strong> — IES N°6<br>También aprende de forma autodidacta React, Three.js y diseño UI/UX.',
+                'chatbot.contact': 'Podés contactar a Juan por:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• También podés usar el formulario de contacto del portafolio (botón "Contacto" arriba a la derecha). ¿Te gustaría que te redirija?',
+                'chatbot.cv': 'Juan está abierto a oportunidades de <strong>desarrollo web</strong>, <strong>proyectos freelance</strong> y <strong>prácticas profesionales</strong>. Podés descargar su CV desde el botón "Descargar CV" en la sección principal, o escribirle directo por email.',
+                'chatbot.data': 'Juan está formándose en <strong>Ciencias de Datos e IA</strong> (IES N°6). Maneja:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Machine Learning supervisado y no supervisado<br>• Procesamiento de Lenguaje Natural (PLN)<br>• Visualización de datos<br>¡Mirá su <strong>Mapa Mental de PLN</strong> en la sección Proyectos!',
+                'chatbot.thanks': '¡De nada! 😊 Si tenés más preguntas, aquí estoy. ¡Suerte!',
+                'chatbot.hello': '¡Hola! 👋 Soy el asistente de Juan. ¿Te interesa saber sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>?',
+                'edu.unju.title': 'Analista Programador Universitario',
+                'edu.unju.inst': 'Facultad de Ingeniería — Universidad Nacional de Jujuy (UNJu)',
+                'edu.unju.desc': 'Carrera universitaria orientada al análisis, diseño e implementación de sistemas de software. Enfoque en algoritmos, estructuras de datos, bases de datos relacionales, sistemas operativos y programación orientada a objetos.',
+                'edu.ies.title': 'Tecnicatura Superior en Ciencias de Datos e Inteligencia Artificial',
+                'edu.ies.inst': 'Instituto de Educación Superior N°6 — Jujuy',
+                'edu.ies.desc': 'Tecnicatura con foco en análisis estadístico, aprendizaje automático, redes neuronales y visualización de datos. Incluye Python, Machine Learning y herramientas modernas del ecosistema de datos.',
+                'edu.self.title': 'Aprendizaje Autodidacta',
+                'edu.self.react': 'React + Vite + TypeScript',
+                'edu.self.react.desc': 'SPAs y PWAs modernas. Apps propias: DeliMarket, Contax, Cuentas Claras desplegadas en Vercel.',
+                'edu.self.ui': 'Diseño UI/UX',
+                'edu.self.ui.desc': 'Figma, Design Systems, Bento Grid, Glassmorphism y estética de productos digitales modernos.',
+                'edu.self.devops': 'DevOps & Deploy',
+                'edu.self.devops.desc': 'Vercel, Netlify, Git/GitHub, CI/CD. Virtualización con Proxmox/KVM (TP Lab SO II — UNJu).',
+                'edu.self.3d': '3D & Animación Web',
+                'edu.self.3d.desc': 'Canvas API, animaciones CSS avanzadas, Three.js y efectos de partículas interactivos.',
+                'testimonials.title': 'Lo que dicen',
+                'badges.title': 'Certificaciones & Badges',
+                'presentation.slide1': 'Analista Programador Universitario & Estudiante de Data Science / IA',
+                'presentation.slide1b': 'Full-Stack Developer • React • Python • Machine Learning',
+                'presentation.slide2': 'React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel',
+                'presentation.slide2b': 'Desarrollo web moderno + Ciencia de datos aplicada',
+                'presentation.slide3': 'DeliMarket · Contax · Cuentas Claras · PortaFlores',
+                'presentation.slide3b': 'Apps propias desplegadas en Vercel con PWA, offline-first y UI/UX cuidada',
+                'presentation.slide4a': 'UNJu — Analista Programador Universitario',
+                'presentation.slide4b': 'IES N°6 — Tec. en Ciencias de Datos e IA',
+                'presentation.slide4c': 'Autodidacta en React, Three.js, Design Systems y DevOps',
+                'presentation.slide5': 'juanmks86@gmail.com',
+                'presentation.slide5b': 'github.com/juanmks86-debug',
+                'calculator.title': 'CUENTAS CLARAS',
+                'calculator.capital': 'Capital ($)',
+                'calculator.rate': 'Tasa anual (%)',
+                'calculator.term': 'Plazo (meses)',
+                'calculator.type': 'Tipo de interés',
+                'calculator.compound': 'Compuesto (capitalizable)',
+                'calculator.simple': 'Simple',
+                'calculator.calculate': 'Calcular',
+                'calculator.final': 'Monto Final',
+                'calculator.interest': 'Intereses',
+                'calculator.based': 'Basado en la app',
+                'calculator.cc': 'Cuentas Claras',
+                'blog.read': 'Leer nota',
+                'blog.min': 'min',
+                'footer.copyright': '© 2026 Juan Israel Flores. Hecho con',
+                'footer.and': 'y',
+                'footer.coffee': 'mucho café'
+            },
+            en: {
+                'nav.about': 'About Me',
+                'nav.skills': 'Skills',
+                'nav.github': 'GitHub Live',
+                'nav.portfolio': 'Projects',
+                'nav.clients': 'Education',
+                'nav.podcast': 'Podcast',
+                'nav.blog': 'Blog',
+                'hero.greeting': 'I am,',
+                'hero.cv': 'Download CV',
+                'hero.contact': 'Contact',
+                'hero.portfolio': 'Portfolio',
+                'hero.repos': 'GitHub Repos',
+                'hero.followers': 'GitHub Followers',
+                'hero.formation': 'Education: UNJu & IES N°6',
+                'hero.tagline': 'Full-Stack Dev<br>& Data Science / AI.',
+                'spotify.listening': 'Now playing on Spotify',
+                'skills.title': 'Skills & Tech Stack ↗',
+                'skills.desc': 'Tools and technologies I master for web development and UI/UX design.',
+                'github.title': 'GitHub Live & Code ↗',
+                'github.desc': 'Live repositories, contributions and recent synced activity.',
+                'github.placeholder': 'Enter a GitHub username...',
+                'github.load': 'Load Data',
+                'portfolio.title': 'Selected Projects ↗',
+                'portfolio.desc': 'Own apps, this portfolio and college work — web development, systems and data & AI.',
+                'filter.all': 'All',
+                'filter.webapp': 'Web Apps / PWA',
+                'filter.data': 'Data & AI',
+                'filter.frontend': 'Frontend / UI',
+                'filter.sistemas': 'Systems / Infrastructure',
+                'clients.title': 'Academic Background ↗',
+                'clients.desc': 'My university and technical journey in software development, data and artificial intelligence.',
+                'podcast.title': 'Podcasts I follow ↗',
+                'podcast.desc': 'Technology shows I listen to regularly — open in a new tab.',
+                'blog.title': 'Tech Blog ↗',
+                'blog.desc': 'Notes, insights and reflections on web development, data science and artificial intelligence.',
+                'contact.title': "Let's talk about your next project!",
+                'contact.desc': 'Send a message and we will get in touch quickly.',
+                'contact.name': 'Your Name',
+                'contact.email': 'Your Email',
+                'contact.message': 'Message',
+                'contact.namePlaceholder': 'E.g.: María García',
+                'contact.emailPlaceholder': 'maria@company.com',
+                'contact.msgPlaceholder': 'Tell me about your project goals...',
+                'contact.send': 'Send Message',
+                'contact.alt': 'Or write me directly at',
+                'cv.title': 'Curriculum Vitae — Juan Israel Flores',
+                'cv.subtitle': 'Full-Stack Developer & Data Science / AI',
+                'cv.download': 'Download PDF',
+                'cv.notYet': 'Not available yet? Write me at',
+                'edit.title': 'Customize Portfolio',
+                'edit.desc': 'Modify your profile data in real time.',
+                'edit.name': 'Full Name',
+                'edit.email': 'Email Address',
+                'edit.save': 'Save Changes',
+                'terminal.title': 'bash — juan@flores-portfolio ~ (CLI)',
+                'chatbot.title': "Juan Israel Flores' Assistant",
+                'chatbot.online': 'Online',
+                'chatbot.typing': 'Typing...',
+                'chatbot.greeting': "👋 Hi! I'm Juan's assistant. I can tell you about his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>. What are you interested in?",
+                'chatbot.fallback': "Hmm, I'm not sure I understand 🤔<br>You can ask me about his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>.",
+                'chatbot.projects': 'Juan has several own projects:<br>• <strong>DeliMarket</strong> — Delivery marketplace (React + PWA)<br>• <strong>Contax</strong> — Offline inventory and sales manager<br>• <strong>Cuentas Claras</strong> — Loan and interest management<br>• <strong>PortaFlores</strong> — This interactive portfolio<br>Want to see any in particular?',
+                'chatbot.skills': 'Juan masters:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/AI:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Design:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM',
+                'chatbot.education': 'Juan is studying two degrees:<br>• <strong>University Programming Analyst</strong> — UNJu (Engineering Faculty)<br>• <strong>Data Science & AI Technician</strong> — IES N°6<br>He also self-teaches React, Three.js and UI/UX design.',
+                'chatbot.contact': 'You can contact Juan via:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• You can also use the contact form in the portfolio ("Contact" button top right). Would you like me to redirect you?',
+                'chatbot.cv': 'Juan is open to <strong>web development</strong>, <strong>freelance projects</strong> and <strong>internships</strong>. You can download his CV from the "Download CV" button in the main section, or write him directly by email.',
+                'chatbot.data': 'Juan is training in <strong>Data Science & AI</strong> (IES N°6). He handles:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Supervised and unsupervised Machine Learning<br>• Natural Language Processing (NLP)<br>• Data visualization<br>Check out his <strong>NLP Mind Map</strong> in the Projects section!',
+                'chatbot.thanks': "You're welcome! 😊 If you have more questions, I'm here. Good luck!",
+                'chatbot.hello': "Hi! 👋 I'm Juan's assistant. Are you interested in his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>?",
+                'edu.unju.title': 'University Programming Analyst',
+                'edu.unju.inst': 'Engineering Faculty — National University of Jujuy (UNJu)',
+                'edu.unju.desc': 'University degree focused on analysis, design and implementation of software systems. Emphasis on algorithms, data structures, relational databases, operating systems and object-oriented programming.',
+                'edu.ies.title': 'Higher Technician in Data Science & Artificial Intelligence',
+                'edu.ies.inst': 'Higher Education Institute N°6 — Jujuy',
+                'edu.ies.desc': 'Technical degree focused on statistical analysis, machine learning, neural networks and data visualization. Includes Python, Machine Learning and modern data ecosystem tools.',
+                'edu.self.title': 'Self-Taught Learning',
+                'edu.self.react': 'React + Vite + TypeScript',
+                'edu.self.react.desc': 'Modern SPAs and PWAs. Own apps: DeliMarket, Contax, Cuentas Claras deployed on Vercel.',
+                'edu.self.ui': 'UI/UX Design',
+                'edu.self.ui.desc': 'Figma, Design Systems, Bento Grid, Glassmorphism and modern digital product aesthetics.',
+                'edu.self.devops': 'DevOps & Deploy',
+                'edu.self.devops.desc': 'Vercel, Netlify, Git/GitHub, CI/CD. Virtualization with Proxmox/KVM (Lab SO II TP — UNJu).',
+                'edu.self.3d': '3D & Web Animation',
+                'edu.self.3d.desc': 'Canvas API, advanced CSS animations, Three.js and interactive particle effects.',
+                'testimonials.title': 'What they say',
+                'badges.title': 'Certifications & Badges',
+                'presentation.slide1': 'University Programming Analyst & Data Science / AI Student',
+                'presentation.slide1b': 'Full-Stack Developer • React • Python • Machine Learning',
+                'presentation.slide2': 'React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel',
+                'presentation.slide2b': 'Modern web development + Applied data science',
+                'presentation.slide3': 'DeliMarket · Contax · Cuentas Claras · PortaFlores',
+                'presentation.slide3b': 'Own apps deployed on Vercel with PWA, offline-first and polished UI/UX',
+                'presentation.slide4a': 'UNJu — University Programming Analyst',
+                'presentation.slide4b': 'IES N°6 — Data Science & AI Technician',
+                'presentation.slide4c': 'Self-taught in React, Three.js, Design Systems and DevOps',
+                'presentation.slide5': 'juanmks86@gmail.com',
+                'presentation.slide5b': 'github.com/juanmks86-debug',
+                'calculator.title': 'CUENTAS CLARAS',
+                'calculator.capital': 'Capital ($)',
+                'calculator.rate': 'Annual rate (%)',
+                'calculator.term': 'Term (months)',
+                'calculator.type': 'Interest type',
+                'calculator.compound': 'Compound (capitalizable)',
+                'calculator.simple': 'Simple',
+                'calculator.calculate': 'Calculate',
+                'calculator.final': 'Final Amount',
+                'calculator.interest': 'Interest',
+                'calculator.based': 'Based on the app',
+                'calculator.cc': 'Cuentas Claras',
+                'blog.read': 'Read post',
+                'blog.min': 'min',
+                'footer.copyright': '© 2026 Juan Israel Flores. Made with',
+                'footer.and': 'and',
+                'footer.coffee': 'lots of coffee'
+            }
+        };
+
+        let currentLang = localStorage.getItem('portfolio-lang') || 'es';
+        window.currentLang = currentLang;
+        const langToggleBtn = document.getElementById('langToggleBtn');
+        const langIcon = document.getElementById('langIcon');
+
+        function translatePage(lang) {
+            currentLang = lang;
+            window.currentLang = lang;
+            localStorage.setItem('portfolio-lang', lang);
+            if (langIcon) langIcon.textContent = lang.toUpperCase();
+
+            // Traducir elementos con data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang] && i18n[lang][key]) {
+                    // Preservar elementos hijos (iconos, etc.)
+                    const textNodes = Array.from(el.childNodes).filter(n => n.nodeType === 3);
+                    if (textNodes.length > 0) {
+                        textNodes[0].textContent = i18n[lang][key];
+                    } else {
+                        // Si no hay text node, usar innerHTML para contenido con formato
+                        const hasChildren = el.querySelector('i, span, strong, br');
+                        if (!hasChildren || el.children.length === 0) {
+                            el.innerHTML = i18n[lang][key];
+                        } else {
+                            // Reemplazar solo el texto, preservar hijos
+                            const temp = document.createElement('div');
+                            temp.innerHTML = i18n[lang][key];
+                            // Estrategia: si el elemento tiene hijos, intentamos reemplazar el primer text node
+                            for (let i = 0; i < el.childNodes.length; i++) {
+                                if (el.childNodes[i].nodeType === 3 && el.childNodes[i].textContent.trim()) {
+                                    el.childNodes[i].textContent = i18n[lang][key];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Traducir placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[lang] && i18n[lang][key]) {
+                    el.placeholder = i18n[lang][key];
+                }
+            });
+
+            // Actualizar meta titles dinámicos
+            const titles = {
+                es: {
+                    about: 'Sobre Mí | Juan Israel Flores — Full-Stack & Data/IA',
+                    skills: 'Habilidades & Stack | Juan Israel Flores',
+                    github: 'GitHub Live | Juan Israel Flores',
+                    portfolio: 'Proyectos | Juan Israel Flores — Portafolio',
+                    clients: 'Formación | Juan Israel Flores — UNJu & IES N°6',
+                    podcast: 'Podcasts | Juan Israel Flores',
+                    blog: 'Blog Técnico | Juan Israel Flores'
+                },
+                en: {
+                    about: 'About Me | Juan Israel Flores — Full-Stack & Data/AI',
+                    skills: 'Skills & Stack | Juan Israel Flores',
+                    github: 'GitHub Live | Juan Israel Flores',
+                    portfolio: 'Projects | Juan Israel Flores — Portfolio',
+                    clients: 'Education | Juan Israel Flores — UNJu & IES N°6',
+                    podcast: 'Podcasts | Juan Israel Flores',
+                    blog: 'Tech Blog | Juan Israel Flores'
+                }
+            };
+
+            // Actualizar el objeto titles usado por el script de meta tags
+            if (window.dynamicTitles) {
+                window.dynamicTitles = titles[lang];
+            }
+
+            // Actualizar título actual si hay una pestaña activa
+            const activeTab = document.querySelector('.nav-btn.active');
+            if (activeTab && titles[lang]) {
+                const tab = activeTab.dataset.tab;
+                if (tab && titles[lang][tab]) {
+                    document.title = titles[lang][tab];
+                }
+            }
+
+            // Disparar evento para que otros scripts sepan que cambió el idioma
+            document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
+        }
+
+        if (langToggleBtn) {
+            langToggleBtn.addEventListener('click', function() {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                translatePage(newLang);
+            });
+        }
+
+        // Traducir al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage(currentLang);
+        });
+
+        // Exponer función global
+        window.translatePage = translatePage;
+        window.i18n = i18n;
+    })();
     </script>
 
 </body>
