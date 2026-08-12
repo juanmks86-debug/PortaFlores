@@ -384,15 +384,19 @@
                                     <span>TP de Laboratorio de Sistemas Operativos II (UNJu) — KVM</span>
                                 </div>
                             </div>
-                            <a class="gallery-item" data-category="data" href="assets/mapa-mental-pln.pdf" target="_blank" rel="noopener">
+                            <div class="gallery-item" data-category="data" id="openMapaModal" style="cursor:pointer;">
                                 <div class="placeholder-art art-purple">
-                                    <i class="fa-solid fa-chart-line"></i>
+                                    <i class="fa-solid fa-brain"></i>
                                 </div>
                                 <div class="gallery-info">
                                     <h4>Mapa Mental — PLN</h4>
                                     <span>Procesamiento de Lenguaje Natural — resumen visual</span>
+                                    <div class="gallery-actions" style="margin-top:8px;display:flex;gap:8px;">
+                                        <span class="tag-badge" style="font-size:11px;padding:4px 10px;"><i class="fa-solid fa-eye"></i> Ver</span>
+                                        <span class="tag-badge" style="font-size:11px;padding:4px 10px;background:var(--color-mint);"><i class="fa-solid fa-download"></i> PDF</span>
+                                    </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -658,6 +662,23 @@
                     <span>Ver demo en video</span>
                 </div>
             </div>
+        
+    <!-- Mapa Mental PDF Modal -->
+    <div class="modal-backdrop" id="mapaModal">
+        <div class="modal-card modal-media-view" style="max-width:900px;width:90vw;height:85vh;display:flex;flex-direction:column;">
+            <button class="modal-close" id="closeMapaModal">&times;</button>
+            <h3 style="margin-bottom:12px;"><i class="fa-solid fa-brain"></i> Mapa Mental — PLN</h3>
+            <div style="flex:1;min-height:0;border-radius:12px;overflow:hidden;background:#f5f5f5;position:relative;">
+                <iframe id="mapaPdfFrame" src="assets/mapa-mental-pln.pdf" style="width:100%;height:100%;border:0;" title="Mapa Mental PLN"></iframe>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:16px;justify-content:center;">
+                <a class="submit-btn" href="assets/mapa-mental-pln.pdf" download="Mapa-Mental-PLN.pdf" style="text-decoration:none;justify-content:center;min-width:160px;">
+                    <i class="fa-solid fa-download"></i> Descargar PDF
+                </a>
+                <a class="submit-btn" href="assets/mapa-mental-pln.pdf" target="_blank" rel="noopener" style="text-decoration:none;justify-content:center;min-width:160px;background:var(--color-dark);color:#fff;">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir en pestaña
+                </a>
+            </div>
         </div>
     </div>
 
@@ -689,6 +710,38 @@
             if (backdrop) backdrop.addEventListener('click', function (e) {
                 if (e.target === backdrop) resetDeliVideo();
             });
+        });
+    </script>
+
+    <!-- Mapa Mental Modal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mapaModal = document.getElementById('mapaModal');
+            const openMapaBtn = document.getElementById('openMapaModal');
+            const closeMapaBtn = document.getElementById('closeMapaModal');
+
+            if (openMapaBtn && mapaModal) {
+                openMapaBtn.addEventListener('click', function() {
+                    mapaModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            if (closeMapaBtn && mapaModal) {
+                closeMapaBtn.addEventListener('click', function() {
+                    mapaModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (mapaModal) {
+                mapaModal.addEventListener('click', function(e) {
+                    if (e.target === mapaModal) {
+                        mapaModal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
         });
     </script>
 
