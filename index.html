@@ -33,6 +33,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -1111,6 +1112,145 @@
         // Poner hora al mensaje inicial
         const initialTime = document.getElementById('msgTime0');
         if (initialTime) initialTime.textContent = getCurrentTime();
+    });
+    </script>
+
+
+    <!-- Cuentas Claras — Calculadora de Intereses Embebida -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const capitalInput = document.getElementById('ccCapital');
+        const tasaInput = document.getElementById('ccTasa');
+        const plazoInput = document.getElementById('ccPlazo');
+        const tipoInput = document.getElementById('ccTipo');
+        const calcularBtn = document.getElementById('ccCalcularBtn');
+        const montoFinalEl = document.getElementById('ccMontoFinal');
+        const interesesEl = document.getElementById('ccIntereses');
+        const ctx = document.getElementById('ccChart');
+
+        let chartInstance = null;
+
+        function formatMoney(n) {
+            return '$' + Math.round(n).toLocaleString('es-AR');
+        }
+
+        function calcular() {
+            const capital = parseFloat(capitalInput.value) || 0;
+            const tasaAnual = parseFloat(tasaInput.value) || 0;
+            const plazoMeses = parseInt(plazoInput.value) || 1;
+            const tipo = tipoInput.value;
+            const tasaMensual = tasaAnual / 12 / 100;
+
+            const labels = [];
+            const dataCapital = [];
+            const dataIntereses = [];
+
+            let montoFinal = capital;
+            let totalIntereses = 0;
+
+            if (tipo === 'simple') {
+                totalIntereses = capital * (tasaAnual / 100) * (plazoMeses / 12);
+                montoFinal = capital + totalIntereses;
+                for (let i = 0; i <= plazoMeses; i++) {
+                    labels.push('Mes ' + i);
+                    dataCapital.push(capital);
+                    dataIntereses.push(capital + (totalIntereses * (i / plazoMeses)));
+                }
+            } else {
+                // Compuesto mensual
+                for (let i = 0; i <= plazoMeses; i++) {
+                    labels.push('Mes ' + i);
+                    const monto = capital * Math.pow(1 + tasaMensual, i);
+                    dataCapital.push(capital);
+                    dataIntereses.push(monto);
+                }
+                montoFinal = dataIntereses[plazoMeses];
+                totalIntereses = montoFinal - capital;
+            }
+
+            montoFinalEl.textContent = formatMoney(montoFinal);
+            interesesEl.textContent = '+' + formatMoney(totalIntereses);
+
+            // Actualizar gráfico
+            if (chartInstance) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets[0].data = dataIntereses;
+                chartInstance.data.datasets[1].data = dataCapital;
+                chartInstance.update('active');
+            } else if (ctx) {
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Monto acumulado',
+                                data: dataIntereses,
+                                borderColor: '#059669',
+                                backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 2,
+                                pointHoverRadius: 5
+                            },
+                            {
+                                label: 'Capital inicial',
+                                data: dataCapital,
+                                borderColor: '#92400E',
+                                borderDash: [5, 5],
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: { font: { size: 10 }, boxWidth: 10 }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + formatMoney(context.parsed.y);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { font: { size: 9 }, maxTicksLimit: 6 },
+                                grid: { display: false }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 9 },
+                                    callback: function(value) {
+                                        if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
+                                        if (value >= 1000) return '$' + (value / 1000).toFixed(0) + 'k';
+                                        return '$' + value;
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.05)' }
+                            }
+                        },
+                        interaction: { intersect: false, mode: 'index' }
+                    }
+                });
+            }
+        }
+
+        if (calcularBtn) calcularBtn.addEventListener('click', calcular);
+        if (capitalInput) capitalInput.addEventListener('input', calcular);
+        if (tasaInput) tasaInput.addEventListener('input', calcular);
+        if (plazoInput) plazoInput.addEventListener('input', calcular);
+        if (tipoInput) tipoInput.addEventListener('change', calcular);
+
+        // Calcular al cargar
+        calcular();
     });
     </script>
 
