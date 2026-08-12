@@ -174,16 +174,16 @@
                             <div class="bento-row top-row">
                                 
                                 <!-- Featured Project Card -->
-                                <a class="bento-card card-media-feature" id="openVideoModal" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background: var(--color-mint);">
+                                <div class="bento-card card-media-feature" id="openVideoModal" style="display:flex; align-items:center; justify-content:center; background: var(--color-mint); cursor:pointer;">
                                     <div class="media-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%);">
                                         <i class="fa-solid fa-utensils" style="font-size: 48px; color: #FFF;"></i>
-                                        <span class="card-arrow-top">↗</span>
+                                        <a href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener" class="card-arrow-top" onclick="event.stopPropagation()" title="Abrir DeliMarket en vivo">↗</a>
                                     </div>
                                     <div class="media-caption">
                                         <span class="tag-badge">Web App / PWA</span>
                                         <h3>DeliMarket</h3>
                                     </div>
-                                </a>
+                                </div>
 
                                 <!-- Stats Stack -->
                                 <div class="stats-stack">
@@ -658,12 +658,12 @@
     <div class="modal-backdrop" id="videoModal">
         <div class="modal-card modal-media-view">
             <button class="modal-close" id="closeVideoModal">&times;</button>
-            <h3>Tropical Paradise 3D Papercraft</h3>
-            <div class="video-placeholder">
-                <img src="assets/project1.jpg" alt="Project Showcase" class="video-preview-img">
+            <h3>DeliMarket — Demo</h3>
+            <div class="video-placeholder" id="videoPlaceholder" onclick="playDeliVideo()">
+                <img src="assets/project1.jpg" alt="DeliMarket Demo" class="video-preview-img">
                 <div class="video-controls-overlay">
                     <i class="fa-solid fa-circle-play video-play-big"></i>
-                    <span>Demo interactivo en alta resolución</span>
+                    <span>Ver demo en video</span>
                 </div>
             </div>
         </div>
@@ -673,5 +673,31 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script src="js/app.js"></script>
+    <script>
+        function playDeliVideo() {
+            const placeholder = document.getElementById('videoPlaceholder');
+            placeholder.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/jPcha7sUMh0?autoplay=1" title="DeliMarket Demo" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;border:0;"></iframe>';
+        }
+
+        function resetDeliVideo() {
+            const placeholder = document.getElementById('videoPlaceholder');
+            if (placeholder) {
+                placeholder.innerHTML = '<img src="assets/project1.jpg" alt="DeliMarket Demo" class="video-preview-img">' +
+                    '<div class="video-controls-overlay">' +
+                    '<i class="fa-solid fa-circle-play video-play-big"></i>' +
+                    '<span>Ver demo en video</span>' +
+                    '</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const closeBtn = document.getElementById('closeVideoModal');
+            const backdrop = document.getElementById('videoModal');
+            if (closeBtn) closeBtn.addEventListener('click', resetDeliVideo);
+            if (backdrop) backdrop.addEventListener('click', function (e) {
+                if (e.target === backdrop) resetDeliVideo();
+            });
+        });
+    </script>
 </body>
 </html>
