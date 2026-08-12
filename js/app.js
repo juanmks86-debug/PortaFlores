@@ -1,3 +1,32 @@
+
+// --- Video Modal Helpers ---
+function playDeliVideo() {
+    const placeholder = document.getElementById('videoPlaceholder');
+    if (placeholder) {
+        placeholder.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/jPcha7sUMh0?autoplay=1" title="DeliMarket Demo" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;border:0;"></iframe>';
+    }
+}
+
+function resetDeliVideo() {
+    const placeholder = document.getElementById('videoPlaceholder');
+    if (placeholder) {
+        placeholder.innerHTML = '<img src="assets/project1.jpg" alt="DeliMarket Demo" class="video-preview-img">' +
+            '<div class="video-controls-overlay">' +
+            '<i class="fa-solid fa-circle-play video-play-big"></i>' +
+            '<span>Ver demo en video</span>' +
+            '</div>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.getElementById('closeVideoModal');
+    const backdrop = document.getElementById('videoModal');
+    if (closeBtn) closeBtn.addEventListener('click', resetDeliVideo);
+    if (backdrop) backdrop.addEventListener('click', function(e) {
+        if (e.target === backdrop) resetDeliVideo();
+    });
+});
+
 /**
  * Bento Grid Portfolio Application Logic
  * Extended with AI Chatbot, GitHub API Live Fetch & Spotify Status
@@ -53,34 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '<i class="fa-solid fa-volume-xmark"></i>';
             soundToggleBtn.title = soundEnabled ? 'Efectos de Sonido (Activado)' : 'Efectos de Sonido (Silenciado)';
             showToast(soundEnabled ? '🔊 Sonidos de UI Activados' : '🔇 Sonidos de UI Silenciados');
-        });
-    }
-
-    // --- 2. Dark / Light Theme Toggle ---
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
-    const htmlElement = document.documentElement;
-
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
-    htmlElement.setAttribute('data-theme', savedTheme);
-    if (themeToggleBtn) {
-        themeToggleBtn.innerHTML = savedTheme === 'dark' 
-            ? '<i class="fa-solid fa-sun"></i>' 
-            : '<i class="fa-solid fa-moon"></i>';
-    }
-
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            playUiSound('click');
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('portfolio-theme', newTheme);
-            themeToggleBtn.innerHTML = newTheme === 'dark' 
-                ? '<i class="fa-solid fa-sun"></i>' 
-                : '<i class="fa-solid fa-moon"></i>';
-            
-            showToast(newTheme === 'dark' ? '🌙 Modo Oscuro Activado' : '☀️ Modo Claro Activado');
         });
     }
 
@@ -355,10 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Respeta el toggle global de sonido (mismo botón que los efectos de UI)
-    document.getElementById('soundToggleBtn')?.addEventListener('click', () => {
-        if (!soundEnabled && ambientPlaying) stopAmbient();
-    });
+
 
     // --- 8. AI Chatbot Widget Logic ---
     const toggleAiChatBtn = document.getElementById('toggleAiChatBtn');
@@ -659,5 +657,633 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
+    }
+});
+
+
+/* ============================================================
+   NUEVOS SCRIPTS AGREGADOS
+   ============================================================ */
+
+// --- A. Meta Tags Dinámicas por Sección ---
+document.addEventListener('DOMContentLoaded', function() {
+    const descMeta = document.querySelector('meta[name="description"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+
+    function updateMeta(tab) {
+        const lang = window.currentLang || localStorage.getItem('portfolio-lang') || 'es';
+        const titles = {
+            es: {
+                about: 'Sobre Mí | Juan Israel Flores — Full-Stack & Data/IA',
+                skills: 'Habilidades & Stack | Juan Israel Flores',
+                github: 'GitHub Live | Juan Israel Flores',
+                portfolio: 'Proyectos | Juan Israel Flores — Portafolio',
+                clients: 'Formación | Juan Israel Flores — UNJu & IES N°6',
+                podcast: 'Podcasts | Juan Israel Flores',
+                blog: 'Blog Técnico | Juan Israel Flores'
+            },
+            en: {
+                about: 'About Me | Juan Israel Flores — Full-Stack & Data/AI',
+                skills: 'Skills & Stack | Juan Israel Flores',
+                github: 'GitHub Live | Juan Israel Flores',
+                portfolio: 'Projects | Juan Israel Flores — Portfolio',
+                clients: 'Education | Juan Israel Flores — UNJu & IES N°6',
+                podcast: 'Podcasts | Juan Israel Flores',
+                blog: 'Tech Blog | Juan Israel Flores'
+            }
+        };
+        const descriptions = {
+            es: {
+                about: 'Conocé a Juan Israel Flores: Analista Programador Universitario (UNJu) y estudiante de Ciencias de Datos e IA (IES N°6).',
+                skills: 'Stack técnico completo de Juan Israel Flores: React, TypeScript, Node.js, Python, Machine Learning y más.',
+                github: 'Repositorios en vivo, contribuciones y actividad reciente de Juan Israel Flores en GitHub.',
+                portfolio: 'Explorá los proyectos de Juan Israel Flores: DeliMarket, Contax, Cuentas Claras, PortaFlores y más.',
+                clients: 'Trayectoria académica de Juan Israel Flores: UNJu (Analista Programador) e IES N°6 (Data Science & IA).',
+                podcast: 'Podcasts de tecnología que sigue Juan Israel Flores: Syntax.fm, The Changelog, Microsiervos.',
+                blog: 'Notas técnicas y artículos de Juan Israel Flores sobre desarrollo web, data science e inteligencia artificial.'
+            },
+            en: {
+                about: 'Meet Juan Israel Flores: University Programming Analyst (UNJu) and Data Science & AI student (IES N°6).',
+                skills: 'Full tech stack of Juan Israel Flores: React, TypeScript, Node.js, Python, Machine Learning and more.',
+                github: 'Live repositories, contributions and recent activity of Juan Israel Flores on GitHub.',
+                portfolio: 'Explore Juan Israel Flores projects: DeliMarket, Contax, Cuentas Claras, PortaFlores and more.',
+                clients: 'Academic background of Juan Israel Flores: UNJu (Programming Analyst) and IES N°6 (Data Science & AI).',
+                podcast: 'Technology podcasts Juan Israel Flores follows: Syntax.fm, The Changelog, Microsiervos.',
+                blog: 'Technical notes and articles by Juan Israel Flores on web development, data science and artificial intelligence.'
+            }
+        };
+        if (titles[lang] && titles[lang][tab]) document.title = titles[lang][tab];
+        if (descriptions[lang] && descriptions[lang][tab]) {
+            if (descMeta) descMeta.content = descriptions[lang][tab];
+            if (ogDesc) ogDesc.content = descriptions[lang][tab];
+            if (twDesc) twDesc.content = descriptions[lang][tab];
+        }
+    }
+
+    document.querySelectorAll('.nav-btn[data-tab]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tab = this.dataset.tab;
+            if (tab) updateMeta(tab);
+        });
+    });
+});
+
+// --- B. Hero Stats GitHub en vivo ---
+(async function loadHeroStats() {
+    const username = 'juanmks86-debug';
+    try {
+        const res = await fetch('https://api.github.com/users/' + username);
+        if (!res.ok) throw new Error('GitHub API error');
+        const data = await res.json();
+        const reposEl = document.getElementById('heroReposCount');
+        const followersEl = document.getElementById('heroFollowersCount');
+
+        function animateCounter(el, target) {
+            if (!el) return;
+            let current = 0;
+            const duration = 1500;
+            const step = Math.ceil(target / (duration / 16));
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current.toLocaleString();
+            }, 16);
+        }
+        animateCounter(reposEl, data.public_repos);
+        animateCounter(followersEl, data.followers);
+    } catch (e) {
+        console.log('No se pudieron cargar stats de GitHub:', e);
+    }
+})();
+
+// --- C. Formspree Contact Form ---
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const contactStatus = document.getElementById('contactStatus');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    contactStatus.textContent = '✅ ¡Mensaje enviado! Te responderé pronto.';
+                    contactStatus.className = 'form-status success';
+                    contactStatus.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Error en el servidor');
+                }
+            } catch (err) {
+                contactStatus.textContent = '❌ Hubo un error. Escribime directo a juanmks86@gmail.com';
+                contactStatus.className = 'form-status error';
+                contactStatus.style.display = 'block';
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                setTimeout(() => { contactStatus.style.display = 'none'; }, 6000);
+            }
+        });
+    }
+});
+
+// --- D. Chatbot IA Inteligente con i18n ---
+document.addEventListener('DOMContentLoaded', function() {
+    const chatWindow = document.getElementById('aiChatWindow');
+    const chatMessages = document.getElementById('aiChatMessages');
+    const chatInput = document.getElementById('aiChatInput');
+    const sendBtn = document.getElementById('sendAiChatBtn');
+    const toggleBtn = document.getElementById('toggleAiChatBtn');
+    const closeBtn = document.getElementById('closeAiChatBtn');
+    const botStatus = document.getElementById('aiBotStatus');
+
+    function getChatbotResponse(key) {
+        const lang = window.currentLang || localStorage.getItem('portfolio-lang') || 'es';
+        if (window.i18n && window.i18n[lang] && window.i18n[lang][key]) {
+            return window.i18n[lang][key];
+        }
+        const fallbacks = {
+            es: {
+                'chatbot.hello': '¡Hola! 👋 Soy el asistente de Juan. ¿Te interesa saber sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>?',
+                'chatbot.projects': 'Juan tiene varios proyectos propios:<br>• <strong>DeliMarket</strong> — Marketplace de delivery (React + PWA)<br>• <strong>Contax</strong> — Gestor de inventario y ventas offline<br>• <strong>Cuentas Claras</strong> — Gestión de préstamos e intereses<br>• <strong>PortaFlores</strong> — Este portafolio interactivo<br>¿Querés ver alguno en particular?',
+                'chatbot.skills': 'Juan domina:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/IA:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Diseño:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM',
+                'chatbot.education': 'Juan está cursando dos carreras:<br>• <strong>Analista Programador Universitario</strong> — UNJu (Facultad de Ingeniería)<br>• <strong>Tec. en Ciencias de Datos e IA</strong> — IES N°6<br>También aprende de forma autodidacta React, Three.js y diseño UI/UX.',
+                'chatbot.contact': 'Podés contactar a Juan por:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• También podés usar el formulario de contacto del portafolio (botón "Contacto" arriba a la derecha). ¿Te gustaría que te redirija?',
+                'chatbot.cv': 'Juan está abierto a oportunidades de <strong>desarrollo web</strong>, <strong>proyectos freelance</strong> y <strong>prácticas profesionales</strong>. Podés descargar su CV desde el botón "Descargar CV" en la sección principal, o escribirle directo por email.',
+                'chatbot.data': 'Juan está formándose en <strong>Ciencias de Datos e IA</strong> (IES N°6). Maneja:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Machine Learning supervisado y no supervisado<br>• Procesamiento de Lenguaje Natural (PLN)<br>• Visualización de datos<br>¡Mirá su <strong>Mapa Mental de PLN</strong> en la sección Proyectos!',
+                'chatbot.thanks': '¡De nada! 😊 Si tenés más preguntas, aquí estoy. ¡Suerte!',
+                'chatbot.fallback': 'Mmm, no estoy seguro de entender eso 🤔<br>Podés preguntarme sobre sus <strong>proyectos</strong>, <strong>habilidades</strong>, <strong>formación</strong> o cómo <strong>contactarlo</strong>.'
+            },
+            en: {
+                'chatbot.hello': "Hi! 👋 I'm Juan's assistant. Are you interested in his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>?",
+                'chatbot.projects': 'Juan has several own projects:<br>• <strong>DeliMarket</strong> — Delivery marketplace (React + PWA)<br>• <strong>Contax</strong> — Offline inventory and sales manager<br>• <strong>Cuentas Claras</strong> — Loan and interest management<br>• <strong>PortaFlores</strong> — This interactive portfolio<br>Want to see any in particular?',
+                'chatbot.skills': 'Juan masters:<br>• <strong>Frontend:</strong> React, Vite, TypeScript, Next.js<br>• <strong>Backend:</strong> Node.js, Express, Python<br>• <strong>Data/AI:</strong> Pandas, NumPy, Machine Learning<br>• <strong>Design:</strong> Figma, UI/UX, Design Systems<br>• <strong>DevOps:</strong> Git, Vercel, Proxmox/KVM',
+                'chatbot.education': 'Juan is studying two degrees:<br>• <strong>University Programming Analyst</strong> — UNJu (Engineering Faculty)<br>• <strong>Data Science & AI Technician</strong> — IES N°6<br>He also self-teaches React, Three.js and UI/UX design.',
+                'chatbot.contact': 'You can contact Juan via:<br>• 📧 <strong>juanmks86@gmail.com</strong><br>• 💻 <strong>github.com/juanmks86-debug</strong><br>• You can also use the contact form in the portfolio ("Contact" button top right). Would you like me to redirect you?',
+                'chatbot.cv': 'Juan is open to <strong>web development</strong>, <strong>freelance projects</strong> and <strong>internships</strong>. You can download his CV from the "Download CV" button in the main section, or write him directly by email.',
+                'chatbot.data': 'Juan is training in <strong>Data Science & AI</strong> (IES N°6). He handles:<br>• Python (Pandas, NumPy, Scikit-learn)<br>• Supervised and unsupervised Machine Learning<br>• Natural Language Processing (NLP)<br>• Data visualization<br>Check out his <strong>NLP Mind Map</strong> in the Projects section!',
+                'chatbot.thanks': "You're welcome! 😊 If you have more questions, I'm here. Good luck!",
+                'chatbot.fallback': "Hmm, I'm not sure I understand 🤔<br>You can ask me about his <strong>projects</strong>, <strong>skills</strong>, <strong>education</strong> or how to <strong>contact him</strong>."
+            }
+        };
+        return (fallbacks[lang] && fallbacks[lang][key]) ? fallbacks[lang][key] : key;
+    }
+
+    const knowledgeBase = [
+        { keywords: ['hola', 'buenas', 'hey', 'hi', 'hello'], responseKey: 'chatbot.hello' },
+        { keywords: ['proyecto', 'proyectos', 'app', 'apps', 'aplicación', 'contax', 'delimarket', 'cuentas claras', 'project', 'projects'], responseKey: 'chatbot.projects' },
+        { keywords: ['habilidad', 'habilidades', 'skill', 'skills', 'stack', 'tecnología', 'tecnologías', 'lenguaje', 'lenguajes', 'technology'], responseKey: 'chatbot.skills' },
+        { keywords: ['formación', 'estudio', 'estudios', 'carrera', 'universidad', 'unju', 'ies', 'facultad', 'education', 'study', 'university'], responseKey: 'chatbot.education' },
+        { keywords: ['contacto', 'contactar', 'email', 'mail', 'correo', 'whatsapp', 'teléfono', 'linkedin', 'github', 'contact'], responseKey: 'chatbot.contact' },
+        { keywords: ['cv', 'curriculum', 'trabajo', 'empleo', 'freelance', 'contratar', 'disponible', 'job', 'work', 'hire'], responseKey: 'chatbot.cv' },
+        { keywords: ['data', 'datos', 'ia', 'inteligencia artificial', 'machine learning', 'ml', 'python', 'ai', 'artificial intelligence'], responseKey: 'chatbot.data' },
+        { keywords: ['gracias', 'thank', 'ok', 'perfecto', 'genial', 'buena', 'adiós', 'chau', 'bye', 'thanks'], responseKey: 'chatbot.thanks' }
+    ];
+
+    function getCurrentTime() {
+        const now = new Date();
+        return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    }
+
+    function addMessage(text, isBot) {
+        const div = document.createElement('div');
+        div.className = 'ai-msg ' + (isBot ? 'bot' : 'user');
+        div.innerHTML = '<div class="msg-content">' + text + '</div><div class="msg-time">' + getCurrentTime() + '</div>';
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTyping() {
+        const div = document.createElement('div');
+        div.className = 'ai-msg bot';
+        div.id = 'typingMsg';
+        div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTyping() {
+        const t = document.getElementById('typingMsg');
+        if (t) t.remove();
+    }
+
+    function findResponse(input) {
+        const lower = input.toLowerCase();
+        for (const item of knowledgeBase) {
+            if (item.keywords.some(k => lower.includes(k))) {
+                return getChatbotResponse(item.responseKey);
+            }
+        }
+        return getChatbotResponse('chatbot.fallback');
+    }
+
+    async function handleSend() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        addMessage(text, false);
+        chatInput.value = '';
+        showTyping();
+        if (botStatus) botStatus.innerHTML = '<span class="status-dot"></span> ' + getChatbotResponse('chatbot.typing');
+        const delay = 800 + Math.random() * 800;
+        setTimeout(() => {
+            removeTyping();
+            addMessage(findResponse(text), true);
+            if (botStatus) botStatus.innerHTML = '<span class="status-dot"></span> ' + getChatbotResponse('chatbot.online');
+        }, delay);
+    }
+
+    if (sendBtn) sendBtn.addEventListener('click', handleSend);
+    if (chatInput) chatInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') handleSend(); });
+    if (toggleBtn) toggleBtn.addEventListener('click', function() { chatWindow.classList.toggle('active'); });
+    if (closeBtn) closeBtn.addEventListener('click', function() { chatWindow.classList.remove('active'); });
+
+    const initialTime = document.getElementById('msgTime0');
+    if (initialTime) initialTime.textContent = getCurrentTime();
+});
+
+// --- E. i18n Multi-idioma ES/EN ---
+document.addEventListener('DOMContentLoaded', function() {
+    const i18n = {
+        es: {
+            'nav.about': 'Sobre Mí', 'nav.skills': 'Habilidades', 'nav.github': 'GitHub Live', 'nav.portfolio': 'Proyectos', 'nav.clients': 'Formación', 'nav.podcast': 'Podcast', 'nav.blog': 'Blog',
+            'hero.greeting': 'Soy,', 'hero.cv': 'Descargar CV', 'hero.contact': 'Contacto', 'hero.portfolio': 'Portfolio', 'hero.repos': 'Repos en GitHub', 'hero.followers': 'Seguidores en GitHub', 'hero.formation': 'Formación: UNJu & IES N°6', 'hero.tagline': 'Full-Stack Dev<br>& Data Science / IA.',
+            'spotify.listening': 'Escuchando ahora en Spotify',
+            'skills.title': 'Habilidades & Stack Técnico ↗', 'skills.desc': 'Herramientas y tecnologías que domino para desarrollo web y diseño UI/UX.',
+            'github.title': 'GitHub Live & Código ↗', 'github.desc': 'Repositorios en vivo, contribuciones y actividad reciente sincronizada.', 'github.placeholder': 'Ingresa un usuario de GitHub...', 'github.load': 'Cargar Datos',
+            'portfolio.title': 'Proyectos Seleccionados ↗', 'portfolio.desc': 'Apps propias, este portafolio y trabajos de la facultad — desarrollo web, sistemas y data & IA.',
+            'filter.all': 'Todos', 'filter.webapp': 'Web Apps / PWA', 'filter.data': 'Data & IA', 'filter.frontend': 'Frontend / UI', 'filter.sistemas': 'Sistemas / Infraestructura',
+            'clients.title': 'Formación Académica ↗', 'clients.desc': 'Mi trayectoria universitaria y técnica en desarrollo de software, datos e inteligencia artificial.',
+            'podcast.title': 'Podcasts que sigo ↗', 'podcast.desc': 'Programas de tecnología que escucho habitualmente — abren en una pestaña nueva.',
+            'blog.title': 'Blog Técnico ↗', 'blog.desc': 'Notas, apuntes y reflexiones sobre desarrollo web, ciencia de datos e inteligencia artificial.',
+            'contact.title': '¡Hablemos de tu próximo proyecto!', 'contact.desc': 'Envía un mensaje y nos pondremos en contacto rápidamente.', 'contact.name': 'Tu Nombre', 'contact.email': 'Tu Email', 'contact.message': 'Mensaje', 'contact.namePlaceholder': 'Ej: María García', 'contact.emailPlaceholder': 'maria@empresa.com', 'contact.msgPlaceholder': 'Cuéntame sobre las metas de tu proyecto...', 'contact.send': 'Enviar Mensaje', 'contact.alt': 'O escribime directo a',
+            'cv.title': 'Curriculum Vitae — Juan Israel Flores', 'cv.subtitle': 'Desarrollador Full-Stack & Data Science / IA', 'cv.download': 'Descargar PDF', 'cv.notYet': '¿No disponible aún? Escribime a',
+            'edit.title': 'Personalizar Portafolio', 'edit.desc': 'Modifica los datos de tu perfil en tiempo real.', 'edit.name': 'Nombre Completo', 'edit.email': 'Correo Electrónico', 'edit.save': 'Guardar Cambios',
+            'terminal.title': 'bash — juan@flores-portfolio ~ (CLI)',
+            'chatbot.title': 'Asistente de Juan Israel Flores', 'chatbot.online': 'En línea', 'chatbot.typing': 'Escribiendo...',
+            'blog.read': 'Leer nota', 'blog.min': 'min',
+            'calculator.title': 'CUENTAS CLARAS', 'calculator.capital': 'Capital ($)', 'calculator.rate': 'Tasa anual (%)', 'calculator.term': 'Plazo (meses)', 'calculator.type': 'Tipo de interés', 'calculator.compound': 'Compuesto (capitalizable)', 'calculator.simple': 'Simple', 'calculator.calculate': 'Calcular', 'calculator.final': 'Monto Final', 'calculator.interest': 'Intereses', 'calculator.based': 'Basado en la app', 'calculator.cc': 'Cuentas Claras',
+            'testimonials.title': 'Lo que dicen', 'badges.title': 'Certificaciones & Badges',
+            'presentation.slide1': 'Analista Programador Universitario & Estudiante de Data Science / IA', 'presentation.slide1b': 'Full-Stack Developer • React • Python • Machine Learning',
+            'presentation.slide2': 'React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel', 'presentation.slide2b': 'Desarrollo web moderno + Ciencia de datos aplicada',
+            'presentation.slide3': 'DeliMarket · Contax · Cuentas Claras · PortaFlores', 'presentation.slide3b': 'Apps propias desplegadas en Vercel con PWA, offline-first y UI/UX cuidada',
+            'presentation.slide4a': 'UNJu — Analista Programador Universitario', 'presentation.slide4b': 'IES N°6 — Tec. en Ciencias de Datos e IA', 'presentation.slide4c': 'Autodidacta en React, Three.js, Design Systems y DevOps',
+            'presentation.slide5': 'juanmks86@gmail.com', 'presentation.slide5b': 'github.com/juanmks86-debug'
+        },
+        en: {
+            'nav.about': 'About Me', 'nav.skills': 'Skills', 'nav.github': 'GitHub Live', 'nav.portfolio': 'Projects', 'nav.clients': 'Education', 'nav.podcast': 'Podcast', 'nav.blog': 'Blog',
+            'hero.greeting': 'I am,', 'hero.cv': 'Download CV', 'hero.contact': 'Contact', 'hero.portfolio': 'Portfolio', 'hero.repos': 'GitHub Repos', 'hero.followers': 'GitHub Followers', 'hero.formation': 'Education: UNJu & IES N°6', 'hero.tagline': 'Full-Stack Dev<br>& Data Science / AI.',
+            'spotify.listening': 'Now playing on Spotify',
+            'skills.title': 'Skills & Tech Stack ↗', 'skills.desc': 'Tools and technologies I master for web development and UI/UX design.',
+            'github.title': 'GitHub Live & Code ↗', 'github.desc': 'Live repositories, contributions and recent synced activity.', 'github.placeholder': 'Enter a GitHub username...', 'github.load': 'Load Data',
+            'portfolio.title': 'Selected Projects ↗', 'portfolio.desc': 'Own apps, this portfolio and college work — web development, systems and data & AI.',
+            'filter.all': 'All', 'filter.webapp': 'Web Apps / PWA', 'filter.data': 'Data & AI', 'filter.frontend': 'Frontend / UI', 'filter.sistemas': 'Systems / Infrastructure',
+            'clients.title': 'Academic Background ↗', 'clients.desc': 'My university and technical journey in software development, data and artificial intelligence.',
+            'podcast.title': 'Podcasts I follow ↗', 'podcast.desc': 'Technology shows I listen to regularly — open in a new tab.',
+            'blog.title': 'Tech Blog ↗', 'blog.desc': 'Notes, insights and reflections on web development, data science and artificial intelligence.',
+            'contact.title': "Let's talk about your next project!", 'contact.desc': 'Send a message and we will get in touch quickly.', 'contact.name': 'Your Name', 'contact.email': 'Your Email', 'contact.message': 'Message', 'contact.namePlaceholder': 'E.g.: María García', 'contact.emailPlaceholder': 'maria@company.com', 'contact.msgPlaceholder': 'Tell me about your project goals...', 'contact.send': 'Send Message', 'contact.alt': 'Or write me directly at',
+            'cv.title': 'Curriculum Vitae — Juan Israel Flores', 'cv.subtitle': 'Full-Stack Developer & Data Science / AI', 'cv.download': 'Download PDF', 'cv.notYet': 'Not available yet? Write me at',
+            'edit.title': 'Customize Portfolio', 'edit.desc': 'Modify your profile data in real time.', 'edit.name': 'Full Name', 'edit.email': 'Email Address', 'edit.save': 'Save Changes',
+            'terminal.title': 'bash — juan@flores-portfolio ~ (CLI)',
+            'chatbot.title': "Juan Israel Flores' Assistant", 'chatbot.online': 'Online', 'chatbot.typing': 'Typing...',
+            'blog.read': 'Read post', 'blog.min': 'min',
+            'calculator.title': 'CUENTAS CLARAS', 'calculator.capital': 'Capital ($)', 'calculator.rate': 'Annual rate (%)', 'calculator.term': 'Term (months)', 'calculator.type': 'Interest type', 'calculator.compound': 'Compound (capitalizable)', 'calculator.simple': 'Simple', 'calculator.calculate': 'Calculate', 'calculator.final': 'Final Amount', 'calculator.interest': 'Interest', 'calculator.based': 'Based on the app', 'calculator.cc': 'Cuentas Claras',
+            'testimonials.title': 'What they say', 'badges.title': 'Certifications & Badges',
+            'presentation.slide1': 'University Programming Analyst & Data Science / AI Student', 'presentation.slide1b': 'Full-Stack Developer • React • Python • Machine Learning',
+            'presentation.slide2': 'React · TypeScript · Node.js · Python · Pandas · Scikit-learn · Figma · Git · Vercel', 'presentation.slide2b': 'Modern web development + Applied data science',
+            'presentation.slide3': 'DeliMarket · Contax · Cuentas Claras · PortaFlores', 'presentation.slide3b': 'Own apps deployed on Vercel with PWA, offline-first and polished UI/UX',
+            'presentation.slide4a': 'UNJu — University Programming Analyst', 'presentation.slide4b': 'IES N°6 — Data Science & AI Technician', 'presentation.slide4c': 'Self-taught in React, Three.js, Design Systems and DevOps',
+            'presentation.slide5': 'juanmks86@gmail.com', 'presentation.slide5b': 'github.com/juanmks86-debug'
+        }
+    };
+
+    let currentLang = localStorage.getItem('portfolio-lang') || 'es';
+    window.currentLang = currentLang;
+    window.i18n = i18n;
+
+    const langToggleBtn = document.getElementById('langToggleBtn');
+    const langIcon = document.getElementById('langIcon');
+
+    function translatePage(lang) {
+        currentLang = lang;
+        window.currentLang = lang;
+        localStorage.setItem('portfolio-lang', lang);
+        if (langIcon) langIcon.textContent = lang.toUpperCase();
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (i18n[lang] && i18n[lang][key]) {
+                const hasFormatChildren = el.querySelector('i, span, strong, br, .arrow-accent');
+                if (!hasFormatChildren || el.children.length === 0) {
+                    el.innerHTML = i18n[lang][key];
+                } else {
+                    for (let i = 0; i < el.childNodes.length; i++) {
+                        if (el.childNodes[i].nodeType === 3 && el.childNodes[i].textContent.trim()) {
+                            el.childNodes[i].textContent = i18n[lang][key];
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (i18n[lang] && i18n[lang][key]) el.placeholder = i18n[lang][key];
+        });
+
+        const titles = {
+            es: { about: 'Sobre Mí | Juan Israel Flores', skills: 'Habilidades & Stack | Juan Israel Flores', github: 'GitHub Live | Juan Israel Flores', portfolio: 'Proyectos | Juan Israel Flores', clients: 'Formación | Juan Israel Flores', podcast: 'Podcasts | Juan Israel Flores', blog: 'Blog Técnico | Juan Israel Flores' },
+            en: { about: 'About Me | Juan Israel Flores', skills: 'Skills & Stack | Juan Israel Flores', github: 'GitHub Live | Juan Israel Flores', portfolio: 'Projects | Juan Israel Flores', clients: 'Education | Juan Israel Flores', podcast: 'Podcasts | Juan Israel Flores', blog: 'Tech Blog | Juan Israel Flores' }
+        };
+        const activeTab = document.querySelector('.nav-btn.active');
+        if (activeTab && titles[lang] && titles[lang][activeTab.dataset.tab]) {
+            document.title = titles[lang][activeTab.dataset.tab];
+        }
+    }
+
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', function() {
+            translatePage(currentLang === 'es' ? 'en' : 'es');
+        });
+    }
+
+    translatePage(currentLang);
+    window.translatePage = translatePage;
+});
+
+// --- F. Calculadora Cuentas Claras ---
+document.addEventListener('DOMContentLoaded', function() {
+    const capitalInput = document.getElementById('ccCapital');
+    const tasaInput = document.getElementById('ccTasa');
+    const plazoInput = document.getElementById('ccPlazo');
+    const tipoInput = document.getElementById('ccTipo');
+    const calcularBtn = document.getElementById('ccCalcularBtn');
+    const montoFinalEl = document.getElementById('ccMontoFinal');
+    const interesesEl = document.getElementById('ccIntereses');
+    const ctx = document.getElementById('ccChart');
+
+    let chartInstance = null;
+
+    function formatMoney(n) {
+        return '$' + Math.round(n).toLocaleString('es-AR');
+    }
+
+    function calcular() {
+        const capital = parseFloat(capitalInput.value) || 0;
+        const tasaAnual = parseFloat(tasaInput.value) || 0;
+        const plazoMeses = parseInt(plazoInput.value) || 1;
+        const tipo = tipoInput.value;
+        const tasaMensual = tasaAnual / 12 / 100;
+
+        const labels = [];
+        const dataCapital = [];
+        const dataIntereses = [];
+        let montoFinal = capital;
+        let totalIntereses = 0;
+
+        if (tipo === 'simple') {
+            totalIntereses = capital * (tasaAnual / 100) * (plazoMeses / 12);
+            montoFinal = capital + totalIntereses;
+            for (let i = 0; i <= plazoMeses; i++) {
+                labels.push('Mes ' + i);
+                dataCapital.push(capital);
+                dataIntereses.push(capital + (totalIntereses * (i / plazoMeses)));
+            }
+        } else {
+            for (let i = 0; i <= plazoMeses; i++) {
+                labels.push('Mes ' + i);
+                const monto = capital * Math.pow(1 + tasaMensual, i);
+                dataCapital.push(capital);
+                dataIntereses.push(monto);
+            }
+            montoFinal = dataIntereses[plazoMeses];
+            totalIntereses = montoFinal - capital;
+        }
+
+        montoFinalEl.textContent = formatMoney(montoFinal);
+        interesesEl.textContent = '+' + formatMoney(totalIntereses);
+
+        if (chartInstance) {
+            chartInstance.data.labels = labels;
+            chartInstance.data.datasets[0].data = dataIntereses;
+            chartInstance.data.datasets[1].data = dataCapital;
+            chartInstance.update('active');
+        } else if (ctx) {
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Monto acumulado', data: dataIntereses, borderColor: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.1)', fill: true, tension: 0.4, pointRadius: 2, pointHoverRadius: 5 },
+                        { label: 'Capital inicial', data: dataCapital, borderColor: '#92400E', borderDash: [5, 5], pointRadius: 0, fill: false, tension: 0 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true, labels: { font: { size: 10 }, boxWidth: 10 } },
+                        tooltip: { callbacks: { label: function(c) { return c.dataset.label + ': ' + formatMoney(c.parsed.y); } } }
+                    },
+                    scales: {
+                        x: { ticks: { font: { size: 9 }, maxTicksLimit: 6 }, grid: { display: false } },
+                        y: { ticks: { font: { size: 9 }, callback: function(v) { if (v >= 1000000) return '$' + (v/1000000).toFixed(1) + 'M'; if (v >= 1000) return '$' + (v/1000).toFixed(0) + 'k'; return '$' + v; } }, grid: { color: 'rgba(0,0,0,0.05)' } }
+                    },
+                    interaction: { intersect: false, mode: 'index' }
+                }
+            });
+        }
+    }
+
+    if (calcularBtn) calcularBtn.addEventListener('click', calcular);
+    if (capitalInput) capitalInput.addEventListener('input', calcular);
+    if (tasaInput) tasaInput.addEventListener('input', calcular);
+    if (plazoInput) plazoInput.addEventListener('input', calcular);
+    if (tipoInput) tipoInput.addEventListener('change', calcular);
+    calcular();
+});
+
+// --- G. Mapa Mental Modal ---
+document.addEventListener('DOMContentLoaded', function() {
+    const mapaModal = document.getElementById('mapaModal');
+    const openMapaBtn = document.getElementById('openMapaModal');
+    const closeMapaBtn = document.getElementById('closeMapaModal');
+
+    if (openMapaBtn && mapaModal) {
+        openMapaBtn.addEventListener('click', function() {
+            mapaModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    if (closeMapaBtn && mapaModal) {
+        closeMapaBtn.addEventListener('click', function() {
+            mapaModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    if (mapaModal) {
+        mapaModal.addEventListener('click', function(e) {
+            if (e.target === mapaModal) {
+                mapaModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
+
+// --- H. Modo Presentación ---
+document.addEventListener('DOMContentLoaded', function() {
+    const presentationOverlay = document.getElementById('presentationOverlay');
+    const presentationBtn = document.getElementById('presentationBtn');
+    const presentationExit = document.getElementById('presentationExit');
+    const presentationPrev = document.getElementById('presentationPrev');
+    const presentationNext = document.getElementById('presentationNext');
+    const presentationCounter = document.getElementById('presentationCounter');
+    const presentationProgress = document.getElementById('presentationProgress');
+    const slides = document.querySelectorAll('.presentation-slide');
+    let currentSlide = 0;
+    let autoPlay = null;
+
+    function showSlide(n) {
+        slides.forEach((s, i) => s.classList.toggle('active', i === n));
+        currentSlide = n;
+        presentationCounter.textContent = (n + 1) + ' / ' + slides.length;
+        presentationProgress.style.width = ((n + 1) / slides.length * 100) + '%';
+    }
+    function nextSlide() { showSlide(currentSlide < slides.length - 1 ? currentSlide + 1 : 0); }
+    function prevSlide() { showSlide(currentSlide > 0 ? currentSlide - 1 : slides.length - 1); }
+    function startPresentation() {
+        presentationOverlay.classList.add('active');
+        showSlide(0);
+        autoPlay = setInterval(nextSlide, 8000);
+        document.body.style.overflow = 'hidden';
+    }
+    function stopPresentation() {
+        presentationOverlay.classList.remove('active');
+        clearInterval(autoPlay);
+        document.body.style.overflow = '';
+    }
+
+    if (presentationBtn) presentationBtn.addEventListener('click', startPresentation);
+    if (presentationExit) presentationExit.addEventListener('click', stopPresentation);
+    if (presentationNext) presentationNext.addEventListener('click', () => { clearInterval(autoPlay); nextSlide(); autoPlay = setInterval(nextSlide, 8000); });
+    if (presentationPrev) presentationPrev.addEventListener('click', () => { clearInterval(autoPlay); prevSlide(); autoPlay = setInterval(nextSlide, 8000); });
+
+    document.addEventListener('keydown', function(e) {
+        if (!presentationOverlay.classList.contains('active')) return;
+        if (e.key === 'Escape') stopPresentation();
+        if (e.key === 'ArrowRight') { clearInterval(autoPlay); nextSlide(); autoPlay = setInterval(nextSlide, 8000); }
+        if (e.key === 'ArrowLeft') { clearInterval(autoPlay); prevSlide(); autoPlay = setInterval(nextSlide, 8000); }
+    });
+});
+
+// --- I. Konami Code + Confetti ---
+document.addEventListener('DOMContentLoaded', function() {
+    const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiIndex = 0;
+
+    const konamiMsg = document.createElement('div');
+    konamiMsg.className = 'konami-message';
+    konamiMsg.innerHTML = '🎉 ¡Código Konami activado!<br><small>Sos un verdadero dev. Seguí así.</small>';
+    document.body.appendChild(konamiMsg);
+
+    const confettiCanvas = document.createElement('canvas');
+    confettiCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9998;';
+    document.body.appendChild(confettiCanvas);
+    const ctx = confettiCanvas.getContext('2d');
+
+    function fireConfetti() {
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+        const particles = [];
+        const colors = ['#8B5CF6', '#34D399', '#FBBF24', '#F472B6', '#60A5FA', '#A78BFA'];
+        for (let i = 0; i < 150; i++) {
+            particles.push({
+                x: window.innerWidth / 2, y: window.innerHeight / 2,
+                vx: (Math.random() - 0.5) * 20, vy: (Math.random() - 0.5) * 20 - 5,
+                size: Math.random() * 8 + 4, color: colors[Math.floor(Math.random() * colors.length)],
+                rotation: Math.random() * 360, rotSpeed: (Math.random() - 0.5) * 10, life: 1
+            });
+        }
+        function animate() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            let alive = false;
+            particles.forEach(p => {
+                if (p.life <= 0) return;
+                alive = true;
+                p.x += p.vx; p.y += p.vy; p.vy += 0.3; p.life -= 0.008; p.rotation += p.rotSpeed;
+                ctx.save();
+                ctx.translate(p.x, p.y); ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color; ctx.globalAlpha = p.life;
+                ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                ctx.restore();
+            });
+            if (alive) requestAnimationFrame(animate);
+            else ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        }
+        animate();
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === konamiSequence[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiSequence.length) {
+                konamiIndex = 0;
+                konamiMsg.classList.add('show');
+                fireConfetti();
+                setTimeout(() => konamiMsg.classList.remove('show'), 4000);
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+});
+
+// --- J. Contador de Visitas ---
+document.addEventListener('DOMContentLoaded', function() {
+    const visitCounter = document.createElement('div');
+    visitCounter.className = 'visit-counter';
+    visitCounter.innerHTML = '<i class="fa-solid fa-eye"></i> <span id="visitCount">...</span> <span data-i18n="footer.visits">visitas</span>';
+    document.body.appendChild(visitCounter);
+
+    (async function loadVisits() {
+        try {
+            const res = await fetch('https://api.countapi.xyz/hit/juanisraelflores-portfolio/visits');
+            const data = await res.json();
+            document.getElementById('visitCount').textContent = data.value.toLocaleString();
+        } catch (e) {
+            document.getElementById('visitCount').textContent = '∞';
+        }
+    })();
+});
+
+// --- K. Toast Helper Global ---
+window.showToast = function(message) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.style.cssText = 'background:#1F2937;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;margin-bottom:8px;animation:msgPop 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 3000);
+};
+
+// --- L. AOS Init ---
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
     }
 });
