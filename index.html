@@ -33,6 +33,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+<base target="_blank">
 </head>
 <body>
 
@@ -136,9 +137,9 @@
 
                             <!-- Action CV Download Button -->
                             <div class="hero-cv-action">
-                                <button class="cv-download-btn" id="openCvBtn">
+                                <a class="cv-download-btn" id="heroCvDownloadBtn" href="assets/cv-juan-israel-flores.pdf" download="CV-Juan-Israel-Flores.pdf" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
                                     Descargar CV <i class="fa-solid fa-download"></i>
-                                </button>
+                                </a>
                             </div>
 
                             <!-- Spinning Stamp Badge -->
@@ -688,6 +689,43 @@
             if (backdrop) backdrop.addEventListener('click', function (e) {
                 if (e.target === backdrop) resetDeliVideo();
             });
+        });
+    </script>
+
+    <!-- Fallback de descarga para CV -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function forceDownload(url, filename) {
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // Hero CV button fallback
+            const heroCv = document.getElementById('heroCvDownloadBtn');
+            if (heroCv) {
+                heroCv.addEventListener('click', function(e) {
+                    // Si algo externo bloquea el enlace nativo, forzamos la descarga
+                    if (e.defaultPrevented) {
+                        e.stopImmediatePropagation();
+                        forceDownload('assets/cv-juan-israel-flores.pdf', 'CV-Juan-Israel-Flores.pdf');
+                    }
+                });
+            }
+
+            // Modal CV button fallback
+            const modalCv = document.getElementById('downloadPdfActionBtn');
+            if (modalCv) {
+                modalCv.addEventListener('click', function(e) {
+                    if (e.defaultPrevented) {
+                        e.stopImmediatePropagation();
+                        forceDownload('assets/cv-juan-israel-flores.pdf', 'CV-Juan-Israel-Flores.pdf');
+                    }
+                });
+            }
         });
     </script>
 </body>
