@@ -154,68 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchHeroGitHubStats();
 
-    // --- 5. 3D Canvas Sphere Animation ---
-    const initSphereCanvas = () => {
-        const canvas = document.getElementById('sphereCanvas');
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        let width, height, angle = 0;
-        let animFrame = null;
-
-        const resize = () => {
-            const parent = canvas.parentElement;
-            if (!parent) return;
-            width = canvas.width = parent.clientWidth || 90;
-            height = canvas.height = parent.clientHeight || 90;
-        };
-
-        const drawSphere = () => {
-            ctx.clearRect(0, 0, width, height);
-
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) * 0.38;
-
-            const glowGradient = ctx.createRadialGradient(centerX, centerY, radius * 0.2, centerX, centerY, radius * 1.4);
-            glowGradient.addColorStop(0, 'rgba(229, 123, 229, 0.9)');
-            glowGradient.addColorStop(0.5, 'rgba(126, 123, 230, 0.7)');
-            glowGradient.addColorStop(1, 'rgba(14, 14, 16, 0)');
-
-            ctx.fillStyle = glowGradient;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius * 1.4, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.rotate(angle);
-
-            for (let i = 0; i < 6; i++) {
-                ctx.beginPath();
-                ctx.ellipse(0, 0, radius, radius * Math.cos(angle + i), angle + i, 0, Math.PI * 2);
-                ctx.strokeStyle = `hsl(${(angle * 50 + i * 30) % 360}, 80%, 70%)`;
-                ctx.lineWidth = 1.8;
-                ctx.stroke();
-            }
-
-            ctx.restore();
-
-            angle += 0.015;
-            animFrame = requestAnimationFrame(drawSphere);
-        };
-
-        resize();
-        drawSphere();
-
-        // Recalcular al redimensionar la ventana
-        window.addEventListener('resize', () => {
-            resize();
-        });
-    };
-
-    initSphereCanvas();
-
     // --- 6. GitHub API Live Data Fetch ---
     const fetchGitHubData = async (username) => {
         const reposGrid = document.getElementById('ghReposGrid');
@@ -1043,6 +981,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calcular() {
+        if (!capitalInput || !tasaInput || !plazoInput || !tipoInput) return;
         const capital = parseFloat(capitalInput.value) || 0;
         const tasaAnual = parseFloat(tasaInput.value) || 0;
         const plazoMeses = parseInt(plazoInput.value) || 1;
@@ -1113,7 +1052,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (tasaInput) tasaInput.addEventListener('input', calcular);
     if (plazoInput) plazoInput.addEventListener('input', calcular);
     if (tipoInput) tipoInput.addEventListener('change', calcular);
-    calcular();
+    // Solo calcular si existen los elementos
+    if (capitalInput && tasaInput && plazoInput && tipoInput) calcular();
 });
 
 // --- G. Mapa Mental Modal ---
@@ -1145,7 +1085,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // --- H. Modo Presentación ---
-document.addEventListener('DOMContentLoaded', function() {
+(function initPresentation() {
+    'use strict';
     const presentationOverlay = document.getElementById('presentationOverlay');
     const presentationBtn = document.getElementById('presentationBtn');
     const presentationExit = document.getElementById('presentationExit');
@@ -1157,38 +1098,57 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSlide = 0;
     let autoPlay = null;
 
+    console.log('[Presentation] Init - overlay:', !!presentationOverlay, 'btn:', !!presentationBtn, 'slides:', slides.length);
+
+    if (!presentationOverlay || !presentationBtn || slides.length === 0) {
+        console.warn('[Presentation] Faltan elementos necesarios');
+        return;
+    }
+
     function showSlide(n) {
         slides.forEach((s, i) => s.classList.toggle('active', i === n));
         currentSlide = n;
-        presentationCounter.textContent = (n + 1) + ' / ' + slides.length;
-        presentationProgress.style.width = ((n + 1) / slides.length * 100) + '%';
+        if (presentationCounter) presentationCounter.textContent = (n + 1) + ' / ' + slides.length;
+        if (presentationProgress) presentationProgress.style.width = ((n + 1) / slides.length * 100) + '%';
     }
+
     function nextSlide() { showSlide(currentSlide < slides.length - 1 ? currentSlide + 1 : 0); }
     function prevSlide() { showSlide(currentSlide > 0 ? currentSlide - 1 : slides.length - 1); }
-    function startPresentation() {
+
+    window.startPresentation = function() {
+        console.log('[Presentation] Iniciando...');
         presentationOverlay.classList.add('active');
         showSlide(0);
         autoPlay = setInterval(nextSlide, 8000);
         document.body.style.overflow = 'hidden';
-    }
-    function stopPresentation() {
+    };
+
+    window.stopPresentation = function() {
+        console.log('[Presentation] Cerrando...');
         presentationOverlay.classList.remove('active');
         clearInterval(autoPlay);
         document.body.style.overflow = '';
-    }
+    };
 
-    if (presentationBtn) presentationBtn.addEventListener('click', startPresentation);
-    if (presentationExit) presentationExit.addEventListener('click', stopPresentation);
+    presentationBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.startPresentation();
+    });
+
+    if (presentationExit) presentationExit.addEventListener('click', window.stopPresentation);
     if (presentationNext) presentationNext.addEventListener('click', () => { clearInterval(autoPlay); nextSlide(); autoPlay = setInterval(nextSlide, 8000); });
     if (presentationPrev) presentationPrev.addEventListener('click', () => { clearInterval(autoPlay); prevSlide(); autoPlay = setInterval(nextSlide, 8000); });
 
     document.addEventListener('keydown', function(e) {
         if (!presentationOverlay.classList.contains('active')) return;
-        if (e.key === 'Escape') stopPresentation();
+        if (e.key === 'Escape') window.stopPresentation();
         if (e.key === 'ArrowRight') { clearInterval(autoPlay); nextSlide(); autoPlay = setInterval(nextSlide, 8000); }
         if (e.key === 'ArrowLeft') { clearInterval(autoPlay); prevSlide(); autoPlay = setInterval(nextSlide, 8000); }
     });
-});
+
+    console.log('[Presentation] Listo - click en el botón de pizarra para iniciar');
+})();
 
 // --- I. Konami Code + Confetti ---
 document.addEventListener('DOMContentLoaded', function() {
@@ -1260,12 +1220,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(visitCounter);
 
     (async function loadVisits() {
+        const countEl = document.getElementById('visitCount');
+        if (!countEl) return;
         try {
             const res = await fetch('https://api.countapi.xyz/hit/juanisraelflores-portfolio/visits');
             const data = await res.json();
-            document.getElementById('visitCount').textContent = data.value.toLocaleString();
+            countEl.textContent = data.value.toLocaleString();
         } catch (e) {
-            document.getElementById('visitCount').textContent = '∞';
+            countEl.textContent = '∞';
         }
     })();
 });
