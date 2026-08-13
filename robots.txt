@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://porta-flores.vercel.app/sitemap.xml
