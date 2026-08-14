@@ -1313,3 +1313,284 @@ if ('serviceWorker' in navigator) {
             .catch((err) => console.log('[SW] Error:', err));
     });
 }
+
+/* ============================================================
+   FEATURES 3-9 IMPLEMENTATION
+   ============================================================ */
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    /* --- 3. Hash Routing --- */
+    function activateTab(tabName) {
+        const targetBtn = document.querySelector('.nav-btn[data-tab="' + tabName + '"]');
+        if (targetBtn) {
+            targetBtn.click();
+        }
+        // Sync mobile bottom nav
+        document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabName);
+        });
+    }
+
+    // On load: check hash
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash && document.querySelector('.nav-btn[data-tab="' + initialHash + '"]')) {
+        setTimeout(() => activateTab(initialHash), 100);
+    }
+
+    // On hash change (browser back/forward)
+    window.addEventListener('hashchange', function() {
+        const tab = window.location.hash.replace('#', '');
+        if (tab && document.querySelector('.nav-btn[data-tab="' + tab + '"]')) {
+            activateTab(tab);
+        }
+    });
+
+    // Hook into existing nav buttons to update hash
+    document.querySelectorAll('.nav-btn[data-tab]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tab = this.dataset.tab;
+            window.location.hash = tab;
+            // Sync mobile nav
+            document.querySelectorAll('.mob-nav-btn').forEach(mob => {
+                mob.classList.toggle('active', mob.dataset.tab === tab);
+            });
+        });
+    });
+
+    /* --- 9. Mobile Bottom Navigation --- */
+    document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tab = this.dataset.tab;
+            activateTab(tab);
+        });
+    });
+
+    /* --- 4. Typing Effect --- */
+    const typingEl = document.getElementById('typingEffect');
+    if (typingEl) {
+        const stringsES = [
+            'Full-Stack Developer',
+            'Data Science Student',
+            'React Specialist',
+            'PWA Builder',
+            'UI/UX Enthusiast'
+        ];
+        const stringsEN = [
+            'Full-Stack Developer',
+            'Data Science Student',
+            'React Specialist',
+            'PWA Builder',
+            'UI/UX Enthusiast'
+        ];
+        let strIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function typeLoop() {
+            const lang = window.currentLang || 'es';
+            const strings = lang === 'es' ? stringsES : stringsEN;
+            const current = strings[strIndex];
+
+            if (isDeleting) {
+                typingEl.innerHTML = current.substring(0, charIndex - 1) + '<span class="typing-cursor">|</span>';
+                charIndex--;
+                typeSpeed = 40;
+            } else {
+                typingEl.innerHTML = current.substring(0, charIndex + 1) + '<span class="typing-cursor">|</span>';
+                charIndex++;
+                typeSpeed = 90;
+            }
+
+            if (!isDeleting && charIndex === current.length) {
+                isDeleting = true;
+                typeSpeed = 1800; // pause before deleting
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                strIndex = (strIndex + 1) % strings.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+        setTimeout(typeLoop, 800);
+    }
+
+    /* --- 5. Mouse Follow Glow --- */
+    const mouseGlow = document.getElementById('mouseGlow');
+    if (mouseGlow && window.matchMedia('(pointer: fine)').matches) {
+        let glowX = 0, glowY = 0;
+        let targetX = 0, targetY = 0;
+        document.addEventListener('mousemove', function(e) {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+        function animateGlow() {
+            glowX += (targetX - glowX) * 0.08;
+            glowY += (targetY - glowY) * 0.08;
+            mouseGlow.style.left = glowX + 'px';
+            mouseGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        }
+        animateGlow();
+    }
+
+    /* --- 7. Copy Email --- */
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const email = document.getElementById('userEmailText').textContent;
+            navigator.clipboard.writeText(email).then(function() {
+                copyEmailBtn.classList.add('copied');
+                copyEmailBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                showToast('📋 Email copiado al portapapeles');
+                setTimeout(function() {
+                    copyEmailBtn.classList.remove('copied');
+                    copyEmailBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+                }, 2000);
+            }).catch(function() {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = email;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('📋 Email copiado al portapapeles');
+            });
+        });
+    }
+
+    /* --- 6. Project Detail Modal --- */
+    const projectModal = document.getElementById('projectDetailModal');
+    const projectContent = document.getElementById('projectDetailContent');
+    const closeProjectBtn = document.getElementById('closeProjectDetailModal');
+
+    function openProjectModal(el) {
+        const title = el.dataset.projectTitle || '';
+        const desc = el.dataset.projectDesc || '';
+        const stack = el.dataset.projectStack || '';
+        const demo = el.dataset.projectDemo || '';
+        const repo = el.dataset.projectRepo || '';
+
+        // Determine icon color based on category
+        const card = el.querySelector('.placeholder-art');
+        let iconClass = 'fa-solid fa-code';
+        let iconColor = '#7E7BE6';
+        if (card) {
+            if (card.classList.contains('art-mint')) { iconColor = '#34D399'; iconClass = 'fa-solid fa-utensils'; }
+            else if (card.classList.contains('art-yellow')) { iconColor = '#FBBF24'; iconClass = 'fa-solid fa-hand-holding-dollar'; }
+            else if (card.classList.contains('art-dark')) { iconColor = '#374151'; iconClass = 'fa-solid fa-diamond'; }
+            else if (card.classList.contains('art-purple')) { iconColor = '#8B5CF6'; iconClass = 'fa-solid fa-boxes-stacked'; }
+        }
+
+        const stackTags = stack.split('·').map(s => '<span>' + s.trim() + '</span>').join('');
+
+        let actionsHtml = '';
+        if (demo) {
+            actionsHtml += '<a href="' + demo + '" target="_blank" rel="noopener" class="btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Demo</a>';
+        }
+        if (repo) {
+            actionsHtml += '<a href="' + repo + '" target="_blank" rel="noopener" class="btn-secondary"><i class="fa-brands fa-github"></i> Ver Código</a>';
+        }
+        if (!demo && !repo) {
+            actionsHtml += '<button class="btn-secondary" onclick="showToast(\'Próximamente disponible\')"><i class="fa-solid fa-clock"></i> Próximamente</button>';
+        }
+
+        projectContent.innerHTML = `
+            <div class="project-detail-header">
+                <div class="project-detail-icon" style="background:${iconColor}20;color:${iconColor};">
+                    <i class="${iconClass}"></i>
+                </div>
+                <h3 class="project-detail-title">${title}</h3>
+            </div>
+            <p class="project-detail-desc">${desc}</p>
+            <div class="project-detail-stack">${stackTags}</div>
+            <div class="project-detail-actions">${actionsHtml}</div>
+        `;
+
+        projectModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    document.querySelectorAll('.gallery-item[data-project-detail]').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            openProjectModal(this);
+        });
+    });
+
+    if (closeProjectBtn) {
+        closeProjectBtn.addEventListener('click', function() {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    if (projectModal) {
+        projectModal.addEventListener('click', function(e) {
+            if (e.target === projectModal) {
+                projectModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    /* --- 8. Project Search --- */
+    const projectSearch = document.getElementById('projectSearch');
+    if (projectSearch) {
+        const galleryGrid = document.querySelector('.gallery-grid');
+        let noResultsMsg = null;
+
+        projectSearch.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            const items = document.querySelectorAll('.gallery-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const title = item.querySelector('h4')?.textContent.toLowerCase() || '';
+                const desc = item.querySelector('span')?.textContent.toLowerCase() || '';
+                const stack = item.dataset.projectStack?.toLowerCase() || '';
+                const category = item.dataset.category?.toLowerCase() || '';
+                const match = title.includes(query) || desc.includes(query) || stack.includes(query) || category.includes(query);
+                item.style.display = match ? 'block' : 'none';
+                if (match) visibleCount++;
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && query.length > 0) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.className = 'no-results-msg';
+                    noResultsMsg.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> No se encontraron proyectos con "' + query + '"';
+                    galleryGrid.appendChild(noResultsMsg);
+                } else {
+                    noResultsMsg.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> No se encontraron proyectos con "' + query + '"';
+                    noResultsMsg.style.display = 'block';
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.style.display = 'none';
+            }
+
+            // Reset filter buttons visual state when searching
+            if (query.length > 0) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            }
+        });
+
+        // Also reset search when clicking filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                projectSearch.value = '';
+                if (noResultsMsg) noResultsMsg.style.display = 'none';
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    item.style.display = 'block';
+                });
+            });
+        });
+    }
+
+});

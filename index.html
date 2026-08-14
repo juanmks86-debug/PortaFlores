@@ -95,6 +95,7 @@
 <base target="_blank">
 </head>
 <body>
+    <div class="mouse-glow" id="mouseGlow"></div>
 
     <main class="viewport-wrapper">
         <div class="bento-frame">
@@ -189,7 +190,11 @@
                                     <span id="userEmailText">juanmks86@gmail.com</span>
                                     <i class="fa-regular fa-envelope"></i>
                                 </a>
+                                <button class="copy-email-btn" id="copyEmailBtn" title="Copiar email"><i class="fa-regular fa-copy"></i></button>
                             </div>
+
+                            <!-- Typing Effect -->
+                            <p class="typing-effect" id="typingEffect"><span class="typing-cursor">|</span></p>
 
                             <!-- Spotify Live Player Status Bar -->
                             <div class="spotify-status-bar" id="spotifyWidget">
@@ -459,6 +464,10 @@
                             <h2 data-i18n="portfolio.title">Proyectos Seleccionados <span class="arrow-accent">↗</span></h2>
                             <p data-i18n="portfolio.desc">Apps propias, este portafolio y trabajos de la facultad — desarrollo web, sistemas y data & IA.</p>
                         </header>
+                        <div class="portfolio-search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="projectSearch" placeholder="Buscar proyectos..." data-i18n-placeholder="search.placeholder">
+                        </div>
                         <div class="portfolio-filter-bar">
                             <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Todos</button>
                             <button class="filter-btn" data-filter="webapp" data-i18n="filter.webapp">Web Apps / PWA</button>
@@ -467,7 +476,7 @@
                             <button class="filter-btn" data-filter="sistemas" data-i18n="filter.sistemas">Sistemas / Infraestructura</button>
                         </div>
                         <div class="gallery-grid">
-                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Contax" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Contax" target="_blank" rel="noopener" data-project-detail data-project-title="Contax" data-project-desc="Gestor de inventario y ventas con soporte offline. PWA completa con IndexedDB para persistencia local, sincronización de datos y diseño responsive." data-project-stack="React · Vite · IndexedDB · PWA · CSS3" data-project-demo="" data-project-repo="https://github.com/juanmks86-debug/Contax">
                                 <div class="placeholder-art art-purple">
                                     <i class="fa-solid fa-boxes-stacked"></i>
                                 </div>
@@ -476,7 +485,7 @@
                                     <span>Gestor de inventario y ventas — PWA offline</span>
                                 </div>
                             </a>
-                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener" data-project-detail data-project-title="DeliMarket" data-project-desc="Marketplace de delivery con carrito de compras, filtros por categoría, geolocalización y pasarela de pagos simulada. Diseñado para pequeños comercios." data-project-stack="React · Vite · CSS3 · Vercel · PWA" data-project-demo="https://delimarket-app.vercel.app/" data-project-repo="">
                                 <div class="placeholder-art art-mint">
                                     <i class="fa-solid fa-utensils"></i>
                                 </div>
@@ -485,7 +494,7 @@
                                     <span>Marketplace de delivery con carrito y filtros</span>
                                 </div>
                             </a>
-                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Adeuas" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-category="webapp" href="https://github.com/juanmks86-debug/Adeuas" target="_blank" rel="noopener" data-project-detail data-project-title="Cuentas Claras" data-project-desc="Sistema de gestión de préstamos e intereses con calculadora financiera embebida. Permite registrar deudores, calcular interés simple y compuesto, y exportar resúmenes." data-project-stack="JavaScript · HTML5 · CSS3 · Chart.js · PWA" data-project-demo="" data-project-repo="https://github.com/juanmks86-debug/Adeuas">
                                 <div class="placeholder-art art-yellow">
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </div>
@@ -494,7 +503,7 @@
                                     <span>Gestión de préstamos e intereses — PWA</span>
                                 </div>
                             </a>
-                            <a class="gallery-item" data-aos="fade-up" data-aos-delay="300" data-category="frontend" href="https://github.com/juanmks86-debug/PortaFlores" target="_blank" rel="noopener">
+                            <a class="gallery-item" data-aos="fade-up" data-aos-delay="300" data-category="frontend" href="https://github.com/juanmks86-debug/PortaFlores" target="_blank" rel="noopener" data-project-detail data-project-title="PortaFlores" data-project-desc="Este portafolio interactivo construido con diseño Bento Grid. Incluye chatbot IA, terminal CLI, esfera 3D en Canvas, modo presentación y sincronización con GitHub API." data-project-stack="HTML5 · CSS3 · JavaScript · Canvas API · AOS" data-project-demo="https://porta-flores.vercel.app/" data-project-repo="https://github.com/juanmks86-debug/PortaFlores">
                                 <div class="placeholder-art art-dark">
                                     <i class="fa-solid fa-diamond"></i>
                                 </div>
@@ -919,6 +928,14 @@
         </div>
     </div>
 
+    <!-- Project Detail Modal -->
+    <div class="modal-backdrop" id="projectDetailModal">
+        <div class="modal-card modal-project-card">
+            <button class="modal-close" id="closeProjectDetailModal">&times;</button>
+            <div id="projectDetailContent"></div>
+        </div>
+    </div>
+
     <!-- Toast Notifications Container -->
     <div class="toast-container" id="toastContainer"></div>
 
@@ -1008,6 +1025,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="js/app.js"></script>
+
+<!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav">
+        <button class="mob-nav-btn active" data-tab="about"><i class="fa-solid fa-user-gear"></i><span>Sobre Mí</span></button>
+        <button class="mob-nav-btn" data-tab="skills"><i class="fa-solid fa-code"></i><span>Skills</span></button>
+        <button class="mob-nav-btn" data-tab="portfolio"><i class="fa-solid fa-briefcase"></i><span>Proyectos</span></button>
+        <button class="mob-nav-btn" data-tab="github"><i class="fa-brands fa-github"></i><span>GitHub</span></button>
+        <button class="mob-nav-btn" data-tab="clients"><i class="fa-solid fa-graduation-cap"></i><span>Formación</span></button>
+    </nav>
 
 </body>
 </html>
