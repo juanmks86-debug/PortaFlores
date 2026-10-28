@@ -1755,3 +1755,66 @@ body:hover .mouse-glow {
         display: none;
     }
 }
+
+
+/* Recruiter-focused refresh based on CV 2026 */
+.hero-positioning {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.9);
+}
+.hero-positioning strong { color: #fff; font-weight: 700; }
+.career-highlight-card {
+    background: linear-gradient(135deg, #15151c 0%, #292532 100%);
+    color: #fff;
+    padding: 26px;
+    min-height: 246px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.career-highlight-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 82% 18%, rgba(236,0,140,.45), transparent 35%);
+    pointer-events: none;
+}
+.career-highlight-icon {
+    position: absolute; top: 24px; left: 26px; width: 46px; height: 46px;
+    border-radius: 50%; display: grid; place-items: center;
+    color: #fff; background: #ec008c; font-size: 18px;
+}
+.career-highlight-card .tag-badge { position: relative; align-self: flex-start; margin-bottom: 10px; background: rgba(255,255,255,.13); color: #fff; }
+.career-highlight-card h3, .career-highlight-card p, .highlight-link { position: relative; }
+.career-highlight-card h3 { font-family: var(--font-heading); font-size: 21px; line-height: 1.12; margin-bottom: 8px; }
+.career-highlight-card p { color: rgba(255,255,255,.72); font-size: 12px; line-height: 1.5; max-width: 360px; }
+.highlight-link { margin-top: 16px; font-size: 12px; font-weight: 700; color: #ffc456; }
+.recruiter-proof-stack { gap: 14px; }
+.proof-card { padding: 20px; min-height: 116px; display: flex; align-items: center; gap: 14px; }
+.proof-card-mint { background: var(--color-mint); }
+.proof-card-yellow { background: var(--color-yellow); }
+.proof-number { font-family: var(--font-heading); font-size: 30px; font-weight: 800; line-height: 1; }
+.proof-number i { font-size: 25px; }
+.proof-label { font-size: 12px; font-weight: 800; line-height: 1.25; }
+.proof-label small { font-size: 10px; font-weight: 600; opacity: .7; }
+.experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+.experience-card { background: var(--card-bg-subtle); border: 1px solid rgba(20,20,30,.06); border-radius: 22px; padding: 24px; min-height: 300px; transition: transform .3s ease, box-shadow .3s ease; }
+.experience-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.experience-card-primary { background: linear-gradient(145deg, #fce7f3, #fff); }
+.experience-card-icon { width: 44px; height: 44px; display: grid; place-items: center; background: var(--color-hero-purple); color: #fff; border-radius: 14px; margin-bottom: 20px; }
+.experience-kicker { color: var(--color-purple-accent); text-transform: uppercase; letter-spacing: .08em; font-size: 10px; font-weight: 800; }
+.experience-card h3 { font-family: var(--font-heading); font-size: 18px; line-height: 1.2; margin: 8px 0 16px; }
+.experience-card ul { padding-left: 18px; color: var(--color-text-muted); font-size: 12px; line-height: 1.65; }
+@media (max-width: 900px) { .experience-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .career-highlight-card { min-height: 220px; } .proof-card { min-height: 96px; } }
+
+
+.availability-banner {
+    display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
+    width: fit-content; margin: 22px 0 0 auto; padding: 10px 16px;
+    border-radius: 999px; background: #d8f7e9; color: #166534;
+    font-size: 12px; box-shadow: 0 8px 20px rgba(22,101,52,.08);
+}
+.availability-dot { width: 9px; height: 9px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 4px rgba(22,163,74,.13); }
+.availability-location { margin-left: 5px; color: #4b6b58; }
+@media (max-width: 640px) { .availability-banner { margin-left: 0; font-size: 11px; } }
