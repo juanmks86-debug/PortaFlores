@@ -1987,3 +1987,10 @@ body:hover .mouse-glow {
 .project-links { margin-top: 14px; gap: 13px; }
 .project-links a { font-size: 11px; }
 @media (max-width: 1050px) { .code-projects-header h2 { font-size: 42px; } .code-project-card { min-height: 325px; } }
+
+
+/* Real visual previews inside project cards */
+.project-image-frame { height:145px; margin-top:15px; overflow:hidden; border:1px solid rgba(20,20,30,.08); border-radius:11px; background:#f8fafc; box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); }
+.project-image-frame img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
+.code-project-card:hover .project-image-frame img { transform:scale(1.035); }
+@media (max-width:900px) { .project-image-frame { height:150px; } }
