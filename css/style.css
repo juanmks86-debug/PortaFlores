@@ -1956,3 +1956,34 @@ body:hover .mouse-glow {
 .education-achievement-strip { display:flex; align-items:center; gap:16px; margin-top:20px; padding:18px 22px; background:#fde7f2; border-radius:17px; } .education-strip-icon { width:48px; height:48px; border-radius:50%; display:grid; place-items:center; flex:0 0 48px; background:#ec008c; color:#fff; font-size:20px; } .education-achievement-strip strong { display:block; font-family:var(--font-heading); font-size:20px; } .education-achievement-strip div span { display:block; margin-top:5px; color:#656a76; font-size:12px; }
 .education-other-card { display:flex; align-items:center; gap:16px; padding:20px 22px; margin-top:18px; border:1px solid #e6e7eb; border-radius:17px; background:#fff; } .education-other-icon { width:48px; height:48px; border-radius:50%; background:#dcd7ff; color:#37308c; display:grid; place-items:center; flex:0 0 48px; font-size:19px; } .education-other-card h3 { font-family:var(--font-heading); font-size:19px; margin-bottom:7px; } .education-other-card ul { margin:0; padding-left:17px; color:#656a76; font-size:12px; line-height:1.6; }
 @media (max-width:900px) { .education-main-grid { grid-template-columns:1fr; } .education-card { min-height:auto; } }
+
+
+/* Visual refinement: match the generated Código y proyectos mockup */
+.code-projects-page { padding: 4px 2px 10px; }
+.code-projects-header { margin-bottom: 28px; align-items: center; }
+.code-projects-header h2 { font-size: clamp(38px, 4.6vw, 58px); letter-spacing: -.065em; }
+.code-projects-header p { font-size: 14px; margin-top: 12px; max-width: 760px; }
+.github-profile-btn { padding: 14px 20px; border-radius: 11px; background: #fff; box-shadow: 0 5px 15px rgba(236,0,140,.08); }
+.code-metrics { gap: 17px; margin-bottom: 17px; }
+.code-metric { min-height: 102px; padding: 20px 24px; border-radius: 18px; gap: 17px; }
+.metric-icon { width: 50px; height: 50px; flex-basis: 50px; font-size: 19px; }
+.code-metric strong { font-size: 30px; }
+.code-metric-yellow strong { font-size: 22px; }
+.code-metric span:not(.metric-icon) { font-size: 12px; margin-top: 6px; }
+.code-projects-grid { gap: 16px; }
+.code-project-card { min-height: 342px; padding: 17px; border-radius: 18px; box-shadow: 0 6px 20px rgba(20,20,30,.035); }
+.code-project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(20,20,30,.09); }
+.code-project-card h3 { font-size: 19px; margin-top: 12px; }
+.code-project-card p { font-size: 12px; height: 32px; }
+.project-tech-tags { margin-top: 9px; }
+.project-tech-tags span { padding: 6px 10px; font-size: 10px; }
+.mini-preview { height: 145px; margin-top: 15px; padding: 14px; border-radius: 11px; }
+.mini-preview strong { font-size: 17px; left: 15px; bottom: 21px; }
+.mini-hacki strong { font-size: 12px; bottom: 47px; }
+.mini-hacki .mini-input { bottom: 13px; padding: 6px 8px; }
+.mini-contax strong { font-size: 12px; top: 15px; }
+.mini-donut { width: 64px; height: 64px; top: 34px; right: 28px; }
+.mini-deli i, .mini-portfolio i { font-size: 42px; right: 32px; bottom: 30px; }
+.project-links { margin-top: 14px; gap: 13px; }
+.project-links a { font-size: 11px; }
+@media (max-width: 1050px) { .code-projects-header h2 { font-size: 42px; } .code-project-card { min-height: 325px; } }
