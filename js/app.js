@@ -391,6 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     setupModal('contactBtn', 'contactModal', 'closeContactModal');
+    const sidebarContactBtn = document.getElementById('sidebarContactBtn');
+    if (sidebarContactBtn) sidebarContactBtn.addEventListener('click', () => document.getElementById('contactBtn')?.click());
     setupModal('editProfileBtn', 'editModal', 'closeEditModal');
     setupModal('openVideoModal', 'videoModal', 'closeVideoModal');
     setupModal('openCvBtn', 'cvModal', 'closeCvModal');

@@ -1878,3 +1878,21 @@ body:hover .mouse-glow {
 .project-tags { display: inline-block; margin: 8px 4px 0; padding: 5px 8px; background: #f4f5f7; border-radius: 999px; color: #555965; font-size: 9px; font-weight: 700; }
 @media (max-width: 1050px) { .recruiter-home-grid { grid-template-columns: 1fr; } .home-portrait-card { min-height: 300px; } }
 @media (max-width: 720px) { .home-achievement-grid, .home-projects-grid { grid-template-columns: 1fr; } .home-availability { margin-left: 0; } .home-projects-heading { gap: 9px; } .home-project-card p { min-height: auto; } }
+
+
+/* Sidebar refinement to match the approved mockup */
+.bento-frame { grid-template-columns: 210px 1fr; gap: 30px; }
+.sidebar-nav { padding: 8px 0 8px 0; }
+.sidebar-logo { gap: 12px; min-height: 56px; }
+.logo-symbol { color: #ec008c; font-size: 30px; line-height: 1; transform: rotate(45deg); margin: 5px 3px 0 4px; }
+.logo-symbol:hover { transform: rotate(135deg); }
+.sidebar-name { font-size: 17px; line-height: 1.08; letter-spacing: -.03em; }
+.nav-links { gap: 5px; margin-top: 42px; }
+.nav-btn { position: relative; min-height: 43px; padding: 10px 12px 10px 17px; border-radius: 0 999px 999px 0; color: #686a74; font-size: 13px; font-weight: 600; }
+.nav-btn:hover { color: #1a1b22; background: #f7f7f9; transform: none; }
+.nav-btn.active { color: #ec008c; background: #fff5fa; box-shadow: none; font-weight: 800; }
+.nav-btn.active::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 0 4px 4px 0; background: #ec008c; }
+.nav-btn.active i { color: #ec008c; }
+.nav-contact-btn { margin-top: 16px; padding-top: 16px; border-top: 1px solid #ececf0; border-radius: 0; }
+.nav-contact-btn:hover { border-radius: 0 999px 999px 0; }
+@media (max-width: 1120px) { .bento-frame { grid-template-columns: 190px 1fr; gap: 22px; } }
