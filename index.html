@@ -104,6 +104,7 @@
             <aside class="sidebar-nav">
                 <div class="sidebar-logo">
                     <span class="logo-symbol">❖</span>
+                    <span class="sidebar-name">Juan Israel<br>Flores</span>
                 </div>
                 <nav class="nav-links">
                     <button class="nav-btn active" data-tab="about">
@@ -164,161 +165,69 @@
                 
                 <!-- TAB 1: ABOUT ME (DEFAULT BENTO DASHBOARD VIEW) -->
                 <section class="tab-content active" id="tab-about">
-                    <div class="bento-grid">
-                        
-                        <!-- HERO PROFILE CARD (LEFT COLUMN) -->
-                        <div class="bento-card card-hero-profile">
-                            <div class="hero-header-tab">
-                                <span class="tab-icon">❖</span> Perfil profesional
+                    <div class="recruiter-home-grid">
+                        <div class="home-hero-copy">
+                            <span class="home-eyebrow">HOLA, SOY</span>
+                            <h1>Juan Israel Flores<span class="hero-dot">.</span></h1>
+                            <h2>Desarrollador web junior <span>|</span> Soporte e Infraestructura <span>|</span> Ciencia de Datos e IA</h2>
+                            <p>Construyo aplicaciones web, herramientas offline-first y soluciones orientadas a datos.</p>
+                            <div class="home-actions">
+                                <a class="cv-download-btn" href="assets/cv-juan-israel-flores.pdf" download="CV-Juan-Israel-Flores.pdf"><i class="fa-solid fa-download"></i> Descargar CV</a>
+                                <button class="home-contact-btn" id="contactBtn"><i class="fa-regular fa-envelope"></i> Contactarme</button>
                             </div>
-                            
-                            <div class="profile-image-container">
-                                <div class="profile-ring"></div>
-                                <img src="assets/profile.jpg" alt="Foto de Perfil" id="userProfileImage" class="profile-img">
-                            </div>
-
-                            <div class="profile-info">
-                                <h1 class="profile-name">
-                                    <span class="greeting" data-i18n="hero.greeting">Hola, soy</span>
-                                    <span class="name-highlight" id="userName">Juan Israel Flores</span>
-                                </h1>
-                                <a href="mailto:juanmks86@gmail.com" class="profile-email" id="userEmail">
-                                    <span id="userEmailText">juanmks86@gmail.com</span>
-                                    <i class="fa-regular fa-envelope"></i>
-                                </a>
-                                <button class="copy-email-btn" id="copyEmailBtn" title="Copiar email"><i class="fa-regular fa-copy"></i></button>
-                            </div>
-
-                            <!-- Typing Effect -->
-                            <p class="hero-positioning">Desarrollador web junior<br><strong>Soporte e Infraestructura · Ciencia de Datos e IA</strong></p>
-
-                            <!-- Action CV Download Button -->
-                            <div class="hero-cv-action">
-                                <a class="cv-download-btn" id="heroCvDownloadBtn" href="assets/cv-juan-israel-flores.pdf" download="CV-Juan-Israel-Flores.pdf" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
-                                    <span data-i18n="hero.cv">Descargar CV</span> <i class="fa-solid fa-download"></i>
-                                </a>
-                            </div>
-
-                            <!-- Spinning Stamp Badge -->
-                            <div class="stamp-badge">
-                                <svg viewBox="0 0 100 100" width="85" height="85">
-                                    <path id="circlePath" fill="none" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
-                                    <text font-size="10" font-weight="700" fill="currentColor" letter-spacing="1.4">
-                                        <textPath href="#circlePath" startOffset="0%">
-                                            • DISPONIBILIDAD INMEDIATA • 2026
-                                        </textPath>
-                                    </text>
-                                </svg>
-                                <div class="stamp-center">✦</div>
+                            <div class="home-tech-chips">
+                                <span><i class="fa-brands fa-python"></i> Python</span>
+                                <span><i class="fa-solid fa-database"></i> SQL</span>
+                                <span><i class="fa-brands fa-linux"></i> Linux</span>
+                                <span><i class="fa-brands fa-react"></i> React</span>
+                                <span><i class="fa-solid fa-layer-group"></i> PWA</span>
+                                <span><i class="fa-solid fa-share-nodes"></i> Redes IP</span>
                             </div>
                         </div>
 
-                        <!-- RIGHT COLUMN MAIN AREA -->
-                        <div class="bento-right-column">
-                            
-                            <!-- Header Title -->
-                            <header class="bento-header">
-                                <h2 class="main-title">
-                                    <span data-i18n="hero.portfolio">Portfolio</span> <span class="arrow-accent">↗</span>
-                                </h2>
-                                <div class="header-actions">
-                                    <button class="cta-pill-btn" id="contactBtn">
-                                        <span data-i18n="hero.contact">Contacto</span> <i class="fa-solid fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </header>
-
-                            <!-- TOP ROW: Featured Project & Stats Stack -->
-                            <div class="bento-row top-row">
-                                
-                                <!-- Featured achievement card -->
-                                <div class="bento-card career-highlight-card" id="openExperienceModal">
-                                    <div class="career-highlight-icon"><i class="fa-solid fa-trophy"></i></div>
-                                    <span class="tag-badge">Logro destacado</span>
-                                    <h3>1.er puesto — Hackathon INNOA 2026</h3>
-                                    <p>Concurso de desarrollo web de la Facultad de Ingeniería. Resolución N.º 559/2026.</p>
-                                    <span class="highlight-link">Ver experiencia <i class="fa-solid fa-arrow-right"></i></span>
-                                </div>
-
-                                <!-- Recruiter proof points -->
-                                <div class="stats-stack recruiter-proof-stack">
-                                    <div class="bento-card proof-card proof-card-mint">
-                                        <span class="proof-number">70%</span>
-                                        <span class="proof-label">Ciencia de Datos e IA<br><small>carrera aprobada</small></span>
-                                    </div>
-                                    <div class="bento-card proof-card proof-card-yellow">
-                                        <span class="proof-number"><i class="fa-solid fa-server"></i></span>
-                                        <span class="proof-label">Soporte técnico<br><small>redes · hardware · Linux</small></span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- BOTTOM ROW: Formación Card & Dual Split Card -->
-                            <div class="bento-row bottom-row">
-                                
-                                <!-- Formación Card -->
-                                <div class="bento-card card-clients-dark" id="openClientsModal" style="padding:0;overflow:hidden;cursor:pointer;">
-                                    <span class="card-arrow-top" style="z-index:10;color:rgba(255,255,255,0.6);">↗</span>
-                                    <div class="logo-carousel" id="logoCarousel">
-                                        <div class="logo-slide active" data-index="0">
-                                            <img src="assets/logos/unju.png" alt="UNJu" class="logo-slide-img" loading="lazy">
-                                            <span class="logo-slide-label">Universidad Nacional de Jujuy</span>
-                                        </div>
-                                        <div class="logo-slide" data-index="1">
-                                            <img src="assets/logos/fce-unju.png" alt="FCE UNJu" class="logo-slide-img" loading="lazy">
-                                            <span class="logo-slide-label">Facultad de Ciencias Económicas</span>
-                                        </div>
-                                        <div class="logo-slide" data-index="2">
-                                            <img src="assets/logos/fi-unju.png" alt="FI UNJu" class="logo-slide-img" loading="lazy">
-                                            <span class="logo-slide-label">Facultad de Ingeniería</span>
-                                        </div>
-                                        <div class="logo-slide" data-index="3">
-                                            <img src="assets/logos/ies6.png" alt="IES N°6" class="logo-slide-img" loading="lazy">
-                                            <span class="logo-slide-label">IES N°6 — Ciencias de Datos e IA</span>
-                                        </div>
-                                        <div class="logo-carousel-dots">
-                                            <span class="logo-dot active" data-index="0"></span>
-                                            <span class="logo-dot" data-index="1"></span>
-                                            <span class="logo-dot" data-index="2"></span>
-                                            <span class="logo-dot" data-index="3"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Dual Split Card (3D Sphere + Tagline real) -->
-                                <div class="bento-card card-dual-split" id="openGlobalAwardsModal">
-                                    <span class="card-arrow-top">↗</span>
-                                    
-                                    <!-- Left Section: 3D Interactive Sphere -->
-                                    <div class="split-left-dark">
-                                        <div class="sphere-wrapper">
-                                            <canvas id="sphereCanvas"></canvas>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right Section: Yellow Tagline -->
-                                    <div class="split-right-yellow">
-                                        <div class="award-content">
-                                            <p class="award-text"><span>Aplicaciones web<br>&amp; soluciones orientadas a datos.</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            </div>
-                        </div>
-                    
-                        <div class="availability-banner">
-                            <span class="availability-dot"></span>
-                            <strong>Disponible jornada completa</strong>
-                            <span>·</span>
-                            <span>Incorporación inmediata</span>
-                            <span class="availability-location"><i class="fa-solid fa-location-dot"></i> Perico, Jujuy</span>
+                        <div class="home-portrait-card">
+                            <div class="portrait-note portrait-note-left">IDEAS<br>CÓDIGO<br>DATOS<br><b>IMPACTO</b></div>
+                            <div class="portrait-note portrait-note-right">SEGUIMOS<br>CONSTRUYENDO<br><span>—</span></div>
+                            <img src="assets/profile.jpg" alt="Juan Israel Flores" class="home-portrait">
+                            <div class="portrait-caption">MISMAS GANAS<br>MÁS SOLUCIONES<br><span>—</span></div>
                         </div>
 
-                        <!-- Testimonios omitidos: priorizamos evidencia verificable del CV. -->
+                        <div class="home-achievement-grid">
+                            <article class="home-info-card home-info-pink">
+                                <span class="home-info-icon"><i class="fa-solid fa-trophy"></i></span>
+                                <div><strong>1.er puesto —<br>Hackathon INNOA 2026</strong><small>Solución destacada por su impacto y viabilidad.</small></div>
+                            </article>
+                            <article class="home-info-card home-info-mint">
+                                <span class="home-info-icon"><i class="fa-solid fa-server"></i></span>
+                                <div><strong>Soporte técnico,<br>redes e infraestructura</strong><small>Experiencia práctica y resolución de incidencias.</small></div>
+                            </article>
+                            <article class="home-info-card home-info-yellow">
+                                <span class="home-info-icon"><i class="fa-solid fa-chart-column"></i></span>
+                                <div><strong>70% aprobado —<br>Ciencia de Datos e IA</strong><small>Formación avanzada en análisis e inteligencia artificial.</small></div>
+                            </article>
+                        </div>
+
+                        <div class="home-projects-heading">
+                            <h2>Proyectos destacados</h2>
+                            <span class="home-availability"><i class="fa-solid fa-circle"></i> Disponible jornada completa · Incorporación inmediata</span>
+                            <button class="home-projects-link" type="button" onclick="document.querySelector('.nav-btn[data-tab=\'portfolio\']').click()">Ver todos los proyectos <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+
+                        <div class="home-projects-grid">
+                            <a class="home-project-card project-contax" href="https://github.com/juanmks86-debug/Contax" target="_blank" rel="noopener">
+                                <div class="project-preview"><span class="project-brand">▣ Contax</span><span class="project-chart"><i></i><i></i><i></i><i></i><i></i></span><strong>Gestión simple<br>para tu contabilidad</strong></div>
+                                <h3>Contax</h3><p>Sistema web de gestión contable con facturación, reportes y control de clientes.</p><span class="project-tags">React · Python · SQL · PWA</span>
+                            </a>
+                            <a class="home-project-card project-delimarket" href="https://delimarket-app.vercel.app/" target="_blank" rel="noopener">
+                                <div class="project-preview"><span class="project-brand">🛒 DeliMarket</span><span class="project-food">🍎 🥖 🥬</span><strong>Productos<br>más cerca de ti</strong></div>
+                                <h3>DeliMarket</h3><p>Tienda online con catálogo, carrito de compras y administración de productos.</p><span class="project-tags">React · PWA · SQL · Linux</span>
+                            </a>
+                            <a class="home-project-card project-cuentas" href="https://github.com/juanmks86-debug/Adeuas" target="_blank" rel="noopener">
+                                <div class="project-preview"><span class="project-brand">◔ Cuentas Claras</span><span class="project-donut">58%</span><strong>Tu dinero, en claro.</strong></div>
+                                <h3>Cuentas Claras</h3><p>Aplicación para el control de gastos personales con estadísticas y gráficos interactivos.</p><span class="project-tags">JavaScript · Python · PWA · SQL</span>
+                            </a>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- TAB 2: SKILLS & TECH STACK -->
